@@ -61,9 +61,19 @@ def register(request):
 
 def login(request):
         if request.method == 'POST':
-            email = request.POST.get('email')
-            password = request.POST.get('password')
-            mydata = User.objects.filter(Q(email=email) & Q(password=password)).values()
-            if mydata.filter(role='community'):
-                
-            if mydata.filter(role='community'):
+            #email = request.POST.get('Email')
+            full_name = request.POST.get('full_name')
+            password = request.POST.get('Password')
+            mydata = User.objects.filter(Q(full_name=full_name) & Q(password=password)).values()
+            print(full_name)
+            print(password)
+            if mydata.filter(role='communityMember'):
+                return render(request, 'blog/HomePageCommunity.html')
+            if mydata.filter(role='organizationMember'):
+                return render(request, 'blog/HomePageOrganization.html')
+            if mydata.filter(role='admin'):
+                return render(request, 'blog/HomePageAdmin.html')
+            else:
+                print("someone tried to login and failed.")
+                return HttpResponse("invalid login")
+        return render(request, 'blog/login.html')
