@@ -59,3 +59,11 @@ def register(request):
     return render(request , 'blog/register.html' , {'form':form})
 
 
+def login(request):
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            mydata = User.objects.filter(Q(email=email) & Q(password=password)).values()
+            if mydata.filter(role='community'):
+                
+            if mydata.filter(role='community'):
