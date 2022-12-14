@@ -56,12 +56,21 @@
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     <ul>
-        <li><a href="Posting.html" align = "right" dir="rtl">פרסום פוסט</a></li>
+        <li><a href="posts_page" align = "right" dir="rtl">פרסום פוסט</a></li>
         <li><a href="RateTraining.html" align = "right" dir="rtl">דירוג אימונים</a></li>
         <li><a href="GiftFriend.html" align = "right" dir="rtl">תרום קרדיט</a></li>
         <li><a href="Posting.html" align = "right" dir="rtl">מענה על סקר</a></li>
         <li><a href="Posting.html" align = "right" dir="rtl">דוחות</a></li>
-        <li><a href="HomePage.html" align = "right" dir="rtl">התנתקות</a></li>
+        <li><a href="{% url 'blog-HomePage' %}" align = "right" dir="rtl">התנתקות</a></li>
+        <script type="text/javascript">
+          function preventBack() {
+              window.history.forward(); 
+          }
+            
+          setTimeout("preventBack()", 0);
+            
+          window.onunload = function () { null };
+        </script>
     </ul>
     <h1>sport posts</h1>
     <div class="posts">

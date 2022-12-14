@@ -67,9 +67,9 @@ def login(request):
             mydata = User.objects.filter(Q(full_name=full_name) & Q(password=password)).values()
             print(full_name)
             print(password)
-            if mydata.filter(role='communityMember'):
+            if mydata.filter(role='community'):
                 return render(request, 'blog/HomePageCommunity.html')
-            if mydata.filter(role='organizationMember'):
+            if mydata.filter(role='organization'):
                 return render(request, 'blog/HomePageOrganization.html')
             if mydata.filter(role='admin'):
                 return render(request, 'blog/HomePageAdmin.html')
