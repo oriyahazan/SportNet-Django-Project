@@ -18,6 +18,9 @@ def community(request):
 def organization(request):
     return render(request , 'blog/HomePageOrganization.html')
 
+def AllDocOrg(request):
+    return render(request , 'blog/AllDocOrg.html')    
+
 def admin(request):
     return render(request , 'blog/HomePageAdmin.html')
 

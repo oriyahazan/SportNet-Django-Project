@@ -29,4 +29,5 @@ urlpatterns = [
     path('HomePageOrganization/' , views.organization , name='blog-organization'),
     path('CreatEvent/' , views.CreatEvent , name='blog-CreatEvent'),
     path('CreatMission/' , views.CreatMission , name='blog-CreatMission'),
+    path('AllDocOrg/' , views.AllDocOrg , name='blog-AllDocOrg'),
 ]
