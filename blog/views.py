@@ -28,30 +28,6 @@ def posts(request):
 def about(request):
     return HttpResponse('<h1>Blog About</h1>')
 
-'''
-def register(request):
-    form=RegisterForm()
-    if request.method == 'POST':
-        email=request.POST.get('email')
-        id=request.POST.get('id_number')
-        role= request.POST.get('role')
-        form = RegisterForm(request.POST)
-        #mydata = ValidId.objects.filter(Q(role=role) & Q(id_number=id)).valuse()
-        mydataUnique = User.objects.filter(Q(email=email) | Q(id_number=id)).values()
-        if len(mydataUnique) == 0: #and mydata:
-            if form.is_valid():
-                form.save()
-                return render(request,'blog/register.html' )  #add html page
-            else:
-                return HttpResponse("Invalid login detelis supplied.")
-        else:
-            return HttpResponse("Invalid login detelis supplied")   
-
-
-    context = {'form':form}
-    return render(request , 'blog/register.html' , context)   ##add html page
-
-'''
 def CreatEvent(request):
     formE = forms.EventForm(request.POST)
     if request.method == 'POST':
@@ -59,7 +35,16 @@ def CreatEvent(request):
             return render(request,'blog/HomePage.html')
     else:
         print('invalid')
-    return render(request , 'blog/CreatEvent.html',{'formE':formE})    
+    return render(request , 'blog/CreatEvent.html',{'formE':formE})
+
+def CreatMission(request):
+    formM = forms.MissionForm(request.POST)
+    if request.method == 'POST':
+            formM.save()
+            return render(request,'blog/HomePageAdmin.html')
+    else:
+        print('invalid')
+    return render(request , 'blog/CreatMission.html',{'formM':formM})        
 
 
 def register(request):

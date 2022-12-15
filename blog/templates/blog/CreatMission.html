@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SportNet</title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/miri" type="text/css"/>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/great-vibes" type="text/css"/>
+
+    <style media="screen">
+    .logo{
+      font-size: 0.5em;
+    }
+
+    #Name{
+      font-size: 2.0em;
+      font-family: 'GreatVibesRegular';
+      font-weight: normal;
+      font-style: normal;
+    }
+    body{
+       background:url(https://vitrage-resort.co.il/wp-content/uploads/2016/10/35688222_l2.jpg);
+       font-family: 'MiriMedium';
+       font-weight: normal;
+       font-style: normal;
+       color: white;
+    }
+
+    .Topic{
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 0.75em;
+    }
+
+    .Send{
+      text-align: right;
+    }
+
+    h2{
+      text-align: center;
+      font-size: 2em;
+    }
+
+    #Sending{
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 1.5;
+      background: rgb(115, 229, 255)
+    }
+
+    </style>
+  </head>
+  <body>
+    <p class="logo" id="Name">SportNet</p>
+    <p class="logo">קהילת הספורט הגדולה בישראל</p>
+        {% block content %}
+    <h2>!פרסום פוסט</h2>
+    <form class="Send" action="{%url 'blog-CreatMission' %}" method="POST">
+      {% csrf_token %}
+        <p>{{formM.title}} :כותרת </p>
+        <p>{{formM.content}} :תוכן</p>
+        <!-- {{formM}} -->
+        <input type="submit" name="" value="סיום" id="Sending">
+    {% endblock content %}
+    </form>
+  </body>
+</html>

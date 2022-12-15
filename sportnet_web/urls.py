@@ -26,6 +26,7 @@ urlpatterns = [
     path('login/', views.login, name='blog-login'),
     path('HomePage/', views.home, name='blog-HomePage'),
     path('', include('blog.urls')),
-    path('HomePageOrganization' , views.organization , name='blog-organization'),
-    path('CreatEvent' , views.CreatEvent , name='blog-CreatEvent'),
+    path('HomePageOrganization/' , views.organization , name='blog-organization'),
+    path('CreatEvent/' , views.CreatEvent , name='blog-CreatEvent'),
+    path('CreatMission/' , views.CreatMission , name='blog-CreatMission'),
 ]
