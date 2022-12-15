@@ -21,9 +21,11 @@ from blog import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', views.register, name='blog-register'),
-    path('HomePageCommunity/', views.login, name='blog-HomePageCommunity'),
-    path('HomePageAdmin/', views.login, name='blog-HomePageAdmin'),
+    path('HomePageCommunity/', views.community, name='blog-community'),
+    path('HomePageAdmin/', views.admin, name='blog-admin'),
     path('login/', views.login, name='blog-login'),
     path('HomePage/', views.home, name='blog-HomePage'),
     path('', include('blog.urls')),
+    path('HomePageOrganization' , views.organization , name='blog-organization'),
+    path('CreatEvent' , views.CreatEvent , name='blog-CreatEvent'),
 ]

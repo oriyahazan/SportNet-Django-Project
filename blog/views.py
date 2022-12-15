@@ -12,11 +12,18 @@ def home(request):
     }
     return render(request , 'blog/HomePage.html' , context)
 
+def community(request):
+    return render(request , 'blog/HomePageCommunity.html')
+
+def organization(request):
+    return render(request , 'blog/HomePageOrganization.html')
+
+def admin(request):
+    return render(request , 'blog/HomePageAdmin.html')
+
 def posts(request):
     posts =  Post.objects.all().order_by('title')
     return render(request , 'blog/posts_page.html' ,{'posts': posts})
-
-    
 
 def about(request):
     return HttpResponse('<h1>Blog About</h1>')
@@ -45,7 +52,14 @@ def register(request):
     return render(request , 'blog/register.html' , context)   ##add html page
 
 '''
-
+def CreatEvent(request):
+    formE = forms.EventForm(request.POST)
+    if request.method == 'POST':
+            formE.save()
+            return render(request,'blog/HomePage.html')
+    else:
+        print('invalid')
+    return render(request , 'blog/CreatEvent.html',{'formE':formE})    
 
 
 def register(request):

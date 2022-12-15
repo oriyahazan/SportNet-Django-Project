@@ -25,4 +25,14 @@ class User(models.Model):
     def __str__(self):
         return self.full_name + ',' + self.id_number + ',' + self.identity_qu  + ','+self.place+ ','+ self.role +',' + self.email + ',' + self.password
         
+##############
+class Event(models.Model):
+    title= models.CharField(max_length=200)
+    content= models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    credit = models.IntegerField(default=0)
+    participants = models.IntegerField()
+
+    def __str__(self):
+        return self.title
 

@@ -10,5 +10,4 @@ urlpatterns = [
     path('register/', views.register, name='blog-register'),
     path('HomePage/', views.home, name='blog-HomePage'),
     path('login/', views.login, name='blog-login'),
-
 ]
