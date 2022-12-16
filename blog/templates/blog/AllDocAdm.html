@@ -54,18 +54,15 @@
   <body>
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
-    <h1>!ברוך הבא לדף הבית של חבר האירגון</h1>
+    <h1>!ברוכים הבאים לדף הראשי של מנהל האתר</h1>
     <ul>
-        
-        <li><a href="{% url 'blog-CreatEvent' %}" align = "right" dir="rtl">פרסום אירוע בקהילה</a></li>
-        <li><a href="RateTraining.html" align = "right" dir="rtl">העלאת תמונות מאירוע</a></li>
-        <li><a href="GiftFriend.html" align = "right" dir="rtl">פרסום מדריך לשימוש באתר</a></li>
-        <li><a href="Posting.html" align = "right" dir="rtl">שליחת סקר לחברי הקהילה</a></li>
-        <li><a href="Posting.html" align = "right" dir="rtl">דוחות</a></li>
+        <li><a href="Posting.html" align = "right" dir="rtl">אישור משתמשים</a></li>
+        <li><a href="RateTraining.html" align = "right" dir="rtl">מחיקת משתמשים</a></li>
+        <li><a href="GiftFriend.html" align = "right" dir="rtl">יצירת סקר שביעות רצון</a></li>
+        <li><a href="{% url 'blog-CreatMission' %}" align = "right" dir="rtl">שליחת משימות לחברי האירגון</a></li>
+        <li><a href="Posting.html" align = "right" dir="rtl">אישור פוסטים</a></li>
+        <li><a href="{% url 'blog-AllDocAdm' %}" align = "right" dir="rtl">דוחות</a></li>
         <li><a href="{% url 'blog-HomePage' %}" align = "right" dir="rtl">התנתקות</a></li>
-    
-
-        <!-- <a href="{% url 'blog-missions' %}"> דו"ח משימות ממנהל</a> -->
         <script type="text/javascript">
             function preventBack() {
                 window.history.forward(); 
@@ -77,8 +74,9 @@
           </script>
     </ul><br>
     <ul>
-        <a href="{% url 'blog-missions' %}">דוח משימות מהמנהל</a>
+        <a href="{% url 'blog-ComUserPage' %}">דוח פירוט חברי קהילה</a>
     </ul>
+
 
 
   </body>

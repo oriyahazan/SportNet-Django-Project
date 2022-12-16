@@ -62,19 +62,22 @@
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     {% block content %}
         <div class="content-section">
+
             <form action="{% url 'blog-register' %}" method="POST">
                 {% csrf_token %}
-                  <p>The identity question is: "What the name of your mother?"</p>
-                  <h6 class="text"> {{form.full_name}}
-                    {{form.place}}
-                    In "role" choose community/organization
-                  </h6>
+                  <form class="text">
+                    <p>{{form.full_name}} :שם מלא</p>
+                    <p>{{form.id_number}} :תעודת זהות</p>
+                    <p>{{form.identity_qu}}?שאלת זיהוי:מה שם אימך</p>
+                    <p>{{form.role}} 'community'or'organization' :כתוב מה תפקידך בקהילה</p>
+                    <p>{{form.place}}:מקום מגורים</p>
+                    <p>{{form.email}}:אימייל</p>
+                    <p>{{form.password}}:סיסמה</p>
+                    
                     <button class="btn btn-outline-info" type="submit">יצירת משתמש</button>
+                      {% endblock content %}
             </form>
-            <div class="border-top pt-3">
-            </div>
+
         </div>
-    {% endblock content %}
-      </form>
   </body>
 </html>

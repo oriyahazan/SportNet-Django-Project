@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, User
+from .models import Post, User, Mission, Event
 from .forms import RegisterForm
 from datetime import datetime
 from django.db.models import Q
@@ -21,6 +21,18 @@ def organization(request):
 def AllDocOrg(request):
     return render(request , 'blog/AllDocOrg.html')    
 
+def missions(request):
+    missions =  Mission.objects.all().order_by('title')
+    return render(request , 'blog/MissionPage.html' ,{'missions': missions})   
+
+
+def AllDocAdm(request):
+    return render(request , 'blog/AllDocAdm.html')    
+
+def ComUserPage(request):
+    comuser = User.objects.filter(role = 'community').order_by('full_name')
+    return render(request , 'blog/ComUserPage.html' ,{'comuser': comuser})
+
 def admin(request):
     return render(request , 'blog/HomePageAdmin.html')
 
@@ -35,7 +47,7 @@ def CreatEvent(request):
     formE = forms.EventForm(request.POST)
     if request.method == 'POST':
             formE.save()
-            return render(request,'blog/HomePage.html')
+            return render(request,'blog/HomePageOrganization.html')
     else:
         print('invalid')
     return render(request , 'blog/CreatEvent.html',{'formE':formE})
@@ -79,3 +91,31 @@ def login(request):
                 print("someone tried to login and failed.")
                 return HttpResponse("invalid login")
         return render(request, 'blog/login.html')
+
+
+   
+
+def ResetPassword(request):
+        if request.method == 'POST':
+            #email = request.POST.get('Email')
+            full_name = request.POST.get('full_name')
+            place = request.POST.get('Place')
+            mypass = User.objects.filter(Q(full_name=full_name) & Q(place=place)).values()
+            print(full_name)
+            print(place)
+            if mypass.filter(role='community'):
+                return render(request, 'blog/AfterPassword.html')
+            else:
+                print("someone tried to reset and failed.")
+                return HttpResponse("invalid sapir - details are not vaild")
+        return render(request, 'blog/ResetPassword.html')
+
+
+def AfterPassword(request):
+    AfterPasswords = User.objects.filter(role = 'community')
+    return render(request , 'blog/AfterPassword.html' ,{'AfterPasswords': AfterPasswords})
+
+
+
+
+
