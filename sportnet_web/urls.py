@@ -34,8 +34,8 @@ urlpatterns = [
     path('CreatMission/' , views.CreatMission , name='blog-CreatMission'),
     path('AllDocOrg/' , views.AllDocOrg , name='blog-AllDocOrg'),
     path('MissionPage/' , views.missions , name='blog-missions'),
-    # path('AllDocAdm/' , views.AllDocAdm , name='blog-AllDocAdm'),
-    # path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
+    path('AllDocAdm/' , views.AllDocAdm , name='blog-AllDocAdm'),
+    path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
     # path('ResetPassword/' , views.ResetPassword , name='blog-ResetPassword'),
     # path('AfterPassword/' , views.AfterPassword , name='blog-AfterPassword'),
 ]

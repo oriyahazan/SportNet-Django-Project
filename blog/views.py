@@ -83,3 +83,10 @@ def AllDocOrg(request):
 def missions(request):
     missions =  Mission.objects.all().order_by('title')
     return render(request , 'blog/MissionPage.html' ,{'missions': missions}) 
+
+def AllDocAdm(request):
+    return render(request , 'blog/AllDocAdm.html')    
+
+def ComUserPage(request):
+    comuser = User.objects.filter(role = 'community').order_by('full_name')
+    return render(request , 'blog/ComUserPage.html' ,{'comuser': comuser})
