@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, User
+from .models import Post, User, Mission, Event
 from .forms import RegisterForm
 from datetime import datetime
 from django.db.models import Q
@@ -76,3 +76,10 @@ def login(request):
                 print("someone tried to login and failed.")
                 return HttpResponse("invalid login")
         return render(request, 'blog/login.html')
+
+def AllDocOrg(request):
+    return render(request , 'blog/AllDocOrg.html')    
+
+def missions(request):
+    missions =  Mission.objects.all().order_by('title')
+    return render(request , 'blog/MissionPage.html' ,{'missions': missions}) 
