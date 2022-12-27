@@ -50,8 +50,8 @@ def CreatMission(request):
 def register(request):
     form = forms.RegisterForm(request.POST)
     if request.method == 'POST':
-            form.save()
-            return render(request,'blog/HomePage.html')
+        form.save()
+        return render(request,'blog/HomePage.html')
     else:
         print('invalid')
 
