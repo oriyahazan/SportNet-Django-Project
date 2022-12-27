@@ -14,17 +14,20 @@ class Post(models.Model):
 
 class User(models.Model): 
     full_name = models.CharField(max_length=30)
-    id_number= models.CharField(max_length=10)
+    id_number= models.IntegerField(max_length=10)
     identity_qu=models.CharField(max_length=50)
     place = models.CharField(max_length=10)
     role = models.CharField(max_length=15)
     email= models.EmailField(max_length=40)
     password = models.CharField(max_length=20)
-
+    age = models.IntegerField(max_length=3)
+    flag = models.CharField(max_length=1)
+    credit = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.full_name + ',' + self.id_number + ',' + self.identity_qu  + ','+self.place+ ','+ self.role +',' + self.email + ',' + self.password
-        
+        return self.full_name
+
+
 ##############
 class Event(models.Model):
     title= models.CharField(max_length=200)

@@ -7,7 +7,8 @@ from . import models #
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = models.User
-        fields = ['full_name','id_number','identity_qu','place','email','password','role']
+        fields = ['full_name','id_number','identity_qu','place','email','password','role', 'age', 'flag',
+                  'credit']
 
 
 class EventForm(forms.ModelForm):
