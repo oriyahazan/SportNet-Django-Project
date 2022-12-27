@@ -8,73 +8,75 @@
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/great-vibes" type="text/css"/>
     <style media="screen">
     .logo{
-      font-size: 0.5em;
+      font-size: 0.8em;
+      color: #d6ad60b4;
+    
     }
 
     #Name{
-      font-size: 2.0em;
+      font-size: 2.5em;
       font-family: 'GreatVibesRegular';
       font-weight: normal;
       font-style: normal;
+      margin: 1px 1px 1px 1px;
     }
     body{
-       background:url(https://vitrage-resort.co.il/wp-content/uploads/2016/10/35688222_l2.jpg);
+       background-color: #f5f1e8;
        font-family: 'MiriMedium';
        font-weight: normal;
        font-style: normal;
-       color: white;
+       color: #f5f1e8;
     }
 
-    .click{
-      text-align: center;
-      background: rgb(191, 191, 191);
-      background-blend-mode: hard-light;
 
-    }
-    #NewU{
-      font-family: 'MiriMedium';
-      font-weight: normal;
-      font-style: normal;
-      font-size: 1.5;
-      background: rgb(115, 229, 255)
-    }
-    span{
-      font-size: 0.5em;
-      color: red;
-    }
-
-    #Goals{
-      font-family: 'MiriMedium';
-      font-weight: normal;
-      font-style: normal;
-      font-size: 0.75em;
-    }
-
-    .text{
-    font-size: 1.0em;
+  #hey{
+    font-size: 1.25em;
     text-align: center;
   }
+  #hey1{
+    font-size: 1.75em;
+    font-family: 'MiriMedium';
+    font-weight: normal;
+    font-style: normal;
+    text-align: center;
+  }
+  h2{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 2em;
+  }
+  #page{
+    border-radius: 50% ;
+    background-color: #d6ad60b4;
+    margin:0px 350px 0px 350px;
+    padding-top: 10px;
 
-    </style>
+  }
+  </style>
   </head>
   <body>
-    <p class="logo" id="Name">SportNet</p>
-    <p class="logo">קהילת הספורט הגדולה בישראל</p>
+    <p class="logo" id="Name">SportNet <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
+    <p class="logo">קהילת הספורט הגדולה בישראל</p><br>
+
     {% block content %}
         <div class="content-section">
-            <form action="{% url 'blog-register' %}" method="POST">
+
+            <form action="{% url 'blog-register' %}" method="POST" id="page">
                 {% csrf_token %}
-                  <p>The identity question is: "What the name of your mother?"</p>
-                  <h6 class="text"> {{form.full_name}}
-                    {{form.place}}
-                    In "role" choose community/organization
-                  </h6>
-                    <button class="btn btn-outline-info" type="submit">יצירת משתמש</button>
+                  
+                    <h2>דף הרשמה</h2>
+                    <p id="hey">{{form.full_name}} :שם מלא</p>
+                    <p id="hey">{{form.id_number}} :תעודת זהות</p>
+                    <p id="hey">{{form.identity_qu}}?שאלת זיהוי:מה שם אימך</p>
+                    <p id="hey">{{form.role}} 'community'or'organization' :כתוב מה תפקידך בקהילה</p>
+                    <p id="hey">{{form.place}}:מקום מגורים</p>
+                    <p id="hey">{{form.email}}:אימייל</p>
+                    <p id="hey">{{form.password}}:סיסמה</p>
+                    
+                    <p id="hey"><button class="btn btn-outline-info" type="submit" ><a id="hey1" href="{% url 'blog-login'%}">יצירת משתמש</a></button></p>
+                      {% endblock content %}
+                
             </form>
-            <div class="border-top pt-3">
-            </div>
         </div>
-    {% endblock content %}
-      </form>
   </body>
 </html>
