@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SportNet</title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/miri" type="text/css"/>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/great-vibes" type="text/css"/>
+    <style media="screen">
+    .logo{
+      font-size: 0.8em;
+      color: #d6ad60b4;
+    
+    }
+
+    #Name{
+      font-size: 2.5em;
+      font-family: 'GreatVibesRegular';
+      font-weight: normal;
+      font-style: normal;
+      margin: 1px 1px 1px 1px;
+    }
+    body{
+       background-color: #f5f1e8;
+       font-family: 'MiriMedium';
+       font-weight: normal;
+       font-style: normal;
+       color: #f5f1e8;
+    }
+
+
+  #hey{
+    font-size: 1.25em;
+    text-align: center;
+  }
+  #hey1{
+    font-size: 1.75em;
+    font-family: 'MiriMedium';
+    font-weight: normal;
+    font-style: normal;
+    text-align: center;
+  }
+  h2{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 2em;
+  }
+  #page{
+    border-radius: 50% ;
+    background-color: #d6ad60b4;
+    margin:0px 350px 0px 350px;
+    padding-top: 10px;
+
+  }
+  </style>
+  </head>
+  <body>
+    <p class="logo" id="Name">SportNet <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
+    <p class="logo">קהילת הספורט הגדולה בישראל</p><br>
+
+    {% block content %}
+        <div class="content-section">
+
+            <form action="{% url 'blog-register' %}" method="POST" id="page">
+                {% csrf_token %}
+                  
+                    <h2>דף הרשמה</h2>
+                    <p id="hey">{{form.full_name}} :שם מלא</p>
+                    <p id="hey">{{form.id_number}} :תעודת זהות</p>
+                    <p id="hey">{{form.identity_qu}}?שאלת זיהוי:מה שם אימך</p>
+                    <p id="hey">{{form.role}} 'community'or'organization' :כתוב מה תפקידך בקהילה</p>
+                    <p id="hey">{{form.place}}:מקום מגורים</p>
+                    <p id="hey">{{form.email}}:אימייל</p>
+                    <p id="hey">{{form.age}}:גיל</p>
+                    <p id="hey">{{form.flag}}:דגל</p>
+                    <p id="hey">{{form.credit}}:קרדיט</p>
+                    <p id="hey">{{form.password}}:סיסמה</p>
+                    
+                    <p><a id="hey1" href="{% url 'blog-login'%}"><input id="hey" class="btn btn-outline-info" type="submit" value="יצירת משתמש"></a></p>
+                      {% endblock content %}
+                
+            </form>
+        </div>
+  </body>
+</html>

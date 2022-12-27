@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SportNet</title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/miri" type="text/css"/>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/great-vibes" type="text/css"/>
+    <style media="screen">
+    ul{
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      border-color: rgb(191, 191, 191);
+      border-style: solid;
+      border-width: thin;
+    }
+
+    li{
+      float: right;
+    }
+
+    li a{
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 14px;
+      text-decoration: none;
+    }
+
+    li a:hover{
+      background: black;
+    }
+    .logo{
+      font-size: 0.5em;
+    }
+
+    #Name{
+      font-size: 2.0em;
+      font-family: 'GreatVibesRegular';
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body{
+       background:url(https://vitrage-resort.co.il/wp-content/uploads/2016/10/35688222_l2.jpg);
+       font-family: 'MiriMedium';
+       font-weight: normal;
+       font-style: normal;
+       color: white;
+    }
+
+    </style>
+  </head>
+  <body>
+    <p class="logo" id="Name">SportNet</p>
+    <p class="logo">קהילת הספורט הגדולה בישראל</p>
+    <ul>
+        <li><a href="Posting.html" align = "right" dir="rtl">פרסום פוסט</a></li>
+        <li><a href="RateTraining.html" align = "right" dir="rtl">דירוג אימונים</a></li>
+        <li><a href="GiftFriend.html" align = "right" dir="rtl">תרום קרדיט</a></li>
+        <li><a href="Posting.html" align = "right" dir="rtl">מענה על סקר</a></li>
+        <li><a href="Posting.html" align = "right" dir="rtl">דוחות</a></li>
+        <li><a href="HomePage.html" align = "right" dir="rtl">התנתקות</a></li>
+    </ul>
+    <h1>sport posts</h1>
+    <div class="posts">
+        {% for post in posts %} 
+            <div class="post">
+                <h2><a href="#">{{post.title}}</a><h2>
+            </div>
+        {% endfor %}
+    </div>    
+
+  </body>
+</html>
+
