@@ -102,3 +102,8 @@ def CreatPost(request):
     else:
         print('invalid')
     return render(request , 'blog/CreatPost.html',{'formP':formP})
+
+
+def OrgUserPage(request):
+    orguser = User.objects.filter(role = 'organization').order_by('full_name')
+    return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser})    
