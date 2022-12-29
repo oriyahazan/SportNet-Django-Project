@@ -55,7 +55,7 @@
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
         {% block content %}
-    <h2>!פרסום פוסט</h2>
+    <h2>!פרסום אירוע</h2>
     <form class="Send" action="{%url 'blog-CreatEvent' %}" method="POST">
       {% csrf_token %}
         <p>{{formE.title}} :כותרת </p>
