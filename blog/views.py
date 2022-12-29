@@ -32,7 +32,7 @@ def CreatEvent(request):
     formE = forms.EventForm(request.POST)
     if request.method == 'POST':
             formE.save()
-            return render(request,'blog/HomePage.html')
+            return render(request,'blog/HomePageOrganization.html')
     else:
         print('invalid')
     return render(request , 'blog/CreatEvent.html',{'formE':formE})
@@ -50,8 +50,8 @@ def CreatMission(request):
 def register(request):
     form = forms.RegisterForm(request.POST)
     if request.method == 'POST':
-            form.save()
-            return render(request,'blog/HomePage.html')
+        form.save()
+        return render(request,'blog/HomePage.html')
     else:
         print('invalid')
 
@@ -83,3 +83,22 @@ def AllDocOrg(request):
 def missions(request):
     missions =  Mission.objects.all().order_by('title')
     return render(request , 'blog/MissionPage.html' ,{'missions': missions}) 
+
+def AllDocAdm(request):
+    return render(request , 'blog/AllDocAdm.html')    
+
+def ComUserPage(request):
+    comuser = User.objects.filter(role = 'community').order_by('full_name')
+    return render(request , 'blog/ComUserPage.html' ,{'comuser': comuser})
+
+
+def CreatPost(request):
+    formP = forms.PostForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if formP.is_valid():
+            print("s")
+            formP.save()
+            return render(request,'blog/HomePageCommunity.html')
+    else:
+        print('invalid')
+    return render(request , 'blog/CreatPost.html',{'formP':formP})
