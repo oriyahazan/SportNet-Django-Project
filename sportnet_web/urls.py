@@ -19,7 +19,6 @@ from django.contrib.auth import views as auth_views #
 from django.urls import path, include
 #from users import views as user_views
 from blog import views 
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
@@ -41,8 +40,5 @@ urlpatterns = [
     # path('ResetPassword/' , views.ResetPassword , name='blog-ResetPassword'),
     # path('AfterPassword/' , views.AfterPassword , name='blog-AfterPassword'),
     path('CreatPost/' , views.CreatPost , name='blog-CreatPost'),
+    path('OrgUserPage' , views.OrgUserPage , name='blog-OrgUserPage'),
 ]
-
-
-urlpatterns += staticfiles_urlpatterns()
-
