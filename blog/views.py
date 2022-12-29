@@ -32,7 +32,7 @@ def CreatEvent(request):
     formE = forms.EventForm(request.POST)
     if request.method == 'POST':
             formE.save()
-            return render(request,'blog/HomePage.html')
+            return render(request,'blog/HomePageOrganization.html')
     else:
         print('invalid')
     return render(request , 'blog/CreatEvent.html',{'formE':formE})
