@@ -92,3 +92,13 @@ def ComUserPage(request):
     return render(request , 'blog/ComUserPage.html' ,{'comuser': comuser})
 
 
+def CreatPost(request):
+    formP = forms.PostForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if formP.is_valid():
+            print("s")
+            formP.save()
+            return render(request,'blog/HomePageCommunity.html')
+    else:
+        print('invalid')
+    return render(request , 'blog/CreatPost.html',{'formP':formP})

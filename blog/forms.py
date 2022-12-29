@@ -20,5 +20,10 @@ class EventForm(forms.ModelForm):
 class MissionForm(forms.ModelForm):
     class Meta:
         model = models.Mission
-        fields = ['title','content']        
+        fields = ['title','content']  
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = models.Post
+        fields = ['scope','title','content','thumb','date_posted','credit','author','flag']              
         
