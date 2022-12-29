@@ -34,7 +34,7 @@ class Event(models.Model):
     content= models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     credit = models.IntegerField(default=0)
-    participants = models.IntegerField()
+    participants = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title

@@ -90,3 +90,5 @@ def AllDocAdm(request):
 def ComUserPage(request):
     comuser = User.objects.filter(role = 'community').order_by('full_name')
     return render(request , 'blog/ComUserPage.html' ,{'comuser': comuser})
+
+

@@ -38,4 +38,5 @@ urlpatterns = [
     path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
     # path('ResetPassword/' , views.ResetPassword , name='blog-ResetPassword'),
     # path('AfterPassword/' , views.AfterPassword , name='blog-AfterPassword'),
+    #path('CreatPost/' , views.CreatPost , name='blog-CreatPost'),
 ]
