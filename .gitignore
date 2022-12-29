@@ -65,7 +65,11 @@ db.sqlite3-journal
 !**/migrations
 !**/migrations/__init__.py
 
+*/migrations/*
+!**/migrations/__pycache__
+
 **/__pycache__/**
+*/__pycache__/*
 
 # Flask stuff:
 instance/
