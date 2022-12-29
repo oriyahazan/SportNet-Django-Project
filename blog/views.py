@@ -23,7 +23,7 @@ def admin(request):
 
 def posts(request):
     posts =  Post.objects.all().order_by('title')
-    return render(request , 'blog/HomePageCommunity.html' ,{'posts': posts})
+    return render(request , 'blog/posts_page.html' ,{'posts': posts})
 
 def about(request):
     return HttpResponse('<h1>Blog About</h1>')
