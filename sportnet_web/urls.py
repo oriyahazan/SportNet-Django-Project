@@ -20,6 +20,7 @@ from django.urls import path, include
 #from users import views as user_views
 from blog import views 
 
+
 urlpatterns = [
 
     path('admin/', admin.site.urls),
@@ -38,4 +39,6 @@ urlpatterns = [
     path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
     # path('ResetPassword/' , views.ResetPassword , name='blog-ResetPassword'),
     # path('AfterPassword/' , views.AfterPassword , name='blog-AfterPassword'),
+    path('CreatPost/' , views.CreatPost , name='blog-CreatPost'),
+    path('OrgUserPage' , views.OrgUserPage , name='blog-OrgUserPage'),
 ]

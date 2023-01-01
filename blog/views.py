@@ -63,14 +63,17 @@ def login(request):
             #email = request.POST.get('Email')
             full_name = request.POST.get('full_name')
             password = request.POST.get('Password')
-            mydata = User.objects.filter(Q(full_name=full_name) & Q(password=password)).values()
+            try:
+                mydata = User.objects.get(full_name=full_name, password=password,flag='1')
+            except:
+                return HttpResponse("invalid login")
             print(full_name)
             print(password)
-            if mydata.filter(role='community'):
+            if (mydata.role=='community'):
                 return render(request, 'blog/HomePageCommunity.html')
-            if mydata.filter(role='organization'):
+            if (mydata.role=='organization'):
                 return render(request, 'blog/HomePageOrganization.html')
-            if mydata.filter(role='admin'):
+            if (mydata.role=='admin'):
                 return render(request, 'blog/HomePageAdmin.html')
             else:
                 print("someone tried to login and failed.")
@@ -90,3 +93,27 @@ def AllDocAdm(request):
 def ComUserPage(request):
     comuser = User.objects.filter(role = 'community').order_by('full_name')
     return render(request , 'blog/ComUserPage.html' ,{'comuser': comuser})
+
+
+def CreatPost(request):
+    formP = forms.PostForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if formP.is_valid():
+            print("s")
+            formP.save()
+            return render(request,'blog/HomePageCommunity.html')
+    else:
+        print('invalid')
+    return render(request , 'blog/CreatPost.html',{'formP':formP})
+
+
+def OrgUserPage(request):
+    if request.method=="POST":
+        data=list(request.POST.dict().keys())[1]
+        user=User.objects.get(full_name=data)
+        user.flag='1'
+        user.save()
+        return render(request , 'blog/OrgUserPage.html' ,{'orguser': (user,)})
+    else:
+        orguser = User.objects.filter(role = 'organization').order_by('full_name')
+        return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser})    

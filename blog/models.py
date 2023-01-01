@@ -2,14 +2,14 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-class Post(models.Model):
-    title= models.CharField(max_length=100)
-    content= models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(User , on_delete=models.CASCADE) #if user deleted we want to delete his post
+# class Post(models.Model):
+#     title= models.CharField(max_length=100)
+#     content= models.TextField()
+#     date_posted = models.DateTimeField(default=timezone.now)
+#     author = models.ForeignKey(User , on_delete=models.CASCADE) #if user deleted we want to delete his post
 
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return self.title
 
 
 class User(models.Model): 
@@ -34,7 +34,7 @@ class Event(models.Model):
     content= models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     credit = models.IntegerField(default=0)
-    participants = models.IntegerField()
+    participants = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -47,3 +47,15 @@ class Mission(models.Model):
     def __str__(self):
         return self.title
 
+class Post(models.Model):
+    scope=models.CharField(max_length=50 , default=0)
+    title= models.CharField(max_length=200)
+    content= models.TextField()
+    thumb=models.ImageField(default='default.png', blank=True)
+    date_posted = models.DateTimeField(default=timezone.now)
+    credit = models.IntegerField(default=0)
+    author=models.ForeignKey(User , default=None , on_delete=models.CASCADE)
+    flag=models.CharField(max_length=1 , default=0)
+
+    def _str_(self):
+        return self.title
