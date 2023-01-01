@@ -70,7 +70,7 @@ db.sqlite3-journal
 
 **/__pycache__/**
 */__pycache__/*
-
+*.pyc
 # Flask stuff:
 instance/
 .webassets-cache
