@@ -99,7 +99,6 @@ def CreatPost(request):
     formP = forms.PostForm(request.POST, request.FILES)
     if request.method == 'POST':
         if formP.is_valid():
-            print("s")
             formP.save()
             return render(request,'blog/HomePageCommunity.html')
     else:
@@ -117,3 +116,17 @@ def OrgUserPage(request):
     else:
         orguser = User.objects.filter(role = 'organization').order_by('full_name')
         return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser})    
+
+
+def deleteUsers(request):
+    if request.method=="POST":
+        data=list(request.POST.dict().keys())[1]
+        user=User.objects.get(full_name=data)
+        user.delete()
+        return render(request , 'blog/HomepageAdmin.html' ,{'deleteuser': (user,)})
+    else:
+        deleteuser = User.objects.filter(Q(role = 'organization')|Q(role = 'community')).order_by('full_name')
+        return render(request , 'blog/DeleteUsers.html' ,{'deleteuser': deleteuser})  
+
+
+    
