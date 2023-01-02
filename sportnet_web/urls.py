@@ -42,4 +42,5 @@ urlpatterns = [
     path('CreatPost/' , views.CreatPost , name='blog-CreatPost'),
     path('OrgUserPage/' , views.OrgUserPage , name='blog-OrgUserPage'),
     path('DeleteUsers/' , views.deleteUsers , name='blog-deleteUsers'),
+    path('UserAuth/' , views.UserAuth , name='blog-UserAuth'),
 ]

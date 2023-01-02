@@ -107,15 +107,15 @@ def CreatPost(request):
 
 
 def OrgUserPage(request):
-    if request.method=="POST":
-        data=list(request.POST.dict().keys())[1]
-        user=User.objects.get(full_name=data)
-        user.flag='1'
-        user.save()
-        return render(request , 'blog/OrgUserPage.html' ,{'orguser': (user,)})
-    else:
-        orguser = User.objects.filter(role = 'organization').order_by('full_name')
-        return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser})    
+    # if request.method=="POST":
+    #     data=list(request.POST.dict().keys())[1]
+    #     user=User.objects.get(full_name=data)
+    #     user.flag='1'
+    #     user.save()
+    #     return render(request , 'blog/OrgUserPage.html' ,{'orguser': (user,)})
+    # else:
+    orguser = User.objects.filter(role = 'organization').order_by('full_name')
+    return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser})    
 
 
 def deleteUsers(request):
@@ -127,6 +127,18 @@ def deleteUsers(request):
     else:
         deleteuser = User.objects.filter(Q(role = 'organization')|Q(role = 'community')).order_by('full_name')
         return render(request , 'blog/DeleteUsers.html' ,{'deleteuser': deleteuser})  
+
+def UserAuth(request):
+    if request.method=="POST":
+        data=list(request.POST.dict().keys())[1]
+        user=User.objects.get(full_name=data)
+        user.flag='1'
+        user.save()
+        return render(request , 'blog/HomepageAdmin.html' ,{'orguser': (user,)})
+    else:
+        orguser = User.objects.filter((Q(role = 'organization')|Q(role = 'community'))&(Q(flag ='0'))).order_by('full_name')
+        return render(request , 'blog/UserAuthorization.html' ,{'orguser': orguser})    
+
 
 
     
