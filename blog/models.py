@@ -54,7 +54,7 @@ class Post(models.Model):
     thumb=models.ImageField(default='default.png', blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
     credit = models.IntegerField(default=0)
-    author=models.ForeignKey(User , default=None , on_delete=models.CASCADE)
+    author=models.CharField(max_length=50 , default=0)
     flag=models.CharField(max_length=1 , default=0)
 
     def _str_(self):
