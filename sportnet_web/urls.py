@@ -40,5 +40,5 @@ urlpatterns = [
     # path('ResetPassword/' , views.ResetPassword , name='blog-ResetPassword'),
     # path('AfterPassword/' , views.AfterPassword , name='blog-AfterPassword'),
     path('CreatPost/' , views.CreatPost , name='blog-CreatPost'),
-    path('OrgUserPage' , views.OrgUserPage , name='blog-OrgUserPage'),
+    path('OrgUserPage' , views.OrgUserPage , name='blog-OrgUserPage'),  
 ]

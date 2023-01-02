@@ -1,16 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Post, User, Mission, Event
-from .forms import RegisterForm
+from .forms import RegisterForm, PostForm
 from datetime import datetime
 from django.db.models import Q
 from . import forms #
 
 def home(request):
-    context= {
-        'posts' : Post.objects.all()
-    }
-    return render(request , 'blog/HomePage.html' , context)
+    return render(request , 'blog/HomePage.html')
 
 def community(request):
     return render(request , 'blog/HomePageCommunity.html')
@@ -21,9 +18,9 @@ def organization(request):
 def admin(request):
     return render(request , 'blog/HomePageAdmin.html')
 
-def posts(request):
-    posts =  Post.objects.all().order_by('title')
-    return render(request , 'blog/posts_page.html' ,{'posts': posts})
+# def posts(request):
+#     posts =  Post.objects.all().order_by('title')
+#     return render(request , 'blog/HomePageCommunity.html' ,{'posts': posts})
 
 def about(request):
     return HttpResponse('<h1>Blog About</h1>')
@@ -99,7 +96,6 @@ def CreatPost(request):
     formP = forms.PostForm(request.POST, request.FILES)
     if request.method == 'POST':
         if formP.is_valid():
-            print("s")
             formP.save()
             return render(request,'blog/HomePageCommunity.html')
     else:
@@ -116,4 +112,8 @@ def OrgUserPage(request):
         return render(request , 'blog/OrgUserPage.html' ,{'orguser': (user,)})
     else:
         orguser = User.objects.filter(role = 'organization').order_by('full_name')
-        return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser})    
+        return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser})  
+
+
+
+

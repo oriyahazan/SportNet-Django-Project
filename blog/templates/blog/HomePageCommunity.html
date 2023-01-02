@@ -72,13 +72,14 @@
           window.onunload = function () { null };
         </script>
     </ul>
-    <h1>sport posts</h1>
+    <h1>sport posts:</h1>
     <div class="posts">
-        {% for post in posts %} 
-            <div class="post">
-                <h2>{{post.title}}<h2>
-            </div>
-        {% endfor %}
+      {% for post in posts %} 
+          <div class="post">
+            <h4>     </h4>
+              <h4><a href="#">{{post.content}}</a></h4>
+          </div>
+      {% endfor %}
     </div>    
 
   </body>
