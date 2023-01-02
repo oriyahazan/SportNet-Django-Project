@@ -107,14 +107,7 @@ def CreatPost(request):
 
 
 def OrgUserPage(request):
-    # if request.method=="POST":
-    #     data=list(request.POST.dict().keys())[1]
-    #     user=User.objects.get(full_name=data)
-    #     user.flag='1'
-    #     user.save()
-    #     return render(request , 'blog/OrgUserPage.html' ,{'orguser': (user,)})
-    # else:
-    orguser = User.objects.filter(role = 'organization').order_by('full_name')
+    orguser = User.objects.filter(Q(role = 'organization')& Q(flag = '1')).order_by('full_name')
     return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser})    
 
 
@@ -149,5 +142,9 @@ def PostAuth(request):
     else:
         postuser = Post.objects.filter(flag = '0').order_by('title')
         return render(request , 'blog/PostAuthorization.html' ,{'postuser': postuser})
+
+def ComUserPage(request):
+    comuser = User.objects.filter(Q(role = 'community')& Q(flag = '1')).order_by('full_name')
+    return render(request , 'blog/ComUserPage.html' ,{'comuser': comuser})    
 
     
