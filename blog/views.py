@@ -139,6 +139,15 @@ def UserAuth(request):
         orguser = User.objects.filter((Q(role = 'organization')|Q(role = 'community'))&(Q(flag ='0'))).order_by('full_name')
         return render(request , 'blog/UserAuthorization.html' ,{'orguser': orguser})    
 
-
+def PostAuth(request):
+    if request.method=="POST":
+        data=list(request.POST.dict().keys())[1]
+        post=Post.objects.get(title=data)
+        post.flag='1'
+        post.save()
+        return render(request , 'blog/HomepageAdmin.html' ,{'postuser': (post,)})
+    else:
+        postuser = Post.objects.filter(flag = '0').order_by('title')
+        return render(request , 'blog/PostAuthorization.html' ,{'postuser': postuser})
 
     
