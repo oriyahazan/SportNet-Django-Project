@@ -3,6 +3,7 @@ from django.urls import reverse, resolve
 
 from . import views
 
+
 class UrlsTestCase(TestCase):
 
     def test_home_url(self):
@@ -40,3 +41,4 @@ class UrlsTestCase(TestCase):
         self.assertEqual(url, '/login/')
         resolver_match = resolve('/login/')
         self.assertEqual(resolver_match.func, views.login)
+

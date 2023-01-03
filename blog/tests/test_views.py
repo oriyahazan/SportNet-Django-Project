@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from .models import User, Event, Mission, Post
-from .forms import RegisterForm, EventForm, MissionForm, PostForm
+#from .forms import RegisterForm, EventForm, MissionForm, PostForm
 
 
 class ViewsTestCase(TestCase):
