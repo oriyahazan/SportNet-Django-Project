@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, User, Mission, Event
-from .forms import RegisterForm, PostForm
+from .models import Post, User, Mission, Event, Rating
+from .forms import RegisterForm, PostForm, RatingForm
 from datetime import datetime
 from django.db.models import Q
 from . import forms #
@@ -139,3 +139,13 @@ def PostAuth(request):
     else:
         orguser = User.objects.filter(role = 'organization').order_by('full_name')
         return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser})    
+
+
+def CreateRating(request):
+    formR = forms.RatingForm(request.POST)
+    if request.method == 'POST':
+            formR.save()
+            return render(request,'blog/HomePageCommunity.html')
+    else:
+        print('invalid')
+        return render(request , 'blog/TrainingRating.html', {'formR':formR})   
