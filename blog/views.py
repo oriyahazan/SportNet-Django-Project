@@ -67,7 +67,10 @@ def login(request):
             print(full_name)
             print(password)
             if (mydata.role=='community'):
-                return render(request, 'blog/HomePageCommunity.html')
+                context= {
+                'posts' : Post.objects.filter(flag = '1').order_by('title')
+                }
+                return render(request, 'blog/HomePageCommunity.html',context)
             if (mydata.role=='organization'):
                 return render(request, 'blog/HomePageOrganization.html')
             if (mydata.role=='admin'):
@@ -138,4 +141,14 @@ def PostAuth(request):
         return render(request , 'blog/HomepageAdmin.html' ,{'postuser': (post,)})
     else:
         orguser = User.objects.filter(role = 'organization').order_by('full_name')
-        return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser})    
+        return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser}) 
+
+        
+def ActivityReport(request):
+    allPost =  Post.objects.all()
+    allEvent = Event.objects.all()
+    num_posts = Post.objects.count()
+    num_events = Event.objects.count()
+    return render(request , 'blog/ActivityReport.html' ,{'allPost': allPost , 'allEvent': allEvent , 'num_posts': num_posts , 'num_events':num_events})
+
+                      
