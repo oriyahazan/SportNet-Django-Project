@@ -1,6 +1,7 @@
 from django.test import TestCase
 from .models import User, Event, Mission, Post
 
+#from blog import models -- 1st try
 
 class ModelsTestCase(TestCase):
     def setUp(self):

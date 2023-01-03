@@ -1,6 +1,7 @@
 from django.test import TestCase
 from .forms import RegisterForm, EventForm, MissionForm, PostForm
 
+#from blog import forms -- 1st try
 
 class FormsTestCase(TestCase):
     def test_register_form(self):
