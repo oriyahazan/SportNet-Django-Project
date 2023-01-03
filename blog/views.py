@@ -51,7 +51,6 @@ def register(request):
         return render(request,'blog/HomePage.html')
     else:
         print('invalid')
-
     return render(request , 'blog/register.html' , {'form':form})
 
 
@@ -148,4 +147,13 @@ def CreateRating(request):
             return render(request,'blog/HomePageCommunity.html')
     else:
         print('invalid')
-        return render(request , 'blog/TrainingRating.html', {'formR':formR})   
+        return render(request , 'blog/TrainingRating.html', {'formR':formR})
+
+
+def AllDocCom(request):
+    return render(request , 'blog/AllDocCom.html')   
+
+def CoachRating(request):
+    Couch = Rating.objects.all().order_by('name')
+    return render(request , 'blog/TraningDoc.html',{'Couch': Couch}) 
+
