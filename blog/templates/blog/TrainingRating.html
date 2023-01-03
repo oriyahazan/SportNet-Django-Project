@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SportNet</title>
+      <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/miri" type="text/css"/>
+      <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/great-vibes" type="text/css"/>
+      <style media="screen">
+      .logo{
+        font-size: 0.8em;
+        color: #d6ad60b4;
+
+      }
+
+      #Name{
+        font-size: 2.5em;
+        font-family: 'GreatVibesRegular';
+        font-weight: normal;
+        font-style: normal;
+        margin: 1px 1px 1px 1px;
+      }
+      body{
+         background-color: #f5f1e8;
+         font-family: 'MiriMedium';
+         font-weight: normal;
+         font-style: normal;
+         color: #d6ad60b4;
+      }
+
+
+    #hey{
+      font-size: 1.25em;
+      text-align: right;
+    }
+    #hey1{
+      font-size: 1em;
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      text-align: right;
+      color: #d6ad60b4;
+    }
+    h2{
+      margin-top: 10px;
+      text-align: center;
+      font-size: 2.5em;
+      margin: 1px 1px 1px 1px;
+    }
+    </style>
+  </head>
+  <body>
+    <p class="logo" id="Name">SportNet <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
+    <p class="logo">קהילת הספורט הגדולה בישראל</p><br>
+    {% block content %}
+    <h2> דירוג אימונים</h2>
+    <form class="send" action="{%url 'blog-TrainingRating'%}" method="POST">
+      {% csrf_token %}
+      <p id="hey">{{formR.name}}:שם המאמן</p>
+      <p id="hey">{{formR.rating}}: דירוג האימון מ-1 עד 10</p>
+      <p id="hey">{{formR.good}}: היית חוזר למאמן זה:כן/לא</p>
+      
+
+      <p id="hey1" ><input id="hey1" class="btn btn-outline-info" type="submit" value="סיום"></p>
+    {% endblock content %}
+    </form>
+
+  </body>
+</html>
