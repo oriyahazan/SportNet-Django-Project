@@ -51,7 +51,6 @@ def register(request):
         return render(request,'blog/HomePage.html')
     else:
         print('invalid')
-
     return render(request , 'blog/register.html' , {'form':form})
 
 
@@ -163,4 +162,13 @@ def ActivityReport(request):
     num_events = Event.objects.count()
     return render(request , 'blog/ActivityReport.html' ,{'allPost': allPost , 'allEvent': allEvent , 'num_posts': num_posts , 'num_events':num_events})
 
-                      
+                
+
+
+def AllDocCom(request):
+    return render(request , 'blog/AllDocCom.html')   
+
+def CoachRating(request):
+    Couch = Rating.objects.all().order_by('name')
+    return render(request , 'blog/TraningDoc.html',{'Couch': Couch}) 
+

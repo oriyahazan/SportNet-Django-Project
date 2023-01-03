@@ -48,6 +48,10 @@
        font-style: normal;
        color: white;
     }
+    #list{
+      margin-top: 60px;
+      text-align: right;
+    }
 
     </style>
   </head>
@@ -76,8 +80,9 @@
             window.onunload = function () { null };
           </script>
     </ul><br>
-    <ul>
-        <a href="{% url 'blog-missions' %}">דוח משימות מהמנהל</a>
+    <ul id ="list">
+        <a href="{% url 'blog-missions' %}">דוח משימות מהמנהל</a><br>
+        <a href="">דוח דירוג מאמנים</a>
     </ul>
 
 

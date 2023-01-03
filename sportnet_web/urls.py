@@ -47,4 +47,8 @@ urlpatterns = [
     path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
     path('TrainingRating/' , views.CreateRating , name='blog-TrainingRating'),
     path('ActivityReport/' , views.ActivityReport , name='blog-ActivityReport'),
+    path('TraningDoc/' , views.CoachRating , name='blog-TraningDoc'),
+    path('AllDocCom/' , views.AllDocCom , name='blog-AllDocCom'),
+    
+    
 ]

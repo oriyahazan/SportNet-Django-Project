@@ -61,12 +61,11 @@
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     <h1>!ברוכים הבאים לדף הראשי של מנהל האתר</h1>
     <ul>
-        <li><a href="Posting.html" align = "right" dir="rtl">אישור משתמשים</a></li>
-        <li><a href="RateTraining.html" align = "right" dir="rtl">מחיקת משתמשים</a></li>
-        <li><a href="GiftFriend.html" align = "right" dir="rtl">יצירת סקר שביעות רצון</a></li>
-        <li><a href="{% url 'blog-CreatMission' %}" align = "right" dir="rtl">שליחת משימות לחברי האירגון</a></li>
-        <li><a href="Posting.html" align = "right" dir="rtl">אישור פוסטים</a></li>
-        <li><a href="{% url 'blog-AllDocAdm' %}" align = "right" dir="rtl">דוחות</a></li>
+        <li><a href="{% url 'blog-CreatPost' %}" align = "right" dir="rtl">פרסום פוסט</a></li>
+        <li><a href="{% url 'blog-TrainingRating' %}" align = "right" dir="rtl">דירוג אימונים</a></li>
+        <li><a href="GiftFriend.html" align = "right" dir="rtl">תרום קרדיט</a></li>
+        <li><a href="Posting.html" align = "right" dir="rtl">מענה על סקר</a></li>
+        <li><a href="{% url 'blog-AllDocCom' %}" align = "right" dir="rtl">דוחות</a></li>
         <li><a href="{% url 'blog-HomePage' %}" align = "right" dir="rtl">התנתקות</a></li>
         <script type="text/javascript">
             function preventBack() {
@@ -79,11 +78,9 @@
           </script>
     </ul><br>
     <ul id="list">
-        <a href="{% url 'blog-ComUserPage' %}">דוח פירוט חברי קהילה</a>
+        <a href="{% url 'blog-TraningDoc' %}">דוח דירוג מאמנים</a>
         <br>
         <a href="{% url 'blog-OrgUserPage' %}">דוח פירוט חברי אירגון</a>
-        <br>
-        <a href="{% url 'blog-ActivityReport' %}">דוח פירוט פעילות באתר</a>
 
     </ul>
 
