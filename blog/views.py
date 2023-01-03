@@ -22,9 +22,6 @@ def admin(request):
 #     posts =  Post.objects.all().order_by('title')
 #     return render(request , 'blog/HomePageCommunity.html' ,{'posts': posts})
 
-def about(request):
-    return HttpResponse('<h1>Blog About</h1>')
-
 def CreatEvent(request):
     formE = forms.EventForm(request.POST)
     if request.method == 'POST':
