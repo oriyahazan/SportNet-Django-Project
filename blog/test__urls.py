@@ -12,11 +12,16 @@ class UrlsTestCase(TestCase):
         resolver_match = resolve('/register/')
         self.assertEqual(resolver_match.func, views.register)
 
+    def test_homePageCommunity_url(self):
+        url = reverse('blog-community')
+        self.assertEqual(url, '/HomePageCommunity/')
+        resolver_match = resolve('/HomePageCommunity/')
+        self.assertEqual(resolver_match.func, views.home)
 
-    def test_homePage_url(self):
-        url = reverse('blog-HomePage')
-        self.assertEqual(url, '/HomePage/')
-        resolver_match = resolve('/HomePage/')
+    def test_homePageAdmin_url(self):
+        url = reverse('blog-admin')
+        self.assertEqual(url, '/HomePageAdmin/')
+        resolver_match = resolve('/HomePageAdmin/')
         self.assertEqual(resolver_match.func, views.home)
 
     def test_login_url(self):
@@ -25,19 +30,121 @@ class UrlsTestCase(TestCase):
         resolver_match = resolve('/login/')
         self.assertEqual(resolver_match.func, views.login)
 
-    # def test_home_url(self):
-    #     url = reverse('')
-    #     self.assertEqual(url, '/')
-    #     resolver_match = resolve('/')
-    #     self.assertEqual(resolver_match.func, views.home)
+
+    # def test_login_url(self):
+    #     url = reverse('blog-HomePage')
+    #     self.assertEqual(url, '/HomePage/')
+    #     resolver_match = resolve('/HomePage/')
+    #     self.assertEqual(resolver_match.func, views.login)
+
+    def test_home_url(self):
+        url = reverse('blog.urls')
+        self.assertEqual(url, '/')
+        resolver_match = resolve('/')
+        self.assertEqual(resolver_match.func, views.home)
+
+    def test_homePageOrganization_url(self):
+        url = reverse('blog-organization')
+        self.assertEqual(url, '/HomePageOrganization/')
+        resolver_match = resolve('/HomePageOrganization/')
+        self.assertEqual(resolver_match.func, views.organization)
+
+    def test_creatEvent_url(self):
+        url = reverse('blog-CreatEvent')
+        self.assertEqual(url, '/CreatEvent/')
+        resolver_match = resolve('/CreatEvent/')
+        self.assertEqual(resolver_match.func, views.CreatEvent)
+
+    def test_creatMission_url(self):
+        url = reverse('blog-CreatMission')
+        self.assertEqual(url, '/CreatMission/')
+        resolver_match = resolve('/CreatMission/')
+        self.assertEqual(resolver_match.func, views.CreatMission)
+
+    def test_allDocOrg_url(self):
+        url = reverse('blog-AllDocOrg')
+        self.assertEqual(url, '/AllDocOrg/')
+        resolver_match = resolve('/AllDocOrg/')
+        self.assertEqual(resolver_match.func, views.AllDocOrg)
+
+    def test_missionPage_url(self):
+        url = reverse('blog-missions')
+        self.assertEqual(url, '/MissionPage/')
+        resolver_match = resolve('/MissionPage/')
+        self.assertEqual(resolver_match.func, views.missions)
+
+    def test_allDocAdm_url(self):
+        url = reverse('blog-AllDocAdm')
+        self.assertEqual(url, '/AllDocAdm/')
+        resolver_match = resolve('/AllDocAdm/')
+        self.assertEqual(resolver_match.func, views.AllDocAdm)
+
+    def test_comUserPage_url(self):
+        url = reverse('blog-ComUserPage')
+        self.assertEqual(url, '/ComUserPage/')
+        resolver_match = resolve('/ComUserPage/')
+        self.assertEqual(resolver_match.func, views.ComUserPage)
+
+    def test_creatPost_url(self):
+        url = reverse('blog-CreatPost')
+        self.assertEqual(url, '/CreatPost/')
+        resolver_match = resolve('/CreatPost/')
+        self.assertEqual(resolver_match.func, views.CreatPost)
+
+    def test_orgUserPage_url(self):
+        url = reverse('blog-OrgUserPage')
+        self.assertEqual(url, '/OrgUserPage/')
+        resolver_match = resolve('/OrgUserPage/')
+        self.assertEqual(resolver_match.func, views.OrgUserPage)
+
+    def test_deleteUser_url(self):
+        url = reverse('blog-deleteUsers')
+        self.assertEqual(url, '/DeleteUsers/')
+        resolver_match = resolve('/DeleteUsers/')
+        self.assertEqual(resolver_match.func, views.deleteUsers)
+
+    def test_userAuth_url(self):
+        url = reverse('blog-UserAuth')
+        self.assertEqual(url, '/UserAuth/')
+        resolver_match = resolve('/UserAuth/')
+        self.assertEqual(resolver_match.func, views.UserAuth)
+
+    def test_postAuth_url(self):
+        url = reverse('blog-PostAuth')
+        self.assertEqual(url, '/PostAuthorization/')
+        resolver_match = resolve('/PostAuthorization/')
+        self.assertEqual(resolver_match.func, views.PostAuth)
+
+    def test_trainingRating_url(self):
+        url = reverse('blog-TrainingRating')
+        self.assertEqual(url, '/TrainingRating/')
+        resolver_match = resolve('/TrainingRating/')
+        self.assertEqual(resolver_match.func, views.CreateRating)
+
+    def test_activityReport_url(self):
+        url = reverse('blog-ActivityReport')
+        self.assertEqual(url, '/ActivityReport/')
+        resolver_match = resolve('/ActivityReport/')
+        self.assertEqual(resolver_match.func, views.ActivityReport)
+
+    def test_allDocCom_url(self):
+        url = reverse('blog-AllDocCom')
+        self.assertEqual(url, '/AllDocCom/')
+        resolver_match = resolve('/AllDocCom/')
+        self.assertEqual(resolver_match.func, views.AllDocCom)
+
+    def test_traningDoc_url(self):
+        url = reverse('blog-TraningDoc')
+        self.assertEqual(url, '/TraningDoc/')
+        resolver_match = resolve('/TraningDoc/')
+        self.assertEqual(resolver_match.func, views.register)
 
 
-
-    # def test_posts_url(self):
-    #     url = reverse('blog-CreatPost')
-    #     self.assertEqual(url, '/CreatPost/')
-    #     resolver_match = resolve('/CreatPost/')
-    #     self.assertEqual(resolver_match.func, views.CreatPost)
+# def test_posts_url(self):
+#     url = reverse('blog-CreatPost')
+#     self.assertEqual(url, '/CreatPost/')
+#     resolver_match = resolve('/CreatPost/')
+#     self.assertEqual(resolver_match.func, views.CreatPost)
 
 
 
@@ -50,7 +157,7 @@ This test case will send a GET request to each of the URL patterns and check tha
 which indicates that the request was successful.
 """
 
-class UrlsTestCase(TestCase):
+class UrlsTestCase2(TestCase):
     def test_url_patterns(self):
         # Test the URL pattern for the 'blog-register' view
         url = reverse('blog-register')
@@ -168,13 +275,13 @@ class UrlsTestCase(TestCase):
 
 
 
-# --- 2nd try ----
- """
+    # --- 2nd try ----
+"""
 To create a unit test for these URL patterns in your Django project that uses both the reverse and resolve functions,
 you can do the following:
-    Use the reverse function to get the URL for each pattern.
-    Use the resolve function to check that the correct view function is being called for each URL.
- """
+   Use the reverse function to get the URL for each pattern.
+   Use the resolve function to check that the correct view function is being called for each URL.
+"""
 
 
 #from django.test import TestCase

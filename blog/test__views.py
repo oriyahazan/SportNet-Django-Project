@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from .models import User, Event, Mission, Post
 
-#from blog import models -- 1st try
+from blog import models
 #from .forms import RegisterForm, EventForm, MissionForm, PostForm -- don't work
 
 
