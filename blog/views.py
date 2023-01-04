@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
-from .models import Post, user, Mission, Event, Image
+from .models import Post, user, Mission, Event, Rating, Image, RatingForm
+from datetime import datetime
 from django.db.models import Q
 from .forms import ImageForm
 from . import forms
@@ -20,10 +21,12 @@ def community(request):
     if request.method =="POST":
         key=list(request.POST.dict().keys())[1]
         post=Post.objects.get(id=key)
+        event = Event.objects.get(id=key)
         user=request.user
         user.credit-=post.credit
         author = post.author
-        author.credit+=post.creditr
+        author.credit+=post.credit
+        #registpost.author
         user.save()
         author.save()
     context={'posts': Post.objects.filter(flag = '1').order_by('title'),
@@ -49,7 +52,7 @@ def CreatEvent(request):
     formE = forms.EventForm(request.POST)
     if request.method == 'POST':
             formE.save()
-            return render(request,'blog/HomePageOrganization.html')
+            return redirect('blog-organization')
     else:
         print('invalid')
     return render(request , 'blog/CreatEvent.html',{'formE':formE})
@@ -59,7 +62,7 @@ def CreatMission(request):
     formM = forms.MissionForm(request.POST)
     if request.method == 'POST':
             formM.save()
-            return render(request,'blog/HomePageAdmin.html')
+            return redirect('blog-admin')
     else:
         print('invalid')
     return render(request , 'blog/CreatMission.html',{'formM':formM})        
@@ -139,10 +142,10 @@ def CreatPost(request):
             x=formP.save()
             x.author=request.user
             x.save()
-            return render(request,'blog/HomePageCommunity.html')
+            return redirect('blog-community')
     else:
         print('invalid')
-    return render(request , 'blog/CreatPost.html',{'formP':formP})
+        return render(request , 'blog/CreatPost.html',{'formP':formP})
 
 
 @login_required
@@ -157,7 +160,9 @@ def deleteUsers(request):
         data=list(request.POST.dict().keys())[1]
         user1=user.objects.get(full_name=data)
         user1.delete()
-        return render(request , 'blog/HomepageAdmin.html' ,{'deleteuser': (user1,)})
+        return redirect('blog-admin')
+        #,{'deleteuser': (user1,)})
+        # return render(request , 'blog/HomepageAdmin.html' ,{'deleteuser': (user1,)})
     else:
         deleteuser = user.objects.filter(Q(role = 'organization')|Q(role = 'community')).order_by('full_name')
         return render(request , 'blog/DeleteUsers.html' ,{'deleteuser': deleteuser})  
@@ -169,7 +174,9 @@ def UserAuth(request):
         user1=user.objects.get(full_name=data)
         user1.flag='1'
         user1.save()
-        return render(request , 'blog/HomepageAdmin.html' ,{'orguser': (user1,)})
+        return redirect('blog-admin')
+        #,{'orguser': (user1,)})
+        # return render(request , 'blog/HomepageAdmin.html' ,{'orguser': (user1,)})
     else:
         orguser = user.objects.filter((Q(role = 'organization')|Q(role = 'community'))&(Q(flag ='0'))).order_by('full_name')
         return render(request , 'blog/UserAuthorization.html' ,{'orguser': orguser})    
@@ -181,10 +188,11 @@ def PostAuth(request):
         post=Post.objects.get(title=data)
         post.flag='1'
         post.save()
-        return render(request , 'blog/HomepageAdmin.html' ,{'postuser': (post,)})
+        return redirect('blog-admin')
+        #{'postuser': (post,)})
     else:
-        orguser = user.objects.filter(role = 'organization').order_by('full_name')
-        return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser}) 
+        postuser = Post.objects.filter(flag = '0').order_by('title')
+        return render(request , 'blog/PostAuthorization.html' ,{'postuser': postuser}) 
 
 @login_required       
 def ActivityReport(request):
@@ -211,10 +219,22 @@ def CreateRating(request):
     formR = forms.RatingForm(request.POST)
     if request.method == 'POST':
             formR.save()
-            return render(request,'blog/HomePageCommunity.html')
+            return redirect('blog-community')
     else:
         print('invalid')
         return render(request , 'blog/TrainingRating.html', {'formR':formR})   
+
+
+@login_required       
+def ActivityReport(request):
+    allPost =  Post.objects.all()
+    allEvent = Event.objects.all()
+    num_posts = Post.objects.count()
+    num_events = Event.objects.count()
+    return render(request , 'blog/ActivityReport.html' ,{'allPost': allPost , 'allEvent': allEvent , 'num_posts': num_posts , 'num_events':num_events})
+
+                
+
 
 def AllDocCom(request):
     return render(request , 'blog/AllDocCom.html')   
@@ -222,3 +242,5 @@ def AllDocCom(request):
 def CoachRating(request):
     Couch = Rating.objects.all().order_by('name')
     return render(request , 'blog/TraningDoc.html',{'Couch': Couch}) 
+
+                      

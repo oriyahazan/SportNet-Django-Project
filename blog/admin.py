@@ -1,7 +1,6 @@
 from django.contrib import admin
 from blog import models
-from .models import Post ,Event,Mission,Rating
-from .models import Post ,Event,Mission , Image
+from .models import Post ,Event,Mission , Image, Rating
 from .models import user
 
 

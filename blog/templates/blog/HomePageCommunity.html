@@ -48,8 +48,28 @@
        font-style: normal;
        color: white;
     }
+    h1{
+      text-align: center;
+      margin-top: 30px;
+      font-size: 2.25em;
+    }
     .posts{
-      color: white;
+      text-align: right;
+    }
+    h2{
+      text-align: center;
+      margin-top: 80px;
+      font-size: 2em;
+    }
+    h3{
+      font-size: 1.75em;
+    }
+    #cre{
+      margin: 80px 20px 20px 1150px;
+
+      text-align: right;
+      border:10px solid white;
+      width:17%;
     }
 
     </style>
@@ -59,23 +79,47 @@
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     <ul>
         <li><a href="{% url 'blog-CreatPost' %}" align = "right" dir="rtl">פרסום פוסט</a></li>
-        <li><a href="{% url 'blog-TrainingRating' %}" align = "right" dir="rtl">דירוג מאמנים</a></li>
+        <li><a href="RateTraining.html" align = "right" dir="rtl">דירוג אימונים</a></li>
         <li><a href="GiftFriend.html" align = "right" dir="rtl">תרום קרדיט</a></li>
         <li><a href="Posting.html" align = "right" dir="rtl">מענה על סקר</a></li>
         <li><a href="{% url 'blog-AllDocCom' %}" align = "right" dir="rtl">דוחות</a></li>
         <li><a href="{% url 'logout' %}" align = "right" dir="rtl">התנתקות</a></li>
+
         
     </ul>
-    <h1>{{money}}</h1>
-    <h1>sport posts:</h1>
+    <h3 id="cre">{{money}} :קרדיטים</h3>
+    <h1>פעילויות ספורט ומסירה בקהילה</h1>
     <div class="posts">
       {% for post in posts %} 
           <div class="post">
-            <h4>     </h4>
-              <h4><a href="#">{{post.content}}</a></h4>
-              <form method="POST">{% csrf_token %}<button type="submit" name="{{post.id}}">להירשם</button></form>
+      
+              <!-- {% if post.scope ==  "1" %} -->
+                <h3>מסירת מוצר</h3>
+                <h4>{{post.title}}</h4>
+                <p>תיאור המוצר: {{post.content}}</p>
+                <p>המוסר: {{post.author}}</p>
+                <p>{{post.credit}} :המחיר</p>
+                <p><form method="POST">{% csrf_token %}<button type="submit" name="{{post.id}}">להירשם</button></form></p>
+              <!-- {% elif post.scope ==  "2" %} -->
+                <!-- <h2>פעילות בקהילה</h2>
+                <h4>{{post.title}}</h4>
+                <p>תוכן הפעילות: {{post.content}}</p>
+                <p>המאמן: {{post.author}}</p>
+                <p>{{post.credit}} :המחיר</p>
+                <p><form method="POST">{% csrf_token %}<button type="submit" name="{{post.id}}">להירשם</button></form></p>
+              {% endif %} -->
           </div>
       {% endfor %}
+      <h2>אירועים בקהילה</h2>
+      {% for event in events %}
+          <div>
+            <h4>{{event.title}}</h4>
+            <p>תוכן האירוע: {{event.content}}</p>
+            <p>{{event.credit}} :המחיר</p>
+            <p>{{event.date_posted}} :יום האירוע</p>
+            <p><form method="POST">{% csrf_token %}<button type="submit" name="{{event.id}}">להירשם</button></form></p>
+          </div>  
+      {% endfor %} 
     </div>    
 
   </body>
