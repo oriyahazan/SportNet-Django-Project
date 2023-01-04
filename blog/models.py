@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
 
+from django.contrib.auth.models import AbstractUser
 # class Post(models.Model):
 #     title= models.CharField(max_length=100)
 #     content= models.TextField()
@@ -12,14 +12,13 @@ from django.contrib.auth.models import User
 #         return self.title
 
 
-class User(models.Model): 
-    full_name = models.CharField(max_length=30)
-    id_number= models.IntegerField(max_length=10)
-    identity_qu=models.CharField(max_length=50)
-    place = models.CharField(max_length=10)
-    role = models.CharField(max_length=15)
-    email= models.EmailField(max_length=40)
-    password = models.CharField(max_length=20)
+class user(AbstractUser): 
+    full_name=models.CharField(max_length=50,unique=True)
+    email=models.EmailField(max_length=50,unique=True)
+    id_number= models.IntegerField(max_length=10,null=True)
+    identity_qu=models.CharField(max_length=50,null=True)
+    place = models.CharField(max_length=10,null=True)
+    role = models.CharField(max_length=15,null=True)
     age = models.IntegerField(max_length=3, default=1)
     flag = models.CharField(max_length=1,default=0)
     credit = models.IntegerField(default=0)
@@ -54,11 +53,21 @@ class Post(models.Model):
     thumb=models.ImageField(default='default.png', blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
     credit = models.IntegerField(default=0)
-    author=models.CharField(max_length=50 , default=0)
+    author=models.ForeignKey(user,on_delete=models.CASCADE,null=True)
     flag=models.CharField(max_length=1 , default=0)
+    
 
     def _str_(self):
         return self.title
+
+
+class Image(models.Model):
+    title= models.CharField(max_length=200)
+    content= models.TextField()
+    image= models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.title        
 
 
 class Rating(models.Model):
@@ -68,4 +77,5 @@ class Rating(models.Model):
     
     def __str__(self):
         return str(self.name)
+
 

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -48,24 +49,47 @@
        font-style: normal;
        color: white;
     }
+    h1{
+        text-align: center;
+        font-size: 2.5em;
+    }
+    .mission{
+        text-align: center;
+        border-color: black;
+        margin: auto;
+        border-width: 5px;
+        border-style: solid;
+    }
+    #hed{
+        font-size: 1.5em;
+    }
 
     </style>
   </head>
   <body>
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
-    <h1>!ברוך הבא לדף הבית של חבר האירגון</h1>
-    <ul>
-        <li><a href="{% url 'blog-CreatEvent' %}" align = "right" dir="rtl">פרסום אירוע בקהילה</a></li>
-        <li><a href="RateTraining.html" align = "right" dir="rtl">העלאת תמונות מאירוע</a></li>
-        <li><a href="{% url 'blog-HomePage' %}" align = "right" dir="rtl">פרסום מדריך לשימוש באתר</a></li>
-        <li><a href="{% url 'blog-addImage' %}" align = "right" dir="rtl">העלאת תמונות מאירוע</a></li>
-        <li><a href="##############" align = "right" dir="rtl">פרסום מדריך לשימוש באתר</a></li>
-        <li><a href="Posting.html" align = "right" dir="rtl">שליחת סקר לחברי הקהילה</a></li>
-        <li><a href="{% url 'blog-AllDocOrg' %}" align = "right" dir="rtl">דוחות</a></li>
-        <li><a href="{% url 'logout' %}" align = "right" dir="rtl">התנתקות</a></li>
-    </ul>
-
+    
+    <h1>דו"ח דירוג מאמנים</h1>
+    <div class="missions">
+      {% for CouchA in Couch %}
+            <div>
+                <table class="mission" border="5">
+                    <thead>
+                        <th>?היה חוזר למאמן</th>
+                        <th>הדירוג</th>
+                        <th>:שם המשתמש</th>
+                    </thead>
+                    <tr>
+                        <td>{{CouchA.good}}</td>
+                        <td>{{CouchA.rating}}</td>
+                        <td>{{CouchA.name}}</td>
+                    </tr>
+                  </table>
+            </div>
+        {% endfor %}
+    </div>    
 
   </body>
 </html>
+
