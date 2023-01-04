@@ -1,31 +1,52 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, User, Mission, Event, Image
+from .models import Post, user, Mission, Event, Image
 from datetime import datetime
 from django.db.models import Q
 from .forms import ImageForm
 from . import forms
+from django.contrib.auth import login,logout
+from django.contrib.auth.decorators import login_required
 
+
+def log_out(request):
+    logout(request)
+    return redirect('blog-login')
 
 def home(request):
     return render(request , 'blog/HomePage.html')
-
+    
+@login_required
 def community(request):
-    return render(request , 'blog/HomePageCommunity.html')
+    if request.method =="POST":
+        key=list(request.POST.dict().keys())[1]
+        post=Post.objects.get(id=key)
+        user=request.user
+        user.credit-=post.credit
+        author = post.author
+        author.credit+=post.credit
+        #registpost.author
+        user.save()
+        author.save()
+    context={'posts': Post.objects.filter(flag = '1').order_by('title'),
+    'money':request.user.credit,
+    'events': Event.objects.all().order_by('title')}
+    return render(request, 'blog/HomePageCommunity.html',context)
 
+@login_required
 def organization(request):
-    return render(request , 'blog/HomePageOrganization.html')
+    context={'posts': Post.objects.filter(flag = '1').order_by('title'),
+    'events': Event.objects.all().order_by('title')}
+    return render(request , 'blog/HomePageOrganization.html', context)
 
+@login_required
 def admin(request):
-    return render(request , 'blog/HomePageAdmin.html')
+    context={'posts': Post.objects.filter(flag = '1').order_by('title'),
+    'events': Event.objects.all().order_by('title')}
+    return render(request , 'blog/HomePageAdmin.html', context)
 
-# def posts(request):
-#     posts =  Post.objects.all().order_by('title')
-#     return render(request , 'blog/HomePageCommunity.html' ,{'posts': posts})
 
-def about(request):
-    return HttpResponse('<h1>Blog About</h1>')
-
+@login_required
 def CreatEvent(request):
     formE = forms.EventForm(request.POST)
     if request.method == 'POST':
@@ -35,6 +56,7 @@ def CreatEvent(request):
         print('invalid')
     return render(request , 'blog/CreatEvent.html',{'formE':formE})
 
+@login_required
 def CreatMission(request):
     formM = forms.MissionForm(request.POST)
     if request.method == 'POST':
@@ -48,7 +70,9 @@ def CreatMission(request):
 def register(request):
     form = forms.RegisterForm(request.POST)
     if request.method == 'POST':
-        form.save()
+        user1=form.save()
+        user1.set_password(request.POST.dict()['password'])
+        user1.save()
         return render(request,'blog/HomePage.html')
     else:
         print('invalid')
@@ -56,83 +80,98 @@ def register(request):
     return render(request , 'blog/register.html' , {'form':form})
 
 
-def login(request):
+    
+def my_login(request):
         if request.method == 'POST':
             #email = request.POST.get('Email')
             full_name = request.POST.get('full_name')
             password = request.POST.get('Password')
             try:
-                mydata = User.objects.get(full_name=full_name, password=password,flag='1')
+                mydata = user.objects.get(full_name=full_name,flag='1')
             except:
+                return HttpResponse("invalid login")
+            if  not mydata.check_password(password):
                 return HttpResponse("invalid login")
             print(full_name)
             print(password)
-            if (mydata.role=='community'):
-                context= {
-                'posts' : Post.objects.filter(flag = '1').order_by('title')
+            login(request,mydata)
+            context= {
+                'money':mydata.credit,
                 }
-                return render(request, 'blog/HomePageCommunity.html',context)
+            if (mydata.role=='community'):
+                return redirect('blog-community')
             if (mydata.role=='organization'):
-                return render(request, 'blog/HomePageOrganization.html')
+                return redirect('blog-organization')
             if (mydata.role=='admin'):
-                return render(request, 'blog/HomePageAdmin.html')
+                return redirect('blog-admin')
             else:
                 print("someone tried to login and failed.")
                 return HttpResponse("invalid login")
         return render(request, 'blog/login.html')
 
+
+@login_required
 def AllDocOrg(request):
     return render(request , 'blog/AllDocOrg.html')    
 
+@login_required
 def missions(request):
     missions =  Mission.objects.all().order_by('title')
     return render(request , 'blog/MissionPage.html' ,{'missions': missions}) 
 
+@login_required
 def AllDocAdm(request):
     return render(request , 'blog/AllDocAdm.html')    
 
+@login_required
 def ComUserPage(request):
-    comuser = User.objects.filter(role = 'community').order_by('full_name')
+    comuser = user.objects.filter(role = 'community').order_by('full_name')
     return render(request , 'blog/ComUserPage.html' ,{'comuser': comuser})
 
-
+@login_required
 def CreatPost(request):
     formP = forms.PostForm(request.POST, request.FILES)
     if request.method == 'POST':
         if formP.is_valid():
-            formP.save()
+            x=formP.save()
+            x.author=request.user
+            x.save()
             return render(request,'blog/HomePageCommunity.html')
     else:
         print('invalid')
     return render(request , 'blog/CreatPost.html',{'formP':formP})
 
 
+@login_required
 def OrgUserPage(request):
-    orguser = User.objects.filter(Q(role = 'organization')& Q(flag = '1')).order_by('full_name')
+    orguser = user.objects.filter(Q(role = 'organization')& Q(flag = '1')).order_by('full_name')
     return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser})    
 
 
+@login_required
 def deleteUsers(request):
     if request.method=="POST":
         data=list(request.POST.dict().keys())[1]
-        user=User.objects.get(full_name=data)
-        user.delete()
-        return render(request , 'blog/HomepageAdmin.html' ,{'deleteuser': (user,)})
+        user1=user.objects.get(full_name=data)
+        user1.delete()
+        return render(request , 'blog/HomepageAdmin.html' ,{'deleteuser': (user1,)})
     else:
-        deleteuser = User.objects.filter(Q(role = 'organization')|Q(role = 'community')).order_by('full_name')
+        deleteuser = user.objects.filter(Q(role = 'organization')|Q(role = 'community')).order_by('full_name')
         return render(request , 'blog/DeleteUsers.html' ,{'deleteuser': deleteuser})  
 
+@login_required
 def UserAuth(request):
     if request.method=="POST":
         data=list(request.POST.dict().keys())[1]
-        user=User.objects.get(full_name=data)
-        user.flag='1'
-        user.save()
-        return render(request , 'blog/HomepageAdmin.html' ,{'orguser': (user,)})
+        user1=user.objects.get(full_name=data)
+        user1.flag='1'
+        user1.save()
+        return render(request , 'blog/HomepageAdmin.html' ,{'orguser': (user1,)})
     else:
-        orguser = User.objects.filter((Q(role = 'organization')|Q(role = 'community'))&(Q(flag ='0'))).order_by('full_name')
+        orguser = user.objects.filter((Q(role = 'organization')|Q(role = 'community'))&(Q(flag ='0'))).order_by('full_name')
         return render(request , 'blog/UserAuthorization.html' ,{'orguser': orguser})    
 
+@login_required
 def PostAuth(request):
     if request.method=="POST":
         data=list(request.POST.dict().keys())[1]
@@ -141,10 +180,10 @@ def PostAuth(request):
         post.save()
         return render(request , 'blog/HomepageAdmin.html' ,{'postuser': (post,)})
     else:
-        orguser = User.objects.filter(role = 'organization').order_by('full_name')
+        orguser = user.objects.filter(role = 'organization').order_by('full_name')
         return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser}) 
 
-        
+@login_required       
 def ActivityReport(request):
     allPost =  Post.objects.all()
     allEvent = Event.objects.all()
@@ -153,3 +192,14 @@ def ActivityReport(request):
     return render(request , 'blog/ActivityReport.html' ,{'allPost': allPost , 'allEvent': allEvent , 'num_posts': num_posts , 'num_events':num_events})
 
 
+@login_required
+def addImage(request):
+    formI =forms.ImageForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if formI.is_valid():
+            formI.save()
+            #return redirect('images')
+            return render(request,'blog/HomePageCommunity.html')
+    else:
+        print('invalid')
+        return render(request, 'blog/addImage.html', {'formI': formI})                      
