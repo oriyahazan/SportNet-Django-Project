@@ -26,8 +26,8 @@ class PostForm(forms.ModelForm):
         model = models.Post
         fields = ['scope','title','content','thumb','date_posted','credit']  
 
-class ImageForm(forms.ModelForm):
-    class Meta:
-        model = models.Image
-        fields = ['title','content','image']                      
+# class ImageForm(forms.ModelForm):
+#     class Meta:
+#         model = models.Image
+#         fields = ['title','content','image']                      
         

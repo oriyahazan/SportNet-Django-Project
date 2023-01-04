@@ -70,15 +70,21 @@
   <body>
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
-    
-    <img src="{{ formI }}">  
+      
+    {% block content %} 
 
-    <!-- <p>מספר הפוסטים: {{ formI }}</p> -->
-    <p id="hey1" ><form method="POST">{% csrf_token %}<input id="hey1" class="btn btn-outline-info" type="submit" value="פרסם"></form></p>
-
-
-
-    </div>    
+      <form method="post" enctype="multipart/form-data">  
+        {% csrf_token %}  
+        {{ formI.as_p }}  
+        <button type="submit">העלה</button>  
+      </form>  
+  
+      {% if img_obj %}  
+        <h3>Succesfully uploaded : {{img_obj.caption}}</h3>  
+        <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">  
+      {% endif %}  
+  
+    {% endblock content %}  
 
   </body>
 </html>

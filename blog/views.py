@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, user, Mission, Event, Image
+from .models import Post, user, Mission, Event
 from datetime import datetime
 from django.db.models import Q
-from .forms import ImageForm
 from . import forms
 from django.contrib.auth import login,logout
 from django.contrib.auth.decorators import login_required
@@ -197,14 +196,15 @@ def ActivityReport(request):
     return render(request , 'blog/ActivityReport.html' ,{'allPost': allPost , 'allEvent': allEvent , 'num_posts': num_posts , 'num_events':num_events})
 
 
-@login_required
-def addImage(request):
-    formI =forms.ImageForm(request.POST, request.FILES)
-    if request.method == 'POST':
-        if formI.is_valid():
-            formI.save()
-            #return redirect('images')
-            return render(request,'blog/HomePageCommunity.html')
-    else:
-        print('invalid')
-        return render(request, 'blog/addImage.html', {'formI': formI})                      
+# @login_required
+# def addImage(request):
+#     formI =forms.ImageForm(request.POST, request.FILES)
+#     if request.method == 'POST':
+#         if formI.is_valid():
+#             formI.save()
+#             img_object = formI.instance  
+#             #return redirect('images')
+#             return render(request,'blog/HomePageCommunity.html', {'formI': formI, 'img_obj': img_object})
+#     else:
+#         print('invalid')
+#         return render(request, 'blog/addImage.html', {'formI': formI})                      

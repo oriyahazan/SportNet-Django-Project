@@ -57,15 +57,25 @@ class Post(models.Model):
     flag=models.CharField(max_length=1 , default=0)
     
 
-    def _str_(self):
+    def __str__(self):
         return self.title
 
 
-class Image(models.Model):
-    title= models.CharField(max_length=200)
-    content= models.TextField()
-    image= models.ImageField(upload_to='images/')
+# class Image(models.Model):
+#     title= models.CharField(max_length=200)
+#     content= models.TextField()
+#     image= models.ImageField(upload_to='images')
 
+#     def __str__(self):
+#         return self.title        
+
+
+class Rating(models.Model):
+    name = models.ForeignKey(user,on_delete=models.CASCADE)
+    rating = models.IntegerField(default=1,max_length=10)
+    good = models.CharField(max_length=2)
+    
     def __str__(self):
-        return self.title        
+        return str(self.name)
+
 

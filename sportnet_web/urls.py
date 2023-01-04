@@ -21,6 +21,7 @@ from django.urls import path, include
 from blog import views
 from django.conf import settings
 from django.conf.urls.static import static 
+from django.urls import path  
 
 
 urlpatterns = [
@@ -48,10 +49,11 @@ urlpatterns = [
     path('PostAuthorization/' , views.PostAuth , name='blog-PostAuth'),
     path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
     path('ActivityReport/' , views.ActivityReport , name='blog-ActivityReport'),
-    path('addImage/', views.addImage, name='blog-addImage'),
-    path('logout/',views.log_out,name='logout')
+    #path('addImage/', views.addImage, name='blog-addImage'),
+    path('logout/',views.log_out,name='logout'),
+    #path('', views.addImage, name = "image-request"),  
+
 ]
 
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:  
+#     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
