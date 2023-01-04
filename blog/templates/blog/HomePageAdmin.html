@@ -48,13 +48,29 @@
        font-style: normal;
        color: white;
     }
+    h1{
+      text-align: center;
+      margin-top: 20px;
+      font-size: 2.25em;
+    }
+    .posts{
+      text-align: right;
+    }
+    h2{
+      text-align: center;
+      margin-top: 80px;
+      font-size: 2em;
+    }
+    h3{
+      font-size: 1.75em;
+    }
 
     </style>
   </head>
   <body>
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
-    <h1>!ברוכים הבאים לדף הראשי של מנהל האתר</h1>
+    <h1 id="">!ברוכים הבאים לדף הראשי של מנהל האתר</h1>
     <ul>
         <li><a href="{% url 'blog-UserAuth' %}" align = "right" dir="rtl">אישור משתמשים</a></li>
         <li><a href="{% url 'blog-deleteUsers' %}" align = "right" dir="rtl">מחיקת משתמשים</a></li>
@@ -65,7 +81,35 @@
         <li><a href="{% url 'logout' %}" align = "right" dir="rtl">התנתקות</a></li>
       
     </ul>
-
-
+    <h2>פעילויות ספורט ומסירה בקהילה</h2>
+    <div class="posts">
+      {% for post in posts %} 
+          <div class="post">
+      
+              {% if post.scope ==  "1" %}
+                <h3>מסירת מוצר</h3>
+                <h4>{{post.title}}</h4>
+                <p>תיאור המוצר: {{post.content}}</p>
+                <p>המוסר: {{post.author}}</p>
+                <p>{{post.credit}} :המחיר</p>
+              {% elif post.scope ==  "2" %}
+                <h3>פעילות בקהילה</h3>
+                <h4>{{post.title}}</h4>
+                <p>תוכן הפעילות: {{post.content}}</p>
+                <p>המאמן: {{post.author}}</p>
+                <p>{{post.credit}} :המחיר</p>
+              {% endif %}
+          </div>
+      {% endfor %}
+      {% for event in events %}
+      <h2>אירועים בקהילה</h2>
+          <div>
+            <h4>{{event.title}}</h4>
+            <p>תוכן האירוע: {{event.content}}</p>
+            <p>{{event.credit}} :המחיר</p>
+            <p>{{event.date_posted}} :יום האירוע</p>
+          </div>  
+      {% endfor %} 
+    </div>  
   </body>
 </html>

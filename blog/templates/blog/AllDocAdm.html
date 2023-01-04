@@ -48,6 +48,11 @@
        font-style: normal;
        color: white;
     }
+    #list{
+      margin-top: 60px;
+      text-align: right;
+    }
+
 
     </style>
   </head>
@@ -73,7 +78,7 @@
             window.onunload = function () { null };
           </script>
     </ul><br>
-    <ul>
+    <ul id="list">
         <a href="{% url 'blog-ComUserPage' %}">דוח פירוט חברי קהילה</a>
         <br>
         <a href="{% url 'blog-OrgUserPage' %}">דוח פירוט חברי אירגון</a>

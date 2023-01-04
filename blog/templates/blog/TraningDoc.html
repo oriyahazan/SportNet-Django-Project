@@ -70,23 +70,22 @@
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     
-    <h1>דו"ח פירוט חברי אירגון</h1>
+    <h1>דו"ח דירוג מאמנים</h1>
     <div class="missions">
-        {% for orguse in orguser %} 
+      {% for CouchA in Couch %}
             <div>
                 <table class="mission" border="5">
                     <thead>
+                        <th>?היה חוזר למאמן</th>
+                        <th>הדירוג</th>
                         <th>:שם המשתמש</th>
-                        <th>תעודת זהות</th>
                     </thead>
                     <tr>
-                     
-                        <td>{{orguse.full_name}}</td>
-                        <td>{{orguse.id_number}}</td>
-    
+                        <td>{{CouchA.good}}</td>
+                        <td>{{CouchA.rating}}</td>
+                        <td>{{CouchA.name}}</td>
                     </tr>
-                </table>
-
+                  </table>
             </div>
         {% endfor %}
     </div>    

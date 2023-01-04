@@ -18,9 +18,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views #
 from django.urls import path, include
 #from users import views as user_views
-from blog import views
-from django.conf import settings
-from django.conf.urls.static import static 
+from blog import views 
 
 
 urlpatterns = [
@@ -47,11 +45,6 @@ urlpatterns = [
     path('UserAuth/' , views.UserAuth , name='blog-UserAuth'),
     path('PostAuthorization/' , views.PostAuth , name='blog-PostAuth'),
     path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
+    path('TrainingRating/' , views.CreateRating , name='blog-TrainingRating'),
     path('ActivityReport/' , views.ActivityReport , name='blog-ActivityReport'),
-    path('addImage/', views.addImage, name='blog-addImage'),
-    path('logout/',views.log_out,name='logout')
 ]
-
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
