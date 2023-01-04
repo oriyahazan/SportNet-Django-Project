@@ -38,7 +38,7 @@ urlpatterns = [
     path('AllDocAdm/' , views.AllDocAdm , name='blog-AllDocAdm'),
     path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
     # path('ResetPassword/' , views.ResetPassword , name='blog-ResetPassword'),
-    # path('AfterPassword/' , views.AfterPassword , name='blog-AfterPassword'),
+    # path('NewPassword/' , views.NewPassword , name='blog-NewPassword'),
     path('CreatPost/' , views.CreatPost , name='blog-CreatPost'),
     path('OrgUserPage/' , views.OrgUserPage , name='blog-OrgUserPage'),
     path('DeleteUsers/' , views.deleteUsers , name='blog-deleteUsers'),
@@ -46,4 +46,5 @@ urlpatterns = [
     path('PostAuthorization/' , views.PostAuth , name='blog-PostAuth'),
     path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
     path('TrainingRating/' , views.CreateRating , name='blog-TrainingRating'),
+    path('EventOrgDocs/' , views.EventOrgDocs , name='blog-EventOrgDocs'),
 ]

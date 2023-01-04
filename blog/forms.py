@@ -30,5 +30,3 @@ class RatingForm(forms.ModelForm):
     class Meta:
         model = models.Rating
         fields = ['name', 'rating', 'good'] 
-
-        

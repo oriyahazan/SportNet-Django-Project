@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Post, User, Mission, Event, Rating
-from .forms import RegisterForm, PostForm, RatingForm
+from .forms import RegisterForm, PostForm, RatingForm, NewPasswordForm
 from datetime import datetime
 from django.db.models import Q
 from . import forms #
@@ -47,31 +47,39 @@ def CreatMission(request):
 def register(request):
     form = forms.RegisterForm(request.POST)
     if request.method == 'POST':
-        form.save()
-        return render(request,'blog/HomePage.html')
+                form.save()
+                return render(request,'blog/HomePage.html')
+            else:
+                return HttpResponse("Sorry, you must be at least 18 years old to register.")
     else:
         print('invalid')
 
     return render(request , 'blog/register.html' , {'form':form})
 
 
-def login(request):
+def my_login(request):
         if request.method == 'POST':
             #email = request.POST.get('Email')
             full_name = request.POST.get('full_name')
             password = request.POST.get('Password')
             try:
-                mydata = User.objects.get(full_name=full_name, password=password,flag='1')
+                mydata = user.objects.get(full_name=full_name,flag='1')
             except:
+                return HttpResponse("invalid login")
+            if  not mydata.check_password(password):
                 return HttpResponse("invalid login")
             print(full_name)
             print(password)
+            login(request,mydata)
+            context= {
+                'money':mydata.credit,
+                }
             if (mydata.role=='community'):
-                return render(request, 'blog/HomePageCommunity.html')
+                return redirect('blog-community')
             if (mydata.role=='organization'):
-                return render(request, 'blog/HomePageOrganization.html')
+                return redirect('blog-organization')
             if (mydata.role=='admin'):
-                return render(request, 'blog/HomePageAdmin.html')
+                return redirect('blog-admin')
             else:
                 print("someone tried to login and failed.")
                 return HttpResponse("invalid login")
@@ -149,3 +157,7 @@ def CreateRating(request):
     else:
         print('invalid')
         return render(request , 'blog/TrainingRating.html', {'formR':formR})   
+
+def EventOrgDocs(request):
+    EventOrg =  Event.objects.all().order_by('title')
+    return render(request , 'blog/EventOrgDocs.html' ,{'EventOrg': EventOrg}) 
