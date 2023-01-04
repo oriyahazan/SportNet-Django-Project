@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, user, Mission, Event, Rating, Image, RatingForm, NewPasswordForm
-from datetime import datetime
+from .models import Post, user, Mission, Event, Image
 from django.db.models import Q
 from .forms import ImageForm
 from . import forms
@@ -24,8 +23,7 @@ def community(request):
         user=request.user
         user.credit-=post.credit
         author = post.author
-        author.credit+=post.credit
-        #registpost.author
+        author.credit+=post.creditr
         user.save()
         author.save()
     context={'posts': Post.objects.filter(flag = '1').order_by('title'),
@@ -70,14 +68,23 @@ def CreatMission(request):
 def register(request):
     form = forms.RegisterForm(request.POST)
     if request.method == 'POST':
-        form.save()
-        return render(request,'blog/HomePage.html')
+        age = int(request.POST.get('age'))
+        place = str(request.POST.get('place'))
+        if age > 17 and place == 'ישראל':
+            user1=form.save()
+            user1.set_password(request.POST.dict()['password'])
+            user1.save()
+            return render(request,'blog/HomePage.html')
+        else:
+            return HttpResponse('sorry but your age is under 18 you are not from israel')
     else:
         print('invalid')
+
     return render(request , 'blog/register.html' , {'form':form})
 
 
-def login(request):
+    
+def my_login(request):
         if request.method == 'POST':
             #email = request.POST.get('Email')
             full_name = request.POST.get('full_name')
@@ -179,7 +186,26 @@ def PostAuth(request):
         orguser = user.objects.filter(role = 'organization').order_by('full_name')
         return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser}) 
 
+@login_required       
+def ActivityReport(request):
+    allPost =  Post.objects.all()
+    allEvent = Event.objects.all()
+    num_posts = Post.objects.count()
+    num_events = Event.objects.count()
+    return render(request , 'blog/ActivityReport.html' ,{'allPost': allPost , 'allEvent': allEvent , 'num_posts': num_posts , 'num_events':num_events})
 
+
+@login_required
+def addImage(request):
+    formI =forms.ImageForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if formI.is_valid():
+            formI.save()
+            #return redirect('images')
+            return render(request,'blog/HomePageCommunity.html')
+    else:
+        print('invalid')
+        return render(request, 'blog/addImage.html', {'formI': formI})       
 
 def CreateRating(request):
     formR = forms.RatingForm(request.POST)
@@ -189,3 +215,10 @@ def CreateRating(request):
     else:
         print('invalid')
         return render(request , 'blog/TrainingRating.html', {'formR':formR})   
+
+def AllDocCom(request):
+    return render(request , 'blog/AllDocCom.html')   
+
+def CoachRating(request):
+    Couch = Rating.objects.all().order_by('name')
+    return render(request , 'blog/TraningDoc.html',{'Couch': Couch}) 

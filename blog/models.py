@@ -71,11 +71,9 @@ class Image(models.Model):
 
 
 class Rating(models.Model):
-    name = models.ForeignKey(User,on_delete=models.CASCADE)
+    name = models.ForeignKey(user,on_delete=models.CASCADE)
     rating = models.IntegerField(default=1,max_length=10)
     good = models.CharField(max_length=2)
     
     def __str__(self):
         return str(self.name)
-
-

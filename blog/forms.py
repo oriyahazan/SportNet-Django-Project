@@ -31,8 +31,6 @@ class RatingForm(forms.ModelForm):
         model = models.Rating
         fields = ['name', 'rating', 'good'] 
 
-        fields = ['scope','title','content','thumb','date_posted','credit']  
-
 class ImageForm(forms.ModelForm):
     class Meta:
         model = models.Image
