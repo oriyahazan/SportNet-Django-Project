@@ -1,13 +1,11 @@
 from django.test import TestCase
-from .models import User, Event, Mission, Post
-
 from blog import models
 
 class ModelsTestCase(TestCase):
-    def setUp(self):
+    def setUpClass(self):
         # Create a user
         User.objects.create(full_name='John Smith', id_number='1234567890', identity_qu='Driver License',
-                            place='New York', role='admin', email='john@example.com', password='password123', age=25)
+                            place='israel', role='admin', email='john@example.com', password='password123', age=25)
 
         # Create an event
         Event.objects.create(title='Event 1', content='This is an event', credit=0, participants=10)
@@ -24,7 +22,7 @@ class ModelsTestCase(TestCase):
         user = User.objects.get(full_name='John Smith')
         self.assertEqual(user.id_number, '1234567890')
         self.assertEqual(user.identity_qu, 'Driver License')
-        self.assertEqual(user.place, 'New York')
+        self.assertEqual(user.place, 'israel')
         self.assertEqual(user.role, 'admin')
         self.assertEqual(user.email, 'john@example.com')
         self.assertEqual(user.password, 'password123')

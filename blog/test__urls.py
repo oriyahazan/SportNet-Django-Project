@@ -30,13 +30,6 @@ class UrlsTestCase(TestCase):
         resolver_match = resolve('/login/')
         self.assertEqual(resolver_match.func, views.login)
 
-
-    # def test_login_url(self):
-    #     url = reverse('blog-HomePage')
-    #     self.assertEqual(url, '/HomePage/')
-    #     resolver_match = resolve('/HomePage/')
-    #     self.assertEqual(resolver_match.func, views.login)
-
     def test_home_url(self):
         url = reverse('blog.urls')
         self.assertEqual(url, '/')
@@ -271,23 +264,17 @@ class UrlsTestCase2(TestCase):
 
 
 
+                            # --- 2nd try ----
 
-
-
-
-    # --- 2nd try ----
 """
+
 To create a unit test for these URL patterns in your Django project that uses both the reverse and resolve functions,
 you can do the following:
    Use the reverse function to get the URL for each pattern.
    Use the resolve function to check that the correct view function is being called for each URL.
 """
 
-
-#from django.test import TestCase
-#from django.urls import reverse, resolve
-
-class UrlsTestCase2(TestCase):
+class UrlsTestCase1(TestCase):
     def test_url_patterns(self):
         # Test the URL pattern for the 'blog-register' view
         url = reverse('blog-register')

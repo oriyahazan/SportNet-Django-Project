@@ -41,11 +41,3 @@ class FormsTestCase(TestCase):
         form_data = {'title': '', 'content': 'This is a mission'}
         form = MissionForm(data=form_data)
         self.assertFalse(form.is_valid())
-
-''' 
-    def test_post_form(self):
-        # Test that the PostForm form is valid with correct data
-        form_data = {'scope': 'Public', 'title': 'Post 1', 'content': 'This is a post', 'thumb': 'thumb.jpg',
-                     'date_posted': '2022-01-01', 'credit': 'John Smith', 'author': 'admin', 'flag': 'Active'}
-        form
-'''

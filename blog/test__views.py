@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from .models import User, Event, Mission, Post
 
 from blog import models
+from blog import forms
 #from .forms import RegisterForm, EventForm, MissionForm, PostForm -- don't work
 
 
