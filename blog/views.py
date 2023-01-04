@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, user, Mission, Event, Image
+from .models import Post, user, Mission, Event, Rating, Image, RatingForm
 from datetime import datetime
 from django.db.models import Q
 from .forms import ImageForm
@@ -188,7 +188,19 @@ def PostAuth(request):
         orguser = user.objects.filter(role = 'organization').order_by('full_name')
         return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser}) 
 
-@login_required       
+
+
+def CreateRating(request):
+    formR = forms.RatingForm(request.POST)
+    if request.method == 'POST':
+            formR.save()
+            return render(request,'blog/HomePageCommunity.html')
+    else:
+        print('invalid')
+        return render(request , 'blog/TrainingRating.html', {'formR':formR})   
+
+
+        
 def ActivityReport(request):
     allPost =  Post.objects.all()
     allEvent = Event.objects.all()
@@ -196,15 +208,13 @@ def ActivityReport(request):
     num_events = Event.objects.count()
     return render(request , 'blog/ActivityReport.html' ,{'allPost': allPost , 'allEvent': allEvent , 'num_posts': num_posts , 'num_events':num_events})
 
+                
 
-@login_required
-def addImage(request):
-    formI =forms.ImageForm(request.POST, request.FILES)
-    if request.method == 'POST':
-        if formI.is_valid():
-            formI.save()
-            #return redirect('images')
-            return render(request,'blog/HomePageCommunity.html')
-    else:
-        print('invalid')
-        return render(request, 'blog/addImage.html', {'formI': formI})
+
+def AllDocCom(request):
+    return render(request , 'blog/AllDocCom.html')   
+
+def CoachRating(request):
+    Couch = Rating.objects.all().order_by('name')
+    return render(request , 'blog/TraningDoc.html',{'Couch': Couch}) 
+
