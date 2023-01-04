@@ -55,14 +55,14 @@
     <h2>!פרסום פוסט</h2>
     <form class="send" action="{%url 'blog-CreatPost'%}" method="POST">
       {% csrf_token %}
-      <p id="hey">{{formP.author}}:מחבר הפוסט</p>
+      <!-- <p id="hey">{{formP.author}}:מחבר הפוסט</p> -->
       <p id="hey">{{formP.title}}: כותרת הפוסט</p>
-      <p id="hey">{{formP.scope}}:תחום הפוסט: מסירת מוצר/פעילות בקהילה</p>
+      <p>תחום הפוסט</p>
+      <p id="hey">{{formP.scope}}:לחץ 1 למסירת מוצר, לחץ 2 לפעילות בקהילה</p>
       <p id="hey">{{formP.content}}:תוכן הפוסט</p>
       <p id="hey">{{formP.thumb}}:הוספת תמונה לפוסט</p>
       <p id="hey">{{formP.date_posted}}:תאריך הפעילות</p>
       <p id="hey">{{formP.credit}}:עלות הפעילות/מוצר בקרדיטים</p>
-      <p id="hey">{{formP.flag}}:דגל</p>
 
       <p id="hey1" ><input id="hey1" class="btn btn-outline-info" type="submit" value="סיום"></p>
     {% endblock content %}
