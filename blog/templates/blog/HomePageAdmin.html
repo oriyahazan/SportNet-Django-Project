@@ -62,16 +62,8 @@
         <li><a href="{% url 'blog-CreatMission' %}" align = "right" dir="rtl">שליחת משימות לחברי האירגון</a></li>
         <li><a href="{% url 'blog-PostAuth' %}" align = "right" dir="rtl">אישור פוסטים</a></li>
         <li><a href="{% url 'blog-AllDocAdm' %}" align = "right" dir="rtl">דוחות</a></li>
-        <li><a href="{% url 'blog-HomePage' %}" align = "right" dir="rtl">התנתקות</a></li>
-        <script type="text/javascript">
-            function preventBack() {
-                window.history.forward(); 
-            }
-              
-            setTimeout("preventBack()", 0);
-              
-            window.onunload = function () { null };
-          </script>
+        <li><a href="{% url 'logout' %}" align = "right" dir="rtl">התנתקות</a></li>
+      
     </ul>
 
 
