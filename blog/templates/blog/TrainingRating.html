@@ -52,11 +52,11 @@
     <p class="logo" id="Name">SportNet <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p><br>
     {% block content %}
-    <h2> דירוג אימונים</h2>
+    <h2> דירוג מאמנים</h2>
     <form class="send" action="{%url 'blog-TrainingRating'%}" method="POST">
       {% csrf_token %}
       <p id="hey">{{formR.name}}:שם המאמן</p>
-      <p id="hey">{{formR.rating}}: דירוג האימון מ-1 עד 10</p>
+      <p id="hey">{{formR.rating}}: דירוג מאמן מ-1(גרוע) עד 10(מצויין)</p>
       <p id="hey">{{formR.good}}: היית חוזר למאמן זה:כן/לא</p>
       
 

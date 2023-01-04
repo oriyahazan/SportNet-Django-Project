@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -49,36 +48,43 @@
        font-style: normal;
        color: white;
     }
-    .posts{
-      color: white;
+    #list{
+      margin-top: 60px;
+      text-align: right;
     }
+
 
     </style>
   </head>
   <body>
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
+    <h1>!ברוכים הבאים לדף הראשי של מנהל האתר</h1>
     <ul>
         <li><a href="{% url 'blog-CreatPost' %}" align = "right" dir="rtl">פרסום פוסט</a></li>
-        <li><a href="{% url 'blog-TrainingRating' %}" align = "right" dir="rtl">דירוג מאמנים</a></li>
+        <li><a href="{% url 'blog-TrainingRating' %}" align = "right" dir="rtl">דירוג אימונים</a></li>
         <li><a href="GiftFriend.html" align = "right" dir="rtl">תרום קרדיט</a></li>
         <li><a href="Posting.html" align = "right" dir="rtl">מענה על סקר</a></li>
         <li><a href="{% url 'blog-AllDocCom' %}" align = "right" dir="rtl">דוחות</a></li>
-        <li><a href="{% url 'logout' %}" align = "right" dir="rtl">התנתקות</a></li>
-        
+        <li><a href="{% url 'blog-HomePage' %}" align = "right" dir="rtl">התנתקות</a></li>
+        <script type="text/javascript">
+            function preventBack() {
+                window.history.forward(); 
+            }
+              
+            setTimeout("preventBack()", 0);
+              
+            window.onunload = function () { null };
+          </script>
+    </ul><br>
+    <ul id="list">
+        <a href="{% url 'blog-TraningDoc' %}">דוח דירוג מאמנים</a>
+        <br>
+        <a href="{% url 'blog-OrgUserPage' %}">דוח פירוט חברי אירגון</a>
+
     </ul>
-    <h1>{{money}}</h1>
-    <h1>sport posts:</h1>
-    <div class="posts">
-      {% for post in posts %} 
-          <div class="post">
-            <h4>     </h4>
-              <h4><a href="#">{{post.content}}</a></h4>
-              <form method="POST">{% csrf_token %}<button type="submit" name="{{post.id}}">להירשם</button></form>
-          </div>
-      {% endfor %}
-    </div>    
+
+
 
   </body>
 </html>
-

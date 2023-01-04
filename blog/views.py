@@ -81,7 +81,6 @@ def register(request):
             return HttpResponse('sorry but your age is under 18 you are not from israel')
     else:
         print('invalid')
-
     return render(request , 'blog/register.html' , {'form':form})
 
 
@@ -208,15 +207,14 @@ def ActivityReport(request):
     num_events = Event.objects.count()
     return render(request , 'blog/ActivityReport.html' ,{'allPost': allPost , 'allEvent': allEvent , 'num_posts': num_posts , 'num_events':num_events})
 
+                
 
-@login_required
-def addImage(request):
-    formI =forms.ImageForm(request.POST, request.FILES)
-    if request.method == 'POST':
-        if formI.is_valid():
-            formI.save()
-            #return redirect('images')
-            return render(request,'blog/HomePageCommunity.html')
-    else:
-        print('invalid')
-        return render(request, 'blog/addImage.html', {'formI': formI})                      
+
+def AllDocCom(request):
+    return render(request , 'blog/AllDocCom.html')   
+
+def CoachRating(request):
+    Couch = Rating.objects.all().order_by('name')
+    return render(request , 'blog/TraningDoc.html',{'Couch': Couch}) 
+
+                      
