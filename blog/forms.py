@@ -24,7 +24,12 @@ class MissionForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = models.Post
-        fields = ['scope','title','content','thumb','date_posted','credit']  
+        fields = ['scope','title','content','thumb','date_posted','credit'] 
+
+class RatingForm(forms.ModelForm):
+    class Meta:
+        model = models.Rating
+        fields = ['name', 'rating', 'good']  
 
 # class ImageForm(forms.ModelForm):
 #     class Meta:

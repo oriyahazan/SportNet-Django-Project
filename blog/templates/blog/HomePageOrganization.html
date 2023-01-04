@@ -48,6 +48,22 @@
        font-style: normal;
        color: white;
     }
+    h1{
+      text-align: center;
+      margin-top: 30px;
+      font-size: 2.25em;
+    }
+    .posts{
+      text-align: right;
+    }
+    h2{
+      text-align: center;
+      margin-top: 80px;
+      font-size: 2em;
+    }
+    h3{
+      font-size: 1.75em;
+    }
 
     </style>
   </head>
@@ -57,13 +73,42 @@
     <h1>!ברוך הבא לדף הבית של חבר האירגון</h1>
     <ul>
         <li><a href="{% url 'blog-CreatEvent' %}" align = "right" dir="rtl">פרסום אירוע בקהילה</a></li>
+        <li><a href="{% url 'blog-HomePage' %}" align = "right" dir="rtl">פרסום מדריך לשימוש באתר</a></li>
         <li><a href="{% url 'blog-addImage' %}" align = "right" dir="rtl">העלאת תמונות מאירוע</a></li>
-        <li><a href="##############" align = "right" dir="rtl">פרסום מדריך לשימוש באתר</a></li>
         <li><a href="Posting.html" align = "right" dir="rtl">שליחת סקר לחברי הקהילה</a></li>
         <li><a href="{% url 'blog-AllDocOrg' %}" align = "right" dir="rtl">דוחות</a></li>
         <li><a href="{% url 'logout' %}" align = "right" dir="rtl">התנתקות</a></li>
     </ul>
-
+    <h2>פעילויות ספורט ומסירה בקהילה</h2>
+    <div class="posts">
+      {% for post in posts %} 
+          <div class="post">
+      
+              {% if post.scope ==  "1" %}
+                <h3>מסירת מוצר</h2>
+                <h4>{{post.title}}</h4>
+                <p>תיאור המוצר: {{post.content}}</p>
+                <p>המוסר: {{post.author}}</p>
+                <p>{{post.credit}} :המחיר</p>
+              {% elif post.scope ==  "2" %}
+                <h3>פעילות בקהילה</h2>
+                <h4>{{post.title}}</h4>
+                <p>תוכן הפעילות: {{post.content}}</p>
+                <p>המאמן: {{post.author}}</p>
+                <p>{{post.credit}} :המחיר</p>
+              {% endif %}
+          </div>
+      {% endfor %}
+      <h2>אירועים בקהילה</h2>
+      {% for event in events %}
+          <div>
+            <h4>{{event.title}}</h4>
+            <p>תוכן האירוע: {{event.content}}</p>
+            <p>{{event.credit}} :המחיר</p>
+            <p>{{event.date_posted}} :יום האירוע</p>
+          </div>  
+      {% endfor %} 
+    </div>    
 
   </body>
 </html>
