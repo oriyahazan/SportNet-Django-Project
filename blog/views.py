@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, User, Mission, Event
-from .forms import RegisterForm, PostForm
+from .models import Post, User, Mission, Event, Image
 from datetime import datetime
 from django.db.models import Q
-from . import forms #
+from .forms import ImageForm
+from . import forms
+
 
 def home(request):
     return render(request , 'blog/HomePage.html')
@@ -151,4 +152,4 @@ def ActivityReport(request):
     num_events = Event.objects.count()
     return render(request , 'blog/ActivityReport.html' ,{'allPost': allPost , 'allEvent': allEvent , 'num_posts': num_posts , 'num_events':num_events})
 
-                      
+
