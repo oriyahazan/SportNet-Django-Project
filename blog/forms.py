@@ -34,5 +34,10 @@ class RatingForm(forms.ModelForm):
 class ImageForm(forms.ModelForm):
     class Meta:
         model = models.Image
-        fields = ['title','content','image']                      
+        fields = ['title','content','image'] 
+
+class CreateGuideForm(forms.ModelForm):
+    class Meta:
+        model = models.CreateGuide
+        fields = ['title','context']                              
         

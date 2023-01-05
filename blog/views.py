@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, user, Mission, Event, Rating, Image
+from .models import Post, user, Mission, Event, Rating, CreateGuide
 from datetime import datetime
 from django.db.models import Q
 from .forms import ImageForm
@@ -18,24 +18,28 @@ def home(request):
     
 @login_required
 def community(request):
+    context={'posts': Post.objects.filter(flag = '1').order_by('title'),
+    'money':request.user.credit,
+    'events': Event.objects.all().order_by('title')}
     if request.method =="POST":
         key=list(request.POST.dict().keys())[1]
         post=Post.objects.get(id=key)
-        event = Event.objects.get(id=key)
+        #event = Event.objects.get(id=key)
         user=request.user
-        if (user.credit >= post.credit)|(user.credit >= event.credit):
-            user.credit-=event.credit
-            user.credit-=post.credit
+        if (user.credit >= post.credit): #or (user.credit >= event.credit):
+            #user.credit-=event.credit
+            user.credit = user.credit - post.credit
             author = post.author
             author.credit+=post.credit
             #registpost.author
             user.save()
             author.save()
+            return redirect('blog-community')
         else:
             return HttpResponse('אין מספיק קרדיטים')
-    context={'posts': Post.objects.filter(flag = '1').order_by('title'),
-    'money':request.user.credit,
-    'events': Event.objects.all().order_by('title')}
+    # context={'posts': Post.objects.filter(flag = '1').order_by('title'),
+    # 'money':request.user.credit,
+    # 'events': Event.objects.all().order_by('title')}
     return render(request, 'blog/HomePageCommunity.html',context)
 
 @login_required
@@ -239,4 +243,19 @@ def addImage(request):
     else:
         print('invalid')
         return render(request, 'blog/addImage.html', {'formI': formI}) 
+
+@login_required
+def CreateGuide1(request):
+    formG = forms.CreateGuideForm(request.POST)
+    if request.method == 'POST':
+            formG.save()
+            return redirect('blog-organization')
+    else:
+        print('invalid')
+    return render(request , 'blog/CreateGuide.html',{'formG':formG}) 
+
+def ShowGuide(request):
+    guide = CreateGuide.objects.all().order_by('title')
+    return render(request , 'blog/ShowGuide.html' ,{'guide': guide}) 
+
 

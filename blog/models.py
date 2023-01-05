@@ -78,3 +78,10 @@ class Rating(models.Model):
     def _str_(self):
         return str(self.name)
 
+class CreateGuide(models.Model):
+    title= models.CharField(max_length=100)
+    context = models.TextField()
+    
+    def _str_(self):
+        return self.title        
+
