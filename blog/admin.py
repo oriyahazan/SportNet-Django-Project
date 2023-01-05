@@ -1,10 +1,11 @@
 from django.contrib import admin
 from blog import models
-from .models import Post ,Event,Mission , Image, Rating
+from .models import Post ,Event,Mission , Image, Rating,CreateGuide
 from .models import user
 
 
 admin.site.register(Event)
+admin.site.register(CreateGuide)
 admin.site.register(Post)
 admin.site.register(Mission)
 admin.site.register(Rating)
