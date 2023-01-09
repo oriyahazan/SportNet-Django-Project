@@ -39,5 +39,11 @@ class ImageForm(forms.ModelForm):
 class CreateGuideForm(forms.ModelForm):
     class Meta:
         model = models.CreateGuide
-        fields = ['title','context']                              
+        fields = ['title','context']
+
+
+class DonateForm(forms.ModelForm):
+    class Meta:
+        model = models.Donate
+        fields = ['friend', 'cost']                              
         

@@ -83,5 +83,13 @@ class CreateGuide(models.Model):
     context = models.TextField()
     
     def _str_(self):
-        return self.title        
+        return self.title 
+
+
+class Donate(models.Model):
+    friend=models.ForeignKey(user,on_delete=models.CASCADE,null=True)
+    cost = models.IntegerField(default=1,max_length=10)
+
+    def _str_(self):
+        return str(self.friend)      
 

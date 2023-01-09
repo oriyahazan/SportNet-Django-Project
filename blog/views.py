@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, user, Mission, Event, Rating, CreateGuide
+from .models import Post, user, Mission, Event, Rating, CreateGuide,Donate
 from datetime import datetime
 from django.db.models import Q
 from .forms import ImageForm
@@ -23,7 +23,7 @@ def community(request):
     'events': Event.objects.all().order_by('title')}
     if request.method =="POST":
         key=list(request.POST.dict().keys())[1]
-        post=Post.objects.get(id=key)
+        post=Post.objects.get(id=int(key))
         #event = Event.objects.get(id=key)
         user=request.user
         if (user.credit >= post.credit): #or (user.credit >= event.credit):
@@ -256,6 +256,31 @@ def CreateGuide1(request):
 
 def ShowGuide(request):
     guide = CreateGuide.objects.all().order_by('title')
-    return render(request , 'blog/ShowGuide.html' ,{'guide': guide}) 
+    return render(request , 'blog/ShowGuide.html' ,{'guide': guide})
+
+
+
+def Donate_to_a_friend(request):
+    formD = forms.DonateForm(request.POST)
+    if request.method =="POST":
+        # key=(request.POST.dict().keys())[1]
+        # print(key)
+        don=list(request.POST.dict().keys())[1]
+        print(don)
+        donate=Donate.objects.get(id=don)
+        print(donate.cost)
+        user=request.user
+        user.credit = user.credit - donate.cost
+        Friend = donate.friend
+        Friend.credit+=donate.cost
+        user.save()
+        Friend.save()
+        return redirect('blog-community')
+        # else:
+        #     return HttpResponse('אין מספיק קרדיטים')
+    return render(request,'blog/DonateFriend.html', {'formD':formD})
+
+
+ 
 
 
