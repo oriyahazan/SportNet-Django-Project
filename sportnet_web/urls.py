@@ -18,7 +18,9 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views #
 from django.urls import path, include
 #from users import views as user_views
-from blog import views 
+from blog import views
+from django.conf import settings
+from django.conf.urls.static import static 
 
 
 urlpatterns = [
@@ -38,7 +40,7 @@ urlpatterns = [
     path('AllDocAdm/' , views.AllDocAdm , name='blog-AllDocAdm'),
     path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
     # path('ResetPassword/' , views.ResetPassword , name='blog-ResetPassword'),
-    # path('AfterPassword/' , views.AfterPassword , name='blog-AfterPassword'),
+    # path('NewPassword/' , views.NewPassword , name='blog-NewPassword'),
     path('CreatPost/' , views.CreatPost , name='blog-CreatPost'),
     path('OrgUserPage/' , views.OrgUserPage , name='blog-OrgUserPage'),
     path('DeleteUsers/' , views.deleteUsers , name='blog-deleteUsers'),
@@ -46,5 +48,14 @@ urlpatterns = [
     path('PostAuthorization/' , views.PostAuth , name='blog-PostAuth'),
     path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
     path('TrainingRating/' , views.CreateRating , name='blog-TrainingRating'),
+    # path('EventOrgDocs/' , views.EventOrgDocs , name='blog-EventOrgDocs'),
     path('ActivityReport/' , views.ActivityReport , name='blog-ActivityReport'),
+    path('TraningDoc/' , views.CoachRating , name='blog-TraningDoc'),
+    path('AllDocCom/' , views.AllDocCom , name='blog-AllDocCom'),
+    path('addImage/', views.addImage, name='blog-addImage'),
+    path('logout/',views.log_out,name='logout')
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

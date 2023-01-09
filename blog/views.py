@@ -1,17 +1,46 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
-from .models import Post, User, Mission, Event
-from .forms import RegisterForm, PostForm
+from .models import Post, user, Mission, Event, Rating, Image
 from datetime import datetime
 from django.db.models import Q
-from . import forms #
+from .forms import ImageForm
+from . import forms
+from django.contrib.auth import login,logout
+from django.contrib.auth.decorators import login_required
+
+
+def log_out(request):
+    logout(request)
+    return redirect('blog-login')
 
 def home(request):
     return render(request , 'blog/HomePage.html')
     
 @login_required
 def community(request):
-    return render(request , 'blog/HomePageCommunity.html')
+    context={'posts': Post.objects.filter(flag = '1').order_by('title'),
+    'money':request.user.credit,
+    'events': Event.objects.all().order_by('title')}
+    if request.method =="POST":
+        key=list(request.POST.dict().keys())[1]
+        post=Post.objects.get(id=key)
+        #event = Event.objects.get(id=key)
+        user=request.user
+        if (user.credit >= post.credit): #or (user.credit >= event.credit):
+            #user.credit-=event.credit
+            user.credit = user.credit - post.credit
+            author = post.author
+            author.credit+=post.credit
+            #registpost.author
+            user.save()
+            author.save()
+            return redirect('blog-community')
+        else:
+            return HttpResponse('אין מספיק קרדיטים')
+    # context={'posts': Post.objects.filter(flag = '1').order_by('title'),
+    # 'money':request.user.credit,
+    # 'events': Event.objects.all().order_by('title')}
+    return render(request, 'blog/HomePageCommunity.html',context)
 
 @login_required
 def organization(request):
@@ -50,8 +79,15 @@ def CreatMission(request):
 def register(request):
     form = forms.RegisterForm(request.POST)
     if request.method == 'POST':
-        form.save()
-        return render(request,'blog/HomePage.html')
+        age = int(request.POST.get('age'))
+        place = str(request.POST.get('place'))
+        if age > 17 and place == 'ישראל':
+            user1=form.save()
+            user1.set_password(request.POST.dict()['password'])
+            user1.save()
+            return render(request,'blog/HomePage.html')
+        else:
+            return HttpResponse('sorry but your age is under 18 you are not from israel')
     else:
         print('invalid')
 
@@ -111,8 +147,10 @@ def CreatPost(request):
     formP = forms.PostForm(request.POST, request.FILES)
     if request.method == 'POST':
         if formP.is_valid():
-            formP.save()
-            return render(request,'blog/HomePageCommunity.html')
+            x=formP.save()
+            x.author=request.user
+            x.save()
+            return redirect('blog-community')
     else:
         print('invalid')
         return render(request , 'blog/CreatPost.html',{'formP':formP})
@@ -128,9 +166,11 @@ def OrgUserPage(request):
 def deleteUsers(request):
     if request.method=="POST":
         data=list(request.POST.dict().keys())[1]
-        user=User.objects.get(full_name=data)
-        user.delete()
-        return render(request , 'blog/HomepageAdmin.html' ,{'deleteuser': (user,)})
+        user1=user.objects.get(full_name=data)
+        user1.delete()
+        return redirect('blog-admin')
+        #,{'deleteuser': (user1,)})
+        # return render(request , 'blog/HomepageAdmin.html' ,{'deleteuser': (user1,)})
     else:
         deleteuser = user.objects.filter(Q(role = 'organization')|Q(role = 'community')).order_by('full_name')
         return render(request , 'blog/DeleteUsers.html' ,{'deleteuser': deleteuser})  
@@ -139,10 +179,12 @@ def deleteUsers(request):
 def UserAuth(request):
     if request.method=="POST":
         data=list(request.POST.dict().keys())[1]
-        user=User.objects.get(full_name=data)
-        user.flag='1'
-        user.save()
-        return render(request , 'blog/HomepageAdmin.html' ,{'orguser': (user,)})
+        user1=user.objects.get(full_name=data)
+        user1.flag='1'
+        user1.save()
+        return redirect('blog-admin')
+        #,{'orguser': (user1,)})
+        # return render(request , 'blog/HomepageAdmin.html' ,{'orguser': (user1,)})
     else:
         orguser = user.objects.filter((Q(role = 'organization')|Q(role = 'community'))&(Q(flag ='0'))).order_by('full_name')
         return render(request , 'blog/UserAuthorization.html' ,{'orguser': orguser})    
@@ -159,17 +201,6 @@ def PostAuth(request):
     else:
         postuser = Post.objects.filter(flag = '0').order_by('title')
         return render(request , 'blog/PostAuthorization.html' ,{'postuser': postuser}) 
-
-
-
-def CreateRating(request):
-    formR = forms.RatingForm(request.POST)
-    if request.method == 'POST':
-            formR.save()
-            return redirect('blog-community')
-    else:
-        orguser = User.objects.filter(role = 'organization').order_by('full_name')
-        return render(request , 'blog/OrgUserPage.html' ,{'orguser': orguser}) 
 
 @login_required       
 def ActivityReport(request):
@@ -190,4 +221,32 @@ def addImage(request):
             return render(request,'blog/HomePageCommunity.html')
     else:
         print('invalid')
-        return render(request, 'blog/addImage.html', {'formI': formI})                      
+        return render(request, 'blog/addImage.html', {'formI': formI})       
+
+def CreateRating(request):
+    formR = forms.RatingForm(request.POST)
+    if request.method == 'POST':
+            formR.save()
+            return redirect('blog-community')
+    else:
+        print('invalid')
+        return render(request , 'blog/TrainingRating.html', {'formR':formR})   
+
+
+@login_required       
+def ActivityReport(request):
+    allPost =  Post.objects.all()
+    allEvent = Event.objects.all()
+    num_posts = Post.objects.count()
+    num_events = Event.objects.count()
+    return render(request , 'blog/ActivityReport.html' ,{'allPost': allPost , 'allEvent': allEvent , 'num_posts': num_posts , 'num_events':num_events})
+
+                
+
+
+def AllDocCom(request):
+    return render(request , 'blog/AllDocCom.html')   
+
+def CoachRating(request):
+    Couch = Rating.objects.all().order_by('name')
+    return render(request , 'blog/TraningDoc.html',{'Couch': Couch})
