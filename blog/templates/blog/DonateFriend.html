@@ -51,21 +51,15 @@
   <body>
     <p class="logo" id="Name">SportNet <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p><br>
-    {% block content %}
-    <h2>!פרסום פוסט</h2>
-    <form class="send" action="{%url 'blog-CreatPost'%}" method="POST">
+    <!-- {% block content %} -->
+    <h2>!תרומת קרדיטים לחבר</h2>
+    <form class="send" action="{%url 'blog-DonateFriend'%}" method="POST">
       {% csrf_token %}
-      <!-- <p id="hey">{{formP.author}}:מחבר הפוסט</p> -->
-      <p id="hey">{{formP.title}}: כותרת הפוסט</p>
-      <p>תחום הפוסט</p>
-      <p id="hey">{{formP.scope}}:לחץ 1 למסירת מוצר, לחץ 2 לפעילות בקהילה</p>
-      <p id="hey">{{formP.content}}:תוכן הפוסט</p>
-      <p id="hey">{{formP.thumb}}:הוספת תמונה לפוסט</p>
-      <p id="hey">{{formP.date_posted}}:תאריך הפעילות</p>
-      <p id="hey">{{formP.credit}}:עלות הפעילות/מוצר בקרדיטים</p>
+      <p id="hey">{{formD.friend}}: למי תרצה לתרום</p>
+      <p id="hey">{{formD.cost}}:כמה תרצה לתרום</p>
 
       <p id="hey1" ><input id="hey1" class="btn btn-outline-info" type="submit" value="סיום"></p>
-    {% endblock content %}
+    <!-- {% endblock content %} -->
 
     </form>
 

@@ -75,5 +75,21 @@ class Rating(models.Model):
     rating = models.IntegerField(default=1,max_length=10)
     good = models.CharField(max_length=2)
     
-    def str(self):
+    def _str_(self):
         return str(self.name)
+
+class CreateGuide(models.Model):
+    title= models.CharField(max_length=100)
+    context = models.TextField()
+    
+    def _str_(self):
+        return self.title 
+
+
+class Donate(models.Model):
+    friend=models.ForeignKey(user,on_delete=models.CASCADE,null=True)
+    cost = models.IntegerField(default=1,max_length=10)
+
+    def _str_(self):
+        return str(self.friend)      
+

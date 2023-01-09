@@ -53,7 +53,10 @@ urlpatterns = [
     path('TraningDoc/' , views.CoachRating , name='blog-TraningDoc'),
     path('AllDocCom/' , views.AllDocCom , name='blog-AllDocCom'),
     path('addImage/', views.addImage, name='blog-addImage'),
-    path('logout/',views.log_out,name='logout')
+    path('logout/',views.log_out,name='logout'),
+    path('CreateGuide/' , views.CreateGuide1 , name='blog-CreateGuide'),
+    path('ShowGuide/' , views.ShowGuide , name='blog-showGuide'),
+    path('DonateFriend/' , views.Donate_to_a_friend , name='blog-DonateFriend'),
 ]
 
 

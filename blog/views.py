@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, user, Mission, Event, Rating, Image
+from .models import Post, user, Mission, Event, Rating, CreateGuide,Donate
 from datetime import datetime
 from django.db.models import Q
 from .forms import ImageForm
@@ -24,7 +24,7 @@ def community(request):
     if request.method =="POST":
         key=list(request.POST.dict().keys())[1]
         post=Post.objects.get(id=key)
-        #event = Event.objects.get(id=key)
+        event = Event.objects.get(id=key)
         user=request.user
         if (user.credit >= post.credit): #or (user.credit >= event.credit):
             #user.credit-=event.credit
@@ -250,3 +250,16 @@ def AllDocCom(request):
 def CoachRating(request):
     Couch = Rating.objects.all().order_by('name')
     return render(request , 'blog/TraningDoc.html',{'Couch': Couch})
+
+@login_required
+def addImage(request):
+    formI =forms.ImageForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if formI.is_valid():
+            formI.save()
+            #return redirect('images')
+            return redirect('blog-organization')
+    else:
+        print('invalid')
+        return render(request, 'blog/addImage.html', {'formI': formI}) 
+
