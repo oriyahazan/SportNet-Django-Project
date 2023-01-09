@@ -240,3 +240,43 @@ def CoachRating(request):
     return render(request , 'blog/TraningDoc.html',{'Couch': Couch})
 
 
+@login_required
+def CreateGuide1(request):
+    formG = forms.CreateGuideForm(request.POST)
+    if request.method == 'POST':
+            formG.save()
+            return redirect('blog-organization')
+    else:
+        print('invalid')
+    return render(request , 'blog/CreateGuide.html',{'formG':formG}) 
+
+def ShowGuide(request):
+    guide = CreateGuide.objects.all().order_by('title')
+    return render(request , 'blog/ShowGuide.html' ,{'guide': guide})
+
+
+
+def Donate_to_a_friend(request):
+    formD = forms.DonateForm(request.POST)
+    if request.method =="POST":
+        # key=(request.POST.dict().keys())[1]
+        # print(key)
+        don=int(request.POST.dict()['friend'])
+        print(don)
+        donate=Donate.objects.get(id=don)
+        print(donate.cost)
+        user=request.user
+        user.credit = user.credit - donate.cost
+        Friend = donate.friend
+        Friend.credit+=donate.cost
+        user.save()
+        Friend.save()
+        return redirect('blog-community')
+        # else:
+        #     return HttpResponse('אין מספיק קרדיטים')
+    return render(request,'blog/DonateFriend.html', {'formD':formD})
+
+
+ 
+
+
