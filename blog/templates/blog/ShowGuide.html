@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -56,11 +57,8 @@
     }
     .mission{
         text-align: center;
-        border-color: black;
-        border-radius: 45%;
-        border-width: 5px;
-        border-style: solid;
     }
+
     #hed{
         font-size: 1.5em;
     }
@@ -71,30 +69,15 @@
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     
-    <h1>דו"ח פירוט  פעילות באתר:</h1>
-    <div class="post">
+    <h1>מדריך לשימוש באתר</h1>
 
-      <h2>פוסטים:</h2>
-        {% for post in allPost %} 
-            <div class="post">
-                <h4 id="hed">{{post.title}}<h4>
-                <p>{{post.content}}</p>
+    <div class="ShowGuide">
+        {% for guide1 in guide %} 
+            <div class="mission">
+                <h4 id="hed">כותרת המדריך: {{guide1.title}}<h4>
+                <p>תוכן המדריך: {{guide1.context}}</p>
             </div>
         {% endfor %}
-
-      <p>מספר הפוסטים: {{ num_posts }}</p>
-  
-        <h2>אירועים:</h2>
-        {% for event in allEvent %} 
-            <div class="events">
-                <h4 id="hed">{{event.title}}<h4>
-                <p>{{event.content}}</p>
-            </div>
-
-      <p>מספר הפוסטים: {{ num_events }}</p>
-
-        {% endfor %}    
-
     </div>    
 
   </body>
