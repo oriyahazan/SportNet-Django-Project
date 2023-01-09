@@ -265,7 +265,7 @@ def Donate_to_a_friend(request):
     if request.method =="POST":
         # key=(request.POST.dict().keys())[1]
         # print(key)
-        don=list(request.POST.dict().keys())[1]
+        don=int(request.POST.dict()['friend'])
         print(don)
         donate=Donate.objects.get(id=don)
         print(donate.cost)
