@@ -249,5 +249,17 @@ def AllDocCom(request):
 
 def CoachRating(request):
     Couch = Rating.objects.all().order_by('name')
-    return render(request , 'blog/TraningDoc.html',{'Couch': Couch}) 
+    return render(request , 'blog/TraningDoc.html',{'Couch': Couch})
+
+@login_required
+def addImage(request):
+    formI =forms.ImageForm(request.POST, request.FILES)
+    if request.method == 'POST':
+        if formI.is_valid():
+            formI.save()
+            #return redirect('images')
+            return redirect('blog-organization')
+    else:
+        print('invalid')
+        return render(request, 'blog/addImage.html', {'formI': formI}) 
 

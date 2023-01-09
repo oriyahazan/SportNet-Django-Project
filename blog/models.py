@@ -8,7 +8,7 @@ from django.contrib.auth.models import AbstractUser
 #     date_posted = models.DateTimeField(default=timezone.now)
 #     author = models.ForeignKey(User , on_delete=models.CASCADE) #if user deleted we want to delete his post
 
-#     def _str_(self):
+#     def str(self):
 #         return self.title
 
 
@@ -23,7 +23,7 @@ class user(AbstractUser):
     flag = models.CharField(max_length=1,default=0)
     credit = models.IntegerField(default=0)
 
-    def _str_(self):
+    def str(self):
         return self.full_name
 
 
@@ -35,7 +35,7 @@ class Event(models.Model):
     credit = models.IntegerField(default=0)
     participants = models.IntegerField(default=0)
 
-    def _str_(self):
+    def str(self):
         return self.title
 
 
@@ -43,7 +43,7 @@ class Mission(models.Model):
     title= models.CharField(max_length=200)
     content= models.TextField()
 
-    def _str_(self):
+    def str(self):
         return self.title
 
 class Post(models.Model):
@@ -57,7 +57,7 @@ class Post(models.Model):
     flag=models.CharField(max_length=1 , default=0)
     
 
-    def _str_(self):
+    def str(self):
         return self.title
 
 
@@ -66,7 +66,7 @@ class Image(models.Model):
     content= models.TextField()
     image= models.ImageField(upload_to='images')
 
-    def _str_(self):
+    def str(self):
         return self.title        
 
 
