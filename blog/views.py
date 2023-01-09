@@ -237,8 +237,7 @@ def AllDocCom(request):
 
 def CoachRating(request):
     Couch = Rating.objects.all().order_by('name')
-    return render(request , 'blog/TraningDoc.html',{'Couch': Couch})
-
+    return render(request , 'blog/TraningDoc.html',{'Couch': Couch}) 
 
 @login_required
 def CreateGuide1(request):
@@ -275,8 +274,3 @@ def Donate_to_a_friend(request):
         # else:
         #     return HttpResponse('אין מספיק קרדיטים')
     return render(request,'blog/DonateFriend.html', {'formD':formD})
-
-
- 
-
-
