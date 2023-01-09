@@ -232,18 +232,6 @@ def CreateRating(request):
         print('invalid')
         return render(request , 'blog/TrainingRating.html', {'formR':formR})   
 
-
-@login_required       
-def ActivityReport(request):
-    allPost =  Post.objects.all()
-    allEvent = Event.objects.all()
-    num_posts = Post.objects.count()
-    num_events = Event.objects.count()
-    return render(request , 'blog/ActivityReport.html' ,{'allPost': allPost , 'allEvent': allEvent , 'num_posts': num_posts , 'num_events':num_events})
-
-                
-
-
 def AllDocCom(request):
     return render(request , 'blog/AllDocCom.html')   
 
@@ -251,15 +239,4 @@ def CoachRating(request):
     Couch = Rating.objects.all().order_by('name')
     return render(request , 'blog/TraningDoc.html',{'Couch': Couch})
 
-@login_required
-def addImage(request):
-    formI =forms.ImageForm(request.POST, request.FILES)
-    if request.method == 'POST':
-        if formI.is_valid():
-            formI.save()
-            #return redirect('images')
-            return redirect('blog-organization')
-    else:
-        print('invalid')
-        return render(request, 'blog/addImage.html', {'formI': formI}) 
 
