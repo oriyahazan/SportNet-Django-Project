@@ -93,21 +93,21 @@
       {% for post in posts %} 
           <div class="post">
       
-              <!-- {% if post.scope ==  "1" %} -->
+              {% if post.scope ==  "1" %}
                 <h3>מסירת מוצר</h3>
                 <h4>{{post.title}}</h4>
                 <p>תיאור המוצר: {{post.content}}</p>
                 <p>המוסר: {{post.author}}</p>
                 <p>{{post.credit}} :המחיר</p>
                 <p><form method="POST">{% csrf_token %}<button type="submit" name="{{post.id}}">להירשם</button></form></p>
-              <!-- {% elif post.scope ==  "2" %} -->
-                <!-- <h2>פעילות בקהילה</h2>
+              {% elif post.scope ==  "2" %}
+                <h2>פעילות בקהילה</h2>
                 <h4>{{post.title}}</h4>
                 <p>תוכן הפעילות: {{post.content}}</p>
                 <p>המאמן: {{post.author}}</p>
                 <p>{{post.credit}} :המחיר</p>
                 <p><form method="POST">{% csrf_token %}<button type="submit" name="{{post.id}}">להירשם</button></form></p>
-              {% endif %} -->
+              {% endif %}
           </div>
       {% endfor %}
       <h2>אירועים בקהילה</h2>

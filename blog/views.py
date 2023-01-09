@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
-from .models import Post, user, Mission, Event, Rating, Image, RatingForm
+from .models import Post, user, Mission, Event, Rating, Image
 from datetime import datetime
 from django.db.models import Q
 from .forms import ImageForm
@@ -18,20 +18,28 @@ def home(request):
     
 @login_required
 def community(request):
-    if request.method =="POST":
-        key=list(request.POST.dict().keys())[1]
-        post=Post.objects.get(id=key)
-        event = Event.objects.get(id=key)
-        user=request.user
-        user.credit-=post.credit
-        author = post.author
-        author.credit+=post.credit
-        #registpost.author
-        user.save()
-        author.save()
     context={'posts': Post.objects.filter(flag = '1').order_by('title'),
     'money':request.user.credit,
     'events': Event.objects.all().order_by('title')}
+    if request.method =="POST":
+        key=list(request.POST.dict().keys())[1]
+        post=Post.objects.get(id=key)
+        #event = Event.objects.get(id=key)
+        user=request.user
+        if (user.credit >= post.credit): #or (user.credit >= event.credit):
+            #user.credit-=event.credit
+            user.credit = user.credit - post.credit
+            author = post.author
+            author.credit+=post.credit
+            #registpost.author
+            user.save()
+            author.save()
+            return redirect('blog-community')
+        else:
+            return HttpResponse('אין מספיק קרדיטים')
+    # context={'posts': Post.objects.filter(flag = '1').order_by('title'),
+    # 'money':request.user.credit,
+    # 'events': Event.objects.all().order_by('title')}
     return render(request, 'blog/HomePageCommunity.html',context)
 
 @login_required
