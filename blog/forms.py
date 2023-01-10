@@ -52,3 +52,8 @@ class DonateForm(forms.ModelForm):
         model = models.Donate
         fields = ['friend', 'cost']                              
         
+
+class DocEventForm(forms.ModelForm):
+    class Meta:
+        model = models.DocEvent
+        fields = ['title','content','date_posted','credit','parti']

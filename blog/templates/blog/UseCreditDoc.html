@@ -55,8 +55,12 @@
         text-align: center;
         font-size: 2.5em;
     }
-    .eventsOrg{
+    .mission{
         text-align: center;
+        border-color: black;
+        border-radius: 45%;
+        border-width: 5px;
+        border-style: solid;
     }
     #hed{
         font-size: 1.5em;
@@ -68,16 +72,39 @@
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     
-    <h1>דו"ח פירוט אירועים בקהילה</h1>
-    <div class="eventsOrg">
-        {% for event in Eventorgdocs %} 
-            <div class="eventsOrg">
-                <h4 id="hed">שם האירוע: {{event.title}}<h4>
-                <p>{{event.date_posted}} :תאריך האירוע</p>
-                <p>{{event.participants}} :מספר המשתתפים</p>
-                
+    <h1>דו"ח פירוט שימוש וקבלת קרדיטים</h1>
+    <div class="missions">
+        <h1>:פירוט הורדות</h1>
+        <h2>פעילויות שהשתתפתי</h2> 
+        {% for usecredit in UseCreditEvent %}
+            <h2>פעילויות שהשתתפתי</h2> 
+            <div class="mission">
+                <h4 id="hed">{{usecredit.title}}<h4>
+                <p>{{usecredit.credit}}</p>
             </div>
         {% endfor %}
+        <h2>תרומות שלי</h2>
+        {% for myDonat in myDonate %} 
+        <div class="mission">
+            <h4 id="hed">{{myDonat.friend}}<h4>
+            <p>{{myDonat.cost}}</p>
+        </div>
+    {% endfor %}
+    <h1>:פירוט הוספות</h1>
+    <h2>קבלת קרדיטים ממשתתפים בפעילותיי</h2>
+    {% for partiCredit in partiCreditEvent %} 
+        <div class="mission">
+            <h4 id="hed">{{partiCredit.parti}}<h4>
+            <p>{{partiCredit.credit}}</p>
+        </div>
+    {% endfor %}
+    <h2>תרומות שקיבלתי</h2>
+    {% for friendDonat in friendDonate %} 
+    <div class="mission">
+        <h4 id="hed">{{friendDonat.donor}}<h4>
+        <p>{{friendDonat.cost}}</p>
+    </div>
+    {% endfor %}
     </div>    
 
   </body>

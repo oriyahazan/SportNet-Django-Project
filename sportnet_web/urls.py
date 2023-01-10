@@ -48,7 +48,7 @@ urlpatterns = [
     path('PostAuthorization/' , views.PostAuth , name='blog-PostAuth'),
     path('ComUserPage/' , views.ComUserPage , name='blog-ComUserPage'),
     path('TrainingRating/' , views.CreateRating , name='blog-TrainingRating'),
-    # path('EventOrgDocs/' , views.EventOrgDocs , name='blog-EventOrgDocs'),
+    path('EventOrgDocs/' , views.EventOrgDocs , name='blog-EventOrgDocs'),
     path('ActivityReport/' , views.ActivityReport , name='blog-ActivityReport'),
     path('TraningDoc/' , views.CoachRating , name='blog-TraningDoc'),
     path('AllDocCom/' , views.AllDocCom , name='blog-AllDocCom'),
@@ -60,6 +60,9 @@ urlpatterns = [
     path('AllEvents/' , views.AllEvents , name='blog-AllEvents'),
     path('EventPic/' , views.EventPic , name='blog-EventPic'),
 
+    path('DocEvent/', views.Docevent, name = 'blog-DocEvent'),
+    path('AllEvents/' , views.AllEvents , name='blog-AllEvents'),
+    path('UseCreditDoc/' , views.UseCredit , name='blog-UseCreditDoc'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

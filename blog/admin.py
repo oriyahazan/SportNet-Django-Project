@@ -1,6 +1,6 @@
 from django.contrib import admin
 from blog import models
-from .models import Post ,Event,Mission , Image, Rating,CreateGuide, Donate
+from .models import Post ,Event,Mission , Image, Rating,CreateGuide, Donate, DocEvent
 from .models import user
 
 
@@ -11,7 +11,7 @@ admin.site.register(Mission)
 admin.site.register(Rating)
 admin.site.register(Image)
 admin.site.register(Donate)
-
+admin.site.register(DocEvent)
 
 @admin.register(models.user) #i deleted vaildid
 class PlatformUsers(admin.ModelAdmin):

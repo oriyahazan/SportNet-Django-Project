@@ -55,11 +55,10 @@
         text-align: center;
         font-size: 2.5em;
     }
-    .eventsOrg{
-        text-align: center;
-    }
     #hed{
-        font-size: 1.5em;
+        font-size: 1.25em;
+        text-align: center;
+        margin: auto;
     }
 
     </style>
@@ -68,17 +67,17 @@
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     
-    <h1>דו"ח פירוט אירועים בקהילה</h1>
-    <div class="eventsOrg">
-        {% for event in Eventorgdocs %} 
-            <div class="eventsOrg">
-                <h4 id="hed">שם האירוע: {{event.title}}<h4>
-                <p>{{event.date_posted}} :תאריך האירוע</p>
-                <p>{{event.participants}} :מספר המשתתפים</p>
+    <h1>דו"ח פירוט פעילויות בקהילה</h1>
+    {% for docevent in Docevent %} 
+        <table id="hed">
+            <tr >
+                <td  id="hed"><span>{{docevent.title}} <li></li><br> {{docevent.date_posted}}</span></td><br>
+                <!-- <li id="hed">{{docevent.date_posted}}</li> -->
+            </tr>
+        </table>
                 
-            </div>
         {% endfor %}
-    </div>    
+      
 
   </body>
 </html>
