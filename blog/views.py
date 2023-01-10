@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Post, user, Mission, Event, Rating, CreateGuide,Donate
+from .models import Post, user, Mission, Event, Rating, CreateGuide,Donate,Image
 from datetime import datetime
 from django.db.models import Q
 from .forms import ImageForm
@@ -213,15 +213,17 @@ def ActivityReport(request):
 
 @login_required
 def addImage(request):
-    formI =forms.ImageForm(request.POST, request.FILES)
     if request.method == 'POST':
+        formI =ImageForm(request.POST, request.FILES)
+        print(formI.errors)
         if formI.is_valid():
-            formI.save()
-            #return redirect('images')
+            newform=Image(title=formI.cleaned_data['title'],content=formI.cleaned_data['content'],image=request.FILES['image'])
+            newform.save()
             return render(request,'blog/HomePageCommunity.html')
     else:
-        print('invalid')
-        return render(request, 'blog/addImage.html', {'formI': formI})       
+        formI=ImageForm()
+    return render(request, 'blog/addImage.html', {'formI': formI})  
+       
 
 def CreateRating(request):
     formR = forms.RatingForm(request.POST)
@@ -276,7 +278,10 @@ def Donate_to_a_friend(request):
         #     return HttpResponse('אין מספיק קרדיטים')
     return render(request,'blog/DonateFriend.html', {'formD':formD})
 
+def EventPic(request):
+    EventPic =  Image.objects.all().order_by('title')
+    return render(request , 'blog/EventPic.html' ,{'EventPic': EventPic}) 
 
- 
+
 
 

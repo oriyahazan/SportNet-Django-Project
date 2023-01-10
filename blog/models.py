@@ -50,7 +50,8 @@ class Post(models.Model):
     scope=models.CharField(max_length=50 , default=0)
     title= models.CharField(max_length=200)
     content= models.TextField()
-    thumb=models.ImageField(default='default.png', blank=True)
+    thumb= models.ImageField(upload_to='files/',default='files/.jpg')
+    #thumb=models.ImageField(default='default.png', blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
     credit = models.IntegerField(default=0)
     author=models.ForeignKey(user,on_delete=models.CASCADE,null=True)
@@ -60,11 +61,13 @@ class Post(models.Model):
     def str(self):
         return self.title
 
-
+import os
+if not os.path.exists('files'):
+    os.makedirs('files')
 class Image(models.Model):
     title= models.CharField(max_length=200)
     content= models.TextField()
-    image= models.ImageField(upload_to='images')
+    image= models.ImageField(upload_to='files/',default='files/.jpg')
 
     def str(self):
         return self.title        

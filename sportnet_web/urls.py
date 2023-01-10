@@ -57,8 +57,8 @@ urlpatterns = [
     path('CreateGuide/' , views.CreateGuide1 , name='blog-CreateGuide'),
     path('ShowGuide/' , views.ShowGuide , name='blog-showGuide'),
     path('DonateFriend/' , views.Donate_to_a_friend , name='blog-DonateFriend'),
+    path('EventPic/' , views.EventPic , name='blog-EventPic'),
+
 ]
 
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
