@@ -10,7 +10,7 @@
       list-style-type: none;
       margin: 0;
       padding: 0;
-      border-color: rgb(191, 191, 191);
+      border-color: #00004d;
       border-style: solid;
       border-width: thin;
     }
@@ -21,18 +21,18 @@
 
     li a{
       display: block;
-      color: white;
+      color: #00004d;
       text-align: center;
       padding: 14px 14px;
       text-decoration: none;
     }
 
     li a:hover{
-      background: black;
+      background: white;
     }
     .logo{
       font-size: 0.8em;
-      color: #d6ad60b4;
+      color: #00004d;
     
     }
 
@@ -43,28 +43,48 @@
       font-style: normal;
       margin: 1px 1px 1px 1px;
     }
+
     body{
-       background-color: #f5f1e8;
-       font-family: 'MiriMedium';
-       font-weight: normal;
-       font-style: normal;
-       color: #d6ad60b4;
+      background: url(https://i.ibb.co/p0gM4JG/bg.png);
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      color: #00004d;
     }
     h1{
-        text-align: center;
-        font-size: 2.5em;
+      margin-top: 100px;
+      text-align: center;
+      font-size: 2.5em;
     }
     .deleteuser{
         text-align: center;
         margin: auto;
     }
+    #s{
+      padding: 15px 20px 15px 20px;
+    }
+    #but{
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 0.75em;
+      background: #00004d;
+      color:white;
 
+    }
 
     </style>
   </head>
   <body>
-    <p class="logo" id="Name">SportNet</p>
+    <p class="logo" id="Name">SportNet  <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
+    <ul>
+      <li><a href="{% url 'blog-admin' %}" align = "right" dir="rtl">חזרה לדף הבית</a></li>
+  </ul>
     
     <h1>משתמשים הממתינים לאישור</h1>
     <div class="delete_user">
@@ -72,20 +92,20 @@
         <div>
           
             <table class="deleteuser" border="4">
-                <thead>
-                    <th>תחום עיסוק</th>
-                    <th>מקום מגורים</th>
-                    <th>גיל</th>
-                    <th>תעודת זהות</th>
-                    <th>שם משתמש</th>
+                <thead >
+                    <th id="s">תחום עיסוק</th>
+                    <th id="s">מקום מגורים</th>
+                    <th id="s">גיל</th>
+                    <th id="s">תעודת זהות</th>
+                    <th id="s">שם משתמש</th>
                 </thead>
-                <tr>
-                    <td>{{orguse.role}}</td>
-                    <td>{{orguse.place}}</td>
-                    <td>{{orguse.age}}</td>
-                    <td>{{orguse.id_number}}</td>
-                    <td>{{orguse.full_name}}</td>
-                    <td><form method="POST">{% csrf_token %}<button name="{{orguse.full_name}}">אישור משתמש</button></form></td>
+                <tr >
+                    <td id="s">{{orguse.role}}</td>
+                    <td id="s">{{orguse.place}}</td>
+                    <td id="s">{{orguse.age}}</td>
+                    <td id="s">{{orguse.id_number}}</td>
+                    <td id="s">{{orguse.full_name}}</td>
+                    <td><form method="POST">{% csrf_token %}<button name="{{orguse.full_name}}" id="but">אישור משתמש</button></form></td>
                 </tr>
             </table>        
         </div>

@@ -19,33 +19,25 @@ def home(request):
 @login_required
 def community(request):
     context={'posts': Post.objects.filter(flag = '1').order_by('title'),
-    'money':request.user.credit,
-    'events': Event.objects.all().order_by('title')}
+    'money':request.user.credit}
     if request.method =="POST":
         key=list(request.POST.dict().keys())[1]
         post=Post.objects.get(id=int(key))
-        #event = Event.objects.get(id=key)
         user=request.user
-        if (user.credit >= post.credit): #or (user.credit >= event.credit):
-            #user.credit-=event.credit
+        if (user.credit >= post.credit):
             user.credit = user.credit - post.credit
             author = post.author
             author.credit+=post.credit
-            #registpost.author
             user.save()
             author.save()
             return redirect('blog-community')
         else:
             return HttpResponse('אין מספיק קרדיטים')
-    # context={'posts': Post.objects.filter(flag = '1').order_by('title'),
-    # 'money':request.user.credit,
-    # 'events': Event.objects.all().order_by('title')}
     return render(request, 'blog/HomePageCommunity.html',context)
 
 @login_required
 def organization(request):
-    context={'posts': Post.objects.filter(flag = '1').order_by('title'),
-    'events': Event.objects.all().order_by('title')}
+    context={'posts': Post.objects.filter(flag = '1').order_by('title')}
     return render(request , 'blog/HomePageOrganization.html', context)
 
 @login_required
@@ -263,22 +255,49 @@ def ShowGuide(request):
 def Donate_to_a_friend(request):
     formD = forms.DonateForm(request.POST)
     if request.method =="POST":
-        # key=(request.POST.dict().keys())[1]
-        # print(key)
+        formD.save()
+        key=(request.POST.dict().keys())
+        print(key)
+
         don=int(request.POST.dict()['friend'])
+        cost=int(request.POST.dict()['cost'])
         print(don)
-        donate=Donate.objects.get(id=don)
-        print(donate.cost)
+        print(cost)
+        donate = Donate.objects.get(id = key)
+        print(donate)
+        # newfriend=user.objects.get(id=don)
+        # print(newfriend)
         user=request.user
-        user.credit = user.credit - donate.cost
-        Friend = donate.friend
-        Friend.credit+=donate.cost
+
+        # user.credit = user.credit - donate.cost
+        # Friend = donate.friend
+        # Friend.credit+=donate.cost
         user.save()
-        Friend.save()
+        newfriend.save()
         return redirect('blog-community')
         # else:
         #     return HttpResponse('אין מספיק קרדיטים')
     return render(request,'blog/DonateFriend.html', {'formD':formD})
+
+
+def AllEvents(request):
+    context = {'events': Event.objects.all().order_by('title')}
+    if request.method =="POST":
+        key=list(request.POST.dict().keys())[1]
+        event = Event.objects.get(id=key)
+        user=request.user
+        if (user.credit >= event.credit):
+            user.credit=user.credit - event.credit
+  
+                #registpost.author
+            
+            user.save()
+            return redirect('blog-community')
+        else:
+            return HttpResponse('אין מספיק קרדיטים')
+    return render(request, 'blog/AllEvents.html',context)
+
+
 
 
  
