@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -55,31 +56,54 @@
       font-style: normal;
       color: #00004d;
     }
-    #list{
-      margin-top: 60px;
-      text-align: right;
-    }
+  
     h1{
-      margin-top: 70px;
-      text-align: center;
+        margin-top: 60px;
+        text-align: center;
+        font-size: 2.5em;
     }
-
+    #all{
+        text-align: right;
+    }
+    #but{
+        font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 0.75em;
+      background: #00004d;
+      color:white;
+    }
+    #font{
+        font-family:'Ariel';  
+    }
+    #date{
+        font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      color: #00004d; 
+    }
+    .date {
+  white-space: nowrap;
+}
     </style>
   </head>
   <body>
     <p class="logo" id="Name">SportNet  <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     <ul>
-      <li><a href="{% url 'blog-organization' %}" align = "right" dir="rtl">חזרה לדף הבית</a></li>
+        <li><a href="{% url 'blog-community' %}" align = "right" dir="rtl">חזרה לדף הבית</a></li>
     </ul>
-    <h1>!מאגר הדוחות</h1>
-    <ul id ="list">
-        <a href="{% url 'blog-missions' %}">דוח משימות מהמנהל</a><br>
-        <a href="">דוח פירוט אירועים בקהילה</a><br>
-        <a href="">דוח פירוט אירועים בקהילה</a>
-
-    </ul>
-
-
+    <h1>אירועים בהקהילה</h1>
+    {% for event in events %}
+          <div id="all">
+            <h4>{{event.title}}</h4>
+            <p>תוכן האירוע: {{event.content}}</p>
+            <p>{{event.credit}} :המחיר</p>
+            <div class="date" style="white-space: nowrap;"><span id="font">{{event.date_posted}}</span> :יום האירוע
+            </div>
+            <p><form method="POST">{% csrf_token %}<button type="submit" name="{{event.id}}" id="but">להירשם</button></form></p>
+          </div>  
+      {% endfor %}   
   </body>
 </html>
+

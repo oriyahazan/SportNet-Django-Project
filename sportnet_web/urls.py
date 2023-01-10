@@ -57,6 +57,7 @@ urlpatterns = [
     path('CreateGuide/' , views.CreateGuide1 , name='blog-CreateGuide'),
     path('ShowGuide/' , views.ShowGuide , name='blog-showGuide'),
     path('DonateFriend/' , views.Donate_to_a_friend , name='blog-DonateFriend'),
+    path('AllEvents/' , views.AllEvents , name='blog-AllEvents'),
 ]
 
 

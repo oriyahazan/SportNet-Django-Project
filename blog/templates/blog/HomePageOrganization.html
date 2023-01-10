@@ -10,7 +10,7 @@
       list-style-type: none;
       margin: 0;
       padding: 0;
-      border-color: rgb(191, 191, 191);
+      border-color: #00004d;
       border-style: solid;
       border-width: thin;
     }
@@ -21,32 +21,39 @@
 
     li a{
       display: block;
-      color: white;
+      color: #00004d;
       text-align: center;
       padding: 14px 14px;
       text-decoration: none;
     }
 
     li a:hover{
-      background: black;
+      background: white;
     }
     .logo{
-      font-size: 0.5em;
+      font-size: 0.8em;
+      color: #00004d;
+    
     }
 
     #Name{
-      font-size: 2.0em;
+      font-size: 2.5em;
       font-family: 'GreatVibesRegular';
       font-weight: normal;
       font-style: normal;
+      margin: 1px 1px 1px 1px;
     }
 
     body{
-       background:url(https://vitrage-resort.co.il/wp-content/uploads/2016/10/35688222_l2.jpg);
-       font-family: 'MiriMedium';
-       font-weight: normal;
-       font-style: normal;
-       color: white;
+      background: url(https://i.ibb.co/p0gM4JG/bg.png);
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      color: #00004d;
     }
     h1{
       text-align: center;
@@ -68,14 +75,13 @@
     </style>
   </head>
   <body>
-    <p class="logo" id="Name">SportNet</p>
+    <p class="logo" id="Name">SportNet  <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     <h1>!ברוך הבא לדף הבית של חבר האירגון</h1>
     <ul>
         <li><a href="{% url 'blog-CreatEvent' %}" align = "right" dir="rtl">פרסום אירוע בקהילה</a></li>
         <li><a href="{% url 'blog-CreateGuide' %}" align = "right" dir="rtl">פרסום מדריך לשימוש באתר</a></li>
         <li><a href="{% url 'blog-addImage' %}" align = "right" dir="rtl">העלאת תמונות מאירוע</a></li>
-        <li><a href="Posting.html" align = "right" dir="rtl">שליחת סקר לחברי הקהילה</a></li>
         <li><a href="{% url 'blog-AllDocOrg' %}" align = "right" dir="rtl">דוחות</a></li>
         <li><a href="{% url 'logout' %}" align = "right" dir="rtl">התנתקות</a></li>
     </ul>
@@ -99,15 +105,6 @@
               {% endif %}
           </div>
       {% endfor %}
-      <h2>אירועים בקהילה</h2>
-      {% for event in events %}
-          <div>
-            <h4>{{event.title}}</h4>
-            <p>תוכן האירוע: {{event.content}}</p>
-            <p>{{event.credit}} :המחיר</p>
-            <p>{{event.date_posted}} :יום האירוע</p>
-          </div>  
-      {% endfor %} 
     </div>    
 
   </body>
