@@ -89,7 +89,30 @@ class CreateGuide(models.Model):
 class Donate(models.Model):
     friend=models.ForeignKey(user,on_delete=models.CASCADE,null=True)
     cost = models.IntegerField(default=1,max_length=10)
+    donor = models.CharField(max_length=200, default="s")
 
     def _str_(self):
         return str(self.friend)      
+
+class DocEvent(models.Model):
+    title= models.CharField(max_length=200)
+    content= models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    credit = models.IntegerField(default=0)
+    parti=models.ForeignKey(user,on_delete=models.CASCADE,null=True)
+    userPost = models.CharField(max_length=200, default="organization")
+    
+    def str(self):
+        return self.title
+
+
+
+
+
+
+
+
+
+
+
 
