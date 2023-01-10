@@ -275,7 +275,22 @@ def Donate_to_a_friend(request):
         #     return HttpResponse('אין מספיק קרדיטים')
     return render(request,'blog/DonateFriend.html', {'formD':formD})
 
-
+def AllEvents(request):
+    context = {'events': Event.objects.all().order_by('title')}
+    if request.method =="POST":
+        key=list(request.POST.dict().keys())[1]
+        event = Event.objects.get(id=key)
+        user=request.user
+        if (user.credit >= event.credit):
+            user.credit=user.credit - event.credit
+  
+                #registpost.author
+            
+            user.save()
+            return redirect('blog-community')
+        else:
+            return HttpResponse('אין מספיק קרדיטים')
+    return render(request, 'blog/AllEvents.html',context)
  
 
 
