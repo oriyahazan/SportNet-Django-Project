@@ -2,6 +2,8 @@ from django.forms import ModelForm
 from .models import user
 from django import forms
 from . import models #
+from django.utils import timezone
+
 
 
 class RegisterForm(forms.ModelForm):
@@ -24,14 +26,17 @@ class MissionForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = models.Post
-        fields = ['scope','title','content','thumb','date_posted','credit'] 
+        fields = ['scope','title','content','thumb','date_posted','credit']
 
 class RatingForm(forms.ModelForm):
     class Meta:
         model = models.Rating
         fields = ['name', 'rating', 'good']  
 
-class ImageForm(forms.ModelForm):
+class ImageForm(forms.Form):
+    image = forms.ImageField()
+    title= forms.CharField(max_length=200, required=True)
+    content= forms.CharField(required=True)
     class Meta:
         model = models.Image
         fields = ['title','content','image'] 

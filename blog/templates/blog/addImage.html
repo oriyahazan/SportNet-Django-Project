@@ -71,10 +71,19 @@
     <p class="logo" id="Name">SportNet</p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     
-    <img src="{{ formI }}">  
+    <p id="hey1" >
+    <form method="POST" class="post-form" enctype="multipart/form-data" value="פרסם" action="{% url 'blog-addImage'%}">
+    {% csrf_token %}
 
-    <!-- <p>מספר הפוסטים: {{ formI }}</p> -->
-    <p id="hey1" ><form method="POST">{% csrf_token %}<input id="hey1" class="btn btn-outline-info" type="submit" value="פרסם"></form></p>
+      <p>
+      {{formI.as_p}}
+      </p>
+      <button type="submit" class="save btn btn-default">פרסם</button>
+
+    </form>
+    </p>
+    
+
 
 
 

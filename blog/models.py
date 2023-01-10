@@ -60,11 +60,13 @@ class Post(models.Model):
     def str(self):
         return self.title
 
-
+import os
+if not os.path.exists('files'):
+    os.makedirs('files')
 class Image(models.Model):
     title= models.CharField(max_length=200)
     content= models.TextField()
-    image= models.ImageField(upload_to='images')
+    image= models.ImageField(upload_to='files/',default='files/.jpg')
 
     def str(self):
         return self.title        
