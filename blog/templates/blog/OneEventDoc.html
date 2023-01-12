@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SportNet</title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/miri" type="text/css"/>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/great-vibes" type="text/css"/>
+    <style media="screen">
+    ul{
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      border-color: rgb(191, 191, 191);
+      border-style: solid;
+      border-width: thin;
+    }
+
+    li{
+      float: right;
+    }
+
+    li a{
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 14px;
+      text-decoration: none;
+    }
+
+    li a:hover{
+      background: black;
+    }
+    .logo{
+      font-size: 0.8em;
+      color: #d6ad60b4;
+    
+    }
+
+    #Name{
+      font-size: 2.5em;
+      font-family: 'GreatVibesRegular';
+      font-weight: normal;
+      font-style: normal;
+      margin: 1px 1px 1px 1px;
+    }
+    body{
+       background-color: #f5f1e8;
+       font-family: 'MiriMedium';
+       font-weight: normal;
+       font-style: normal;
+       color: #d6ad60b4;
+    }
+    h1{
+        text-align: center;
+        font-size: 2.5em;
+    }
+    #hed{
+        font-size: 1.25em;
+        text-align: center;
+        margin: auto;
+    }
+
+    </style>
+  </head>
+  <body>
+    <p class="logo" id="Name">SportNet</p>
+    <p class="logo">קהילת הספורט הגדולה בישראל</p>
+    
+    <h1>דו"ח אירוע</h1>
+    {% for one in oneE %} 
+        <table id="hed">
+            <tr >
+            <div class="mission">
+               <p>{{one.title}}</p>
+                <p>{{one.content}}</p>
+                <p>{{one.participants}}</p>
+                <p>{{one.date_posted}}</p>
+            </div> 
+            </tr>
+        </table>
+                
+        {% endfor %}
+      
+
+  </body>
+</html>
+
