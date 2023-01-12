@@ -139,7 +139,7 @@ def AllDocAdm(request):
 
 @login_required
 def ComUserPage(request):
-    comuser = user.objects.filter(role = 'community').order_by('full_name')
+    comuser = user.objects.filter(Q(flag = '1')&Q(role = 'community')).order_by('full_name')
     return render(request , 'blog/ComUserPage.html' ,{'comuser': comuser})
 
 @login_required
@@ -323,4 +323,26 @@ def UseCredit(request):
     myDonate = Donate.objects.filter(donor = user )
     friendDonate = Donate.objects.filter(friend = user )
     return render(request , 'blog/UseCreditDoc.html' ,{'UseCreditEvent': UseCreditEvent , 'partiCreditEvent':partiCreditEvent , 'myDonate':myDonate , 'friendDonate':friendDonate})
+
+
+
+def OneEventDoc(request):
+    oneE = Event.objects.all().order_by('title')
+    return render(request , 'blog/OneEventDoc.html' ,{'oneE': oneE})
+
+def Reset(request):
+    if request.method == 'POST':
+            identity_qu = request.POST.get('identity_qu')
+            id_number = request.POST.get('id_number')
+            try:
+                mydata = user.objects.get(identity_qu=identity_qu,id_number=id_number)
+            except:
+                return HttpResponse("אין משתמש כזה")
+            if  not mydata.check():
+                return HttpResponse("אין משתמש כזה")
+            return render(request, 'blog/Email.html')
+    return render(request, 'blog/ResetPassword.html')
+
+def Email(request):
+    return render(request, 'blog/Email.html')
 

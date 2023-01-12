@@ -63,6 +63,9 @@ urlpatterns = [
     path('DocEvent/', views.Docevent, name = 'blog-DocEvent'),
     path('AllEvents/' , views.AllEvents , name='blog-AllEvents'),
     path('UseCreditDoc/' , views.UseCredit , name='blog-UseCreditDoc'),
+    path('OneEventDoc/', views.OneEventDoc, name='blog-OneEventDoc'),
+    path('ResetPassword/', views.Reset, name='blog-ResetPassword'),
+    path('Email/', views.Email, name='blog-Email'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
