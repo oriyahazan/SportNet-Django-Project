@@ -329,3 +329,20 @@ def UseCredit(request):
 def OneEventDoc(request):
     oneE = Event.objects.all().order_by('title')
     return render(request , 'blog/OneEventDoc.html' ,{'oneE': oneE})
+
+def Reset(request):
+    if request.method == 'POST':
+            identity_qu = request.POST.get('identity_qu')
+            id_number = request.POST.get('id_number')
+            try:
+                mydata = user.objects.get(identity_qu=identity_qu,id_number=id_number)
+            except:
+                return HttpResponse("אין משתמש כזה")
+            if  not mydata.check():
+                return HttpResponse("אין משתמש כזה")
+            return render(request, 'blog/Email.html')
+    return render(request, 'blog/ResetPassword.html')
+
+def Email(request):
+    return render(request, 'blog/Email.html')
+

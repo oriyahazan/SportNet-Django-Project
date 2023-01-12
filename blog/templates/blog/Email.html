@@ -62,9 +62,21 @@
       font-size: 0.75em;
       margin-top: 20px;
     }
-    .text{
-    font-size: 1.0em;
-    text-align: center;
+    h1{
+        margin-top: 20px;
+        text-align: center;
+    }
+    #Sending{
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 1.5;
+      background: #00004d;
+      color:white;
+    }
+    #hey{
+
+        text-align: center;
     }
 
     </style>
@@ -72,18 +84,8 @@
   <body>
     <p class="logo" id="Name">SportNet   <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
-    <form class="Login" action="{% url 'blog-login' %}" method="POST">
-        {% csrf_token %}
-      <input type="text" name="full_name" placeholder="Full name" id="in" required>
-      <label for="Full name">:שם מלא</label>
-      <p></p>
-      <input type="password" name="Password" placeholder="password"  id=in required>
-      <label for="Password">:סיסמה</label>
-    
-      <p><input type="submit" value ="התחבר" id = "Log">
-      <a href="{% url 'blog-ResetPassword' %}"><span>שכחתי סיסמה</span></a></p>
-      <p><a href="{% url 'blog-HomePage' %}"><span>?עדיין אין משתמש</span></a></p>
-    </form>
+    <h1>שחזור הסיסמה נשלח למייל</h1>
+    <p id="hey"><a href="{% url 'blog-HomePage' %}"><button id="Sending">חזרה לדף הבית</button></a></p>
 
   </body>
 </html>
