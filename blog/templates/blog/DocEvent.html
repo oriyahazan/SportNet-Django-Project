@@ -7,11 +7,11 @@
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/miri" type="text/css"/>
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/great-vibes" type="text/css"/>
     <style media="screen">
-    ul{
+     ul{
       list-style-type: none;
       margin: 0;
       padding: 0;
-      border-color: rgb(191, 191, 191);
+      border-color: #00004d;
       border-style: solid;
       border-width: thin;
     }
@@ -22,18 +22,18 @@
 
     li a{
       display: block;
-      color: white;
+      color: #00004d;
       text-align: center;
       padding: 14px 14px;
       text-decoration: none;
     }
 
     li a:hover{
-      background: black;
+      background: white;
     }
     .logo{
       font-size: 0.8em;
-      color: #d6ad60b4;
+      color: #00004d;
     
     }
 
@@ -44,12 +44,17 @@
       font-style: normal;
       margin: 1px 1px 1px 1px;
     }
+
     body{
-       background-color: #f5f1e8;
-       font-family: 'MiriMedium';
-       font-weight: normal;
-       font-style: normal;
-       color: #d6ad60b4;
+      background: url(https://i.ibb.co/p0gM4JG/bg.png);
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      color: #00004d;
     }
     h1{
         text-align: center;
@@ -64,9 +69,11 @@
     </style>
   </head>
   <body>
-    <p class="logo" id="Name">SportNet</p>
+    <p class="logo" id="Name">SportNet  <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
-    
+    <ul>
+      <li><a href="{% url 'blog-AllDocCom' %}" align = "right" dir="rtl">חזרה לדף הודחות</a></li>
+    </ul>
     <h1>דו"ח פירוט פעילויות בקהילה</h1>
     {% for docevent in Docevent %} 
         <table id="hed">

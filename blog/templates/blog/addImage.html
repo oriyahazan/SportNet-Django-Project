@@ -6,11 +6,11 @@
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/miri" type="text/css"/>
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/great-vibes" type="text/css"/>
     <style media="screen">
-    ul{
+  ul{
       list-style-type: none;
       margin: 0;
       padding: 0;
-      border-color: rgb(191, 191, 191);
+      border-color: #00004d;
       border-style: solid;
       border-width: thin;
     }
@@ -21,18 +21,18 @@
 
     li a{
       display: block;
-      color: white;
+      color: #00004d;
       text-align: center;
       padding: 14px 14px;
       text-decoration: none;
     }
 
     li a:hover{
-      background: black;
+      background: white;
     }
     .logo{
       font-size: 0.8em;
-      color: #d6ad60b4;
+      color: #00004d;
     
     }
 
@@ -43,42 +43,52 @@
       font-style: normal;
       margin: 1px 1px 1px 1px;
     }
+
     body{
-       background-color: #f5f1e8;
-       font-family: 'MiriMedium';
-       font-weight: normal;
-       font-style: normal;
-       color: #d6ad60b4;
+      background: url(https://i.ibb.co/p0gM4JG/bg.png);
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      color: #00004d;
     }
     h1{
         text-align: center;
         font-size: 2.5em;
+        margin-top: 70px;
     }
-    .mission{
-        text-align: center;
-        border-color: black;
-        border-radius: 45%;
-        border-width: 5px;
-        border-style: solid;
+    #hey1{
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 0.75em;
+      background: #00004d;
+      color:white;
     }
-    #hed{
-        font-size: 1.5em;
+
+    #im{
+      text-align: center;
     }
+
 
     </style>
   </head>
   <body>
-    <p class="logo" id="Name">SportNet</p>
+    <p class="logo" id="Name">SportNet  <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
-    
-    <p id="hey1" >
-    <form method="POST" class="post-form" enctype="multipart/form-data" value="פרסם" action="{% url 'blog-addImage'%}">
+    <ul>
+      <li><a href="{% url 'blog-organization' %}" align = "right" dir="rtl">חזרה לדף הבית</a></li>     
+    </ul>
+    <h1>!פרסום תמונות מאירועים בקהילה</h1>
+    <p>
+    <form id="im" method="POST" class="post-form" enctype="multipart/form-data" value="פרסם" action="{% url 'blog-addImage'%}">
     {% csrf_token %}
 
-      <p>
-      {{formI.as_p}}
-      </p>
-      <button type="submit" class="save btn btn-default">פרסם</button>
+      <p>{{formI.as_p}}</p>
+      <button id="hey1" type="submit" class="save btn btn-default">פרסם</button>
 
     </form>
     </p>
@@ -86,8 +96,7 @@
 
 
 
-
-    </div>    
+    
 
   </body>
 </html>
