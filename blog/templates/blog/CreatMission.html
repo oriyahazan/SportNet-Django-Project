@@ -91,7 +91,7 @@
       <li><a href="{% url 'blog-admin' %}" align = "right" dir="rtl">חזרה לדף הבית</a></li>
     </ul>
         {% block content %}
-    <h2>!פרסום פוסט</h2>
+    <h2>!יצירת משימה חדשה</h2>
     <form class="Send" action="{%url 'blog-CreatMission' %}" method="POST">
       {% csrf_token %}
         <p>{{formM.title}} :כותרת </p>

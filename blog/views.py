@@ -324,4 +324,3 @@ def UseCredit(request):
     friendDonate = Donate.objects.filter(friend = user )
     return render(request , 'blog/UseCreditDoc.html' ,{'UseCreditEvent': UseCreditEvent , 'partiCreditEvent':partiCreditEvent , 'myDonate':myDonate , 'friendDonate':friendDonate})
 
-
