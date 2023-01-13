@@ -6,26 +6,55 @@
       <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/miri" type="text/css"/>
       <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/great-vibes" type="text/css"/>
       <style media="screen">
-      .logo{
-        font-size: 0.8em;
-        color: #d6ad60b4;
+    ul{
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      border-color: #00004d;
+      border-style: solid;
+      border-width: thin;
+    }
 
-      }
+    li{
+      float: right;
+    }
 
-      #Name{
-        font-size: 2.5em;
-        font-family: 'GreatVibesRegular';
-        font-weight: normal;
-        font-style: normal;
-        margin: 1px 1px 1px 1px;
-      }
-      body{
-         background-color: #f5f1e8;
-         font-family: 'MiriMedium';
-         font-weight: normal;
-         font-style: normal;
-         color: #d6ad60b4;
-      }
+    li a{
+      display: block;
+      color: #00004d;
+      text-align: center;
+      padding: 14px 14px;
+      text-decoration: none;
+    }
+
+    li a:hover{
+      background: white;
+    }
+    .logo{
+      font-size: 0.8em;
+      color: #00004d;
+    
+    }
+
+    #Name{
+      font-size: 2.5em;
+      font-family: 'GreatVibesRegular';
+      font-weight: normal;
+      font-style: normal;
+      margin: 1px 1px 1px 1px;
+    }
+
+    body{
+      background: url(https://i.ibb.co/p0gM4JG/bg.png);
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      color: #00004d;
+    }
 
 
     #hey{
@@ -33,38 +62,41 @@
       text-align: right;
     }
     #hey1{
-      font-size: 1em;
       font-family: 'MiriMedium';
       font-weight: normal;
       font-style: normal;
-      text-align: right;
-      color: #d6ad60b4;
+      font-size: 0.75em;
+      background: #00004d;
+      color:white;
+
     }
     h2{
-      margin-top: 10px;
+      margin-top: 70px;
       text-align: center;
       font-size: 2.5em;
-      margin: 1px 1px 1px 1px;
     }
     </style>
   </head>
   <body>
     <p class="logo" id="Name">SportNet <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
-   <p class="logo">קהילת הספורט הגדולה בישראל</p><br>
+    <p class="logo">קהילת הספורט הגדולה בישראל</p><br>
+    <ul>
+      <li><a href="{% url 'blog-community' %}" align = "right" dir="rtl">חזרה לדף הבית</a></li>
+    </ul>
     {% block content %}
     <h2>!פרסום פוסט</h2>
     <form class="send" action="{%url 'blog-CreatPost'%}" method="POST">
       {% csrf_token %}
-      <p id="hey">{{formP.author}}:מחבר הפוסט</p>
+      <!-- <p id="hey">{{formP.author}}:מחבר הפוסט</p> -->
       <p id="hey">{{formP.title}}: כותרת הפוסט</p>
-      <p id="hey">{{formP.scope}}:תחום הפוסט: מסירת מוצר/פעילות בקהילה</p>
+      <p id="hey">:תחום הפוסט</p>
+      <p id="hey">{{formP.scope}}:לחץ 1 למסירת מוצר, לחץ 2 לפעילות בקהילה</p>
       <p id="hey">{{formP.content}}:תוכן הפוסט</p>
       <p id="hey">{{formP.thumb}}:הוספת תמונה לפוסט</p>
-      <p id="hey">{{formP.date_posted}}:תאריך הפעילות</p>
+      <p id="hey">{{formP.date_posted}}:mm:dd:yy תאריך הפעילות</p>
       <p id="hey">{{formP.credit}}:עלות הפעילות/מוצר בקרדיטים</p>
-      <p id="hey">{{formP.flag}}:דגל</p>
 
-      <p id="hey1" ><input id="hey1" class="btn btn-outline-info" type="submit" value="סיום"></p>
+      <p id="hey"><input id="hey1" class="btn btn-outline-info" type="submit" value="סיום"></p>
     {% endblock content %}
 
     </form>

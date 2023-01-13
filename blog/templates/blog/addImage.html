@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SportNet</title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/miri" type="text/css"/>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/great-vibes" type="text/css"/>
+    <style media="screen">
+  ul{
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      border-color: #00004d;
+      border-style: solid;
+      border-width: thin;
+    }
+
+    li{
+      float: right;
+    }
+
+    li a{
+      display: block;
+      color: #00004d;
+      text-align: center;
+      padding: 14px 14px;
+      text-decoration: none;
+    }
+
+    li a:hover{
+      background: white;
+    }
+    .logo{
+      font-size: 0.8em;
+      color: #00004d;
+    
+    }
+
+    #Name{
+      font-size: 2.5em;
+      font-family: 'GreatVibesRegular';
+      font-weight: normal;
+      font-style: normal;
+      margin: 1px 1px 1px 1px;
+    }
+
+    body{
+      background: url(https://i.ibb.co/p0gM4JG/bg.png);
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      color: #00004d;
+    }
+    h1{
+        text-align: center;
+        font-size: 2.5em;
+        margin-top: 70px;
+    }
+    #hey1{
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 0.75em;
+      background: #00004d;
+      color:white;
+    }
+
+    #im{
+      text-align: center;
+    }
+
+
+    </style>
+  </head>
+  <body>
+    <p class="logo" id="Name">SportNet  <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
+    <p class="logo">קהילת הספורט הגדולה בישראל</p>
+    <ul>
+      <li><a href="{% url 'blog-organization' %}" align = "right" dir="rtl">חזרה לדף הבית</a></li>     
+    </ul>
+    <h1>!פרסום תמונות מאירועים בקהילה</h1>
+    <p>
+    <form id="im" method="POST" class="post-form" enctype="multipart/form-data" value="פרסם" action="{% url 'blog-addImage'%}">
+    {% csrf_token %}
+
+      <p>{{formI.as_p}}</p>
+      <button id="hey1" type="submit" class="save btn btn-default">פרסם</button>
+
+    </form>
+    </p>
+    
+
+
+
+    
+
+  </body>
+</html>

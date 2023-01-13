@@ -6,29 +6,41 @@
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/miri" type="text/css"/>
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/great-vibes" type="text/css"/>
     <style media="screen">
-    .logo{
-      font-size: 0.5em;
+      .logo{
+      font-size: 0.8em;
+      color: #00004d;
+    
     }
 
     #Name{
-      font-size: 2.0em;
+      font-size: 2.5em;
       font-family: 'GreatVibesRegular';
       font-weight: normal;
       font-style: normal;
+      margin: 1px 1px 1px 1px;
     }
 
     body{
-       background:url(https://vitrage-resort.co.il/wp-content/uploads/2016/10/35688222_l2.jpg);
-       font-family: 'MiriMedium';
-       font-weight: normal;
-       font-style: normal;
-       color: white;
+      background: url(https://i.ibb.co/p0gM4JG/bg.png);
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      font-family: 'MiriMedium';
+      font-weight: normal;
+      font-style: normal;
+      color: #00004d;
     }
 
     .Login{
       text-align: center;
-      background: rgb(191, 191, 191);
+      background: white;
+      border-radius: 15%;
+      width: 40%;
+      margin: auto;
       font-size: 1.5em;
+      padding: 30px 30px 30px 30px;
+      margin-top: 60px;
 
     }
 
@@ -41,11 +53,14 @@
     }
 
     #Log{
-      font-size: 0.75em;
       font-family: 'MiriMedium';
       font-weight: normal;
       font-style: normal;
-      background: rgb(115, 229, 255)
+      font-size: 1.5;
+      background: #00004d;
+      color:white;
+      font-size: 0.75em;
+      margin-top: 20px;
     }
     .text{
     font-size: 1.0em;
@@ -55,23 +70,19 @@
     </style>
   </head>
   <body>
-    <p class="logo" id="Name">SportNet</p>
+    <p class="logo" id="Name">SportNet   <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     <form class="Login" action="{% url 'blog-login' %}" method="POST">
         {% csrf_token %}
-    <!-- <form class="Login"> -->
-      <!-- <input type="text" name="Namecode" placeholder="full_name" id="in" required>
-      <label for="Namecode">full_name:</label> -->
-      <!-- <input type="text" name="Email" placeholder="Email" id="in" required>
-      <label for="Email">email:</label> -->
       <input type="text" name="full_name" placeholder="Full name" id="in" required>
-      <label for="Full name">full name:</label>
+      <label for="Full name">:שם מלא</label>
       <p></p>
-      <input type="password" name="Password" value="" id=in required>
-      <label for="Password">password:</label>
+      <input type="password" name="Password" placeholder="password"  id=in required>
+      <label for="Password">:סיסמה</label>
     
       <p><input type="submit" value ="התחבר" id = "Log">
-      <a href="ResetPassword.html"><span>forgot password</span></a></p>
+      <a href="{% url 'blog-ResetPassword' %}"><span>שכחתי סיסמה</span></a></p>
+      <p><a href="{% url 'blog-HomePage' %}"><span>?עדיין אין משתמש</span></a></p>
     </form>
 
   </body>
