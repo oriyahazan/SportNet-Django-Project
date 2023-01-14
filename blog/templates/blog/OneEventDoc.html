@@ -62,8 +62,11 @@
         margin-top: 70px;
     }
     .hed{
-        font-size: 1.25em;
+        font-size: 1.45em;
         text-align: right;
+    }
+    #doc{
+      font-size: 0.70em;
     }
 
     </style>
@@ -80,9 +83,9 @@
             <tr>
             <div class="hed">
               <li></li><p>שם האירוע: {{one.title}}</p>
-              <p>תוכן האירוע: {{one.content}}</p>
-              <p>מספר המשתתפים: {{one.participants}}</p>
-              <p>{{one.date_posted}} :תאריך האירוע</p>
+              <p id="doc">תוכן האירוע: {{one.content}}</p>
+              <p id="doc">מספר המשתתפים: {{one.participants}}</p>
+              <p id="doc">{{one.date_posted}} :תאריך האירוע</p>
             </div> 
             </tr>
         </table>

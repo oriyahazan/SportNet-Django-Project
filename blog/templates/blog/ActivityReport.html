@@ -84,7 +84,7 @@
     <p class="logo" id="Name">SportNet  <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     <ul>
-      <li><a href="{% url 'blog-AllDocAdm' %}" align = "right" dir="rtl">חזרה לדף הודחות</a></li>
+      <li><a href="{% url 'blog-AllDocAdm' %}" align = "right" dir="rtl">חזרה לדף הדוחות</a></li>
     </ul>
     <h1>דו"ח פירוט  פעילות באתר</h1>
     <div class="post">
@@ -105,10 +105,8 @@
                 <h4 id="hed">שם האירוע: {{event.title}}<h4>
                 <p>תוכן האירוע: {{event.content}}</p>
             </div>
-
-      <h3>מספר האירועים שהתפרסמו: {{ num_events }}</h3>
-
         {% endfor %}    
+        <h3>מספר האירועים שהתפרסמו: {{ num_events }}</h3>
 
     </div>    
 

@@ -219,7 +219,7 @@ def addImage(request):
         if formI.is_valid():
             newform=Image(title=formI.cleaned_data['title'],content=formI.cleaned_data['content'],image=request.FILES['image'])
             newform.save()
-            return render(request,'blog/HomePageCommunity.html')
+            return redirect('blog-organization')
     else:
         formI=ImageForm()
     return render(request, 'blog/addImage.html', {'formI': formI})  
