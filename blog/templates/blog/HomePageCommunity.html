@@ -115,7 +115,7 @@
                 <p>{{post.credit}} :המחיר</p>
                 <p><form method="POST">{% csrf_token %}<button type="submit" name="{{post.id}}">לרכישה</button></form></p>
               {% elif post.scope ==  "2" %}
-                <h2>פעילות בקהילה</h2>
+                <h3>פעילות בקהילה</h3>
                 <h4>{{post.title}}</h4>
                 <p>תוכן הפעילות: {{post.content}}</p>
                 <p>המאמן: {{post.author}}</p>
@@ -125,7 +125,5 @@
           </div>
       {% endfor %}
     </div>    
-
-
   </body>
 </html>
