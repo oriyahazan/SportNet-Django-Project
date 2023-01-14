@@ -85,7 +85,7 @@
     <p class="logo" id="Name">SportNet   <img id="im" src="https://i.pinimg.com/originals/66/81/9e/66819e22050aaff576c04cfade083c03.png" width="35px" height="35px"></p>
     <p class="logo">קהילת הספורט הגדולה בישראל</p>
     <ul>
-      <li><a href="{% url 'blog-AllDocCom' %}" align = "right" dir="rtl">חזרה לדף הודחות</a></li>
+      <li><a href="{% url 'blog-AllDocCom' %}" align = "right" dir="rtl">חזרה לדף הדוחות</a></li>
     </ul>
     <h1 id="co">דו"ח פירוט שימוש וקבלת קרדיטים</h1>
     <div class="missions">
@@ -100,7 +100,7 @@
         <h2>תרומות שלי</h2>
         {% for myDonat in myDonate %} 
         <div id ="hed">
-            <h4>מי תרם לי: {{myDonat.friend}}<h4>
+            <h4>{{myDonat.friend}} :למי תרמתי<h4>
             <p>עלות: {{myDonat.cost}}</p>
         </div>
     {% endfor %}
@@ -108,14 +108,14 @@
     <h2>קבלת קרדיטים ממשתתפים בפעילותיי</h2>
     {% for partiCredit in partiCreditEvent %} 
         <div id="hed">
-            <h4>מי מקבל השרות: {{partiCredit.parti}}<h4>
+            <h4>{{partiCredit.parti}} :מקבל השירות<h4>
             <p>עלות: {{partiCredit.credit}}</p>
         </div>
     {% endfor %}
     <h2>תרומות שקיבלתי</h2>
     {% for friendDonat in friendDonate %} 
     <div id="hed">
-        <h4>למי תרמתי: {{friendDonat.donor}}<h4>
+        <h4> {{friendDonat.donor}}:מי תרם לי<h4>
         <p>עלות: {{friendDonat.cost}}</p>
     </div>
     {% endfor %}
