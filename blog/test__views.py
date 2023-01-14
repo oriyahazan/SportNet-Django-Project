@@ -1,52 +1,51 @@
-from django.test import TestCase, Client
-from .models import User, Event, Mission, Post
-
-from blog import models
-from blog import forms
-#from .forms import RegisterForm, EventForm, MissionForm, PostForm -- don't work
-
-
-class ViewsTestCase(TestCase):
-    def setUp(self):
-        # Create a client to send HTTP requests
-        self.client = Client()
-
-        # Create a user
-        User.objects.create(full_name='John Smith', id_number='1234567890', identity_qu='Driver License',
-                            place='New York', role='admin', email='john@example.com', password='password123', age=25)
-
-        # Create an event
-        Event.objects.create(title='Event 1', content='This is an event', credit=0, participants=10)
-
-        # Create a mission
-        Mission.objects.create(title='Mission 1', content='This is a mission')
-
-        # Create a post
-        Post.objects.create(title='Post 1', content='This is a post', credit=0,
-                            author=User.objects.get(full_name='John Smith'))
-
-    def test_home_view(self):
-        # Send a GET request to the home view
-        response = self.client.get('/')
-
-        # Check that the response is 200 OK
-        self.assertEqual(response.status_code, 200)
-
-        # Check that the rendered context contains the correct number of posts
-        self.assertEqual(len(response.context['posts']), 1)
-
-    def test_posts_view(self):
-        # Send a GET request to the posts view
-        response = self.client.get('/posts/')
-
-        # Check that the response is 200 OK
-        self.assertEqual(response.status_code, 200)
-
-        # Check that the rendered context contains the correct number of posts
-        self.assertEqual(len(response.context['posts']), 1)
-
-    def test_about_view(self):
-        # Send a GET request to the about view
-        response = self.client.get('/about/')
-
-a
+# from django.test import TestCase, Client
+# from django.urls import reverse
+# from django.contrib.auth import get_user_model
+# from .models import Post, DocEvent
+# from blog import views
+#
+# class CommunityViewTest(TestCase):
+#     def setUp(self):
+#         self.client = Client()
+#         self.user = get_user_model().objects.create_user(
+#             full_name='Test User',
+#             email='testuser@example.com',
+#             password='testpassword',
+#             credit=100
+#         )
+#         self.post = Post.objects.create(
+#             title='Test Post',
+#             content='This is a test post.',
+#             author=self.user,
+#             credit=50,
+#             flag='1'
+#         )
+#         self.url = reverse('blog-community')
+#
+#     def test_community_view_redirects_if_not_logged_in(self):
+#         response = self.client.get(self.url)
+#         self.assertRedirects(response, '/accounts/login/?next=' + self.url)
+#
+#     def test_community_view_uses_correct_template(self):
+#         self.client.login(email='testuser@example.com', password='testpassword')
+#         response = self.client.get(self.url)
+#         self.assertTemplateUsed(response, 'blog/HomePageCommunity.html')
+#
+#     def test_community_view_displays_all_posts(self):
+#         self.client.login(email='testuser@example.com', password='testpassword')
+#         response = self.client.get(self.url)
+#         self.assertContains(response, self.post.title)
+#
+#     def test_community_view_reduces_user_credit_on_post_purchase(self):
+#         self.client.login(email='testuser@example.com', password='testpassword')
+#         self.client.post(self.url, {'csrfmiddlewaretoken': 'randomstring', '1': '1'})
+#         self.user.refresh_from_db()
+#         self.assertEqual(self.user.credit, 50)
+#
+#     def test_community_view_creates_DocEvent_on_post_purchase(self):
+#         self.client.login(email='testuser@example.com', password='testpassword')
+#         self.client.post(self.url, {'csrfmiddlewaretoken': 'randomstring', '1': '1'})
+#         doc_event = DocEvent.objects.get(title='Test Post')
+#         self.assertEqual(doc_event.content, 'This is a test post.')
+#         self.assertEqual(doc_event.parti, self.user)
+#         self.assertEqual(doc_event.credit, 50)

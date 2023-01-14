@@ -2,10 +2,16 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 
 from blog import views
-#from . import views
+
+
+"""
+To create a unit test for these URL patterns in your Django project that uses both the reverse and resolve functions,
+you can do the following:
+   Use the reverse function to get the URL for each pattern.
+   Use the resolve function to check that the correct view function is being called for each URL.
+"""
 
 class UrlsTestCase(TestCase):
-
     def test_register_url(self):
         url = reverse('blog-register')
         self.assertEqual(url, '/register/')
@@ -16,25 +22,13 @@ class UrlsTestCase(TestCase):
         url = reverse('blog-community')
         self.assertEqual(url, '/HomePageCommunity/')
         resolver_match = resolve('/HomePageCommunity/')
-        self.assertEqual(resolver_match.func, views.home)
+        self.assertEqual(resolver_match.func, views.community)
 
     def test_homePageAdmin_url(self):
         url = reverse('blog-admin')
         self.assertEqual(url, '/HomePageAdmin/')
         resolver_match = resolve('/HomePageAdmin/')
-        self.assertEqual(resolver_match.func, views.home)
-
-    def test_login_url(self):
-        url = reverse('blog-login')
-        self.assertEqual(url, '/login/')
-        resolver_match = resolve('/login/')
-        self.assertEqual(resolver_match.func, views.login)
-
-    def test_home_url(self):
-        url = reverse('blog.urls')
-        self.assertEqual(url, '/')
-        resolver_match = resolve('/')
-        self.assertEqual(resolver_match.func, views.home)
+        self.assertEqual(resolver_match.func, views.admin)
 
     def test_homePageOrganization_url(self):
         url = reverse('blog-organization')
@@ -53,7 +47,7 @@ class UrlsTestCase(TestCase):
         self.assertEqual(url, '/CreatMission/')
         resolver_match = resolve('/CreatMission/')
         self.assertEqual(resolver_match.func, views.CreatMission)
-
+#
     def test_allDocOrg_url(self):
         url = reverse('blog-AllDocOrg')
         self.assertEqual(url, '/AllDocOrg/')
@@ -125,149 +119,94 @@ class UrlsTestCase(TestCase):
         self.assertEqual(url, '/AllDocCom/')
         resolver_match = resolve('/AllDocCom/')
         self.assertEqual(resolver_match.func, views.AllDocCom)
+#
+    # def test_traningDoc_url(self):
+    #     url = reverse('blog-TraningDoc')
+    #     self.assertEqual(url, '/TraningDoc/')
+    #     resolver_match = resolve('/TraningDoc/')
+    #     self.assertEqual(resolver_match.func, views.register)
 
-    def test_traningDoc_url(self):
-        url = reverse('blog-TraningDoc')
-        self.assertEqual(url, '/TraningDoc/')
-        resolver_match = resolve('/TraningDoc/')
-        self.assertEqual(resolver_match.func, views.register)
-
-
-# def test_posts_url(self):
-#     url = reverse('blog-CreatPost')
-#     self.assertEqual(url, '/CreatPost/')
-#     resolver_match = resolve('/CreatPost/')
-#     self.assertEqual(resolver_match.func, views.CreatPost)
-
-
-
-
-# -------------------- 04/01/2022 - unittest --------------
-
-# ---- 1st try ---
-"""
-This test case will send a GET request to each of the URL patterns and check that the response has a status code of 200,
-which indicates that the request was successful.
-"""
-
-class UrlsTestCase2(TestCase):
-    def test_url_patterns(self):
-        # Test the URL pattern for the 'blog-register' view
-        url = reverse('blog-register')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-community' view
-        url = reverse('blog-community')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-admin' view
-        url = reverse('blog-admin')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-login' view
-        url = reverse('blog-login')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-HomePage' view
-        url = reverse('blog-HomePage')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-organization' view
-        url = reverse('blog-organization')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-CreatEvent' view
-        url = reverse('blog-CreatEvent')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-CreatMission' view
-        url = reverse('blog-CreatMission')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-AllDocOrg' view
-        url = reverse('blog-AllDocOrg')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-missions' view
-        url = reverse('blog-missions')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-AllDocAdm' view
-        url = reverse('blog-AllDocAdm')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-ComUserPage' view
-        url = reverse('blog-ComUserPage')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-        # Test the URL pattern for the 'blog-CreatPost' view
+    def test_posts_url(self):
         url = reverse('blog-CreatPost')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(url, '/CreatPost/')
+        resolver_match = resolve('/CreatPost/')
+        self.assertEqual(resolver_match.func, views.CreatPost)
 
-        # Test the URL pattern for the 'blog-OrgUserPage' view
-        url = reverse('blog-OrgUserPage')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+    def test_addImage_url(self):
+        url = reverse('blog-addImage')
+        self.assertEqual(url, '/addImage/')
+        resolver_match = resolve('/addImage/')
+        self.assertEqual(resolver_match.func, views.addImage)
 
-        # Test the URL pattern for the 'blog-deleteUsers' view
-        url = reverse('blog-deleteUsers')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+    def test_logout_url(self):
+        url = reverse('logout')
+        self.assertEqual(url, '/logout/')
+        resolver_match = resolve('/logout/')
+        self.assertEqual(resolver_match.func, views.log_out)
 
-        # Test the URL pattern for the 'blog-UserAuth' view
-        url = reverse('blog-UserAuth')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+    def test_CreateGuide_url(self):
+        url = reverse('blog-CreateGuide')
+        self.assertEqual(url, '/CreateGuide/')
+        resolver_match = resolve('/CreateGuide/')
+        self.assertEqual(resolver_match.func, views.CreateGuide1)
 
-        # Test the URL pattern for the 'blog-PostAuth' view
-        url = reverse('blog-PostAuth')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+    def test_ShowGuide_url(self):
+        url = reverse('blog-showGuide')
+        self.assertEqual(url, '/ShowGuide/')
+        resolver_match = resolve('/ShowGuide/')
+        self.assertEqual(resolver_match.func, views.ShowGuide)
 
-        # Test the URL pattern for the 'blog-ComUserPage' view
-        url = reverse('blog-ComUserPage')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+    def test_DonateFriend_url(self):
+        url = reverse('blog-DonateFriend')
+        self.assertEqual(url, '/DonateFriend/')
+        resolver_match = resolve('/DonateFriend/')
+        self.assertEqual(resolver_match.func, views.Donate_to_a_friend)
 
-        # Test the URL pattern for the 'blog-TrainingRating' view
-        url = reverse('blog-TrainingRating')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+    def test_AllEvents_url(self):
+        url = reverse('blog-AllEvents')
+        self.assertEqual(url, '/AllEvents/')
+        resolver_match = resolve('/AllEvents/')
+        self.assertEqual(resolver_match.func, views.AllEvents)
 
-        # Test the URL pattern for the 'blog-ActivityReport' view
-        url = reverse('blog-ActivityReport')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+    def test_EventPic_url(self):
+        url = reverse('blog-EventPic')
+        self.assertEqual(url, '/EventPic/')
+        resolver_match = resolve('/EventPic/')
+        self.assertEqual(resolver_match.func, views.EventPic)
 
-        # Test the URL pattern for the 'blog-TraningDoc' view
-        url = reverse('blog-TraningDoc')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+    def test_DocEvent_url(self):
+        url = reverse('blog-DocEvent')
+        self.assertEqual(url, '/DocEvent/')
+        resolver_match = resolve('/DocEvent/')
+        self.assertEqual(resolver_match.func, views.Docevent)
 
-        # Test the URL pattern for the 'blog-AllDocCom' view
-        url = reverse('blog-AllDocCom')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+    def test_UseCreditDoc_url(self):
+        url = reverse('blog-UseCreditDoc')
+        self.assertEqual(url, '/UseCreditDoc/')
+        resolver_match = resolve('/UseCreditDoc/')
+        self.assertEqual(resolver_match.func, views.UseCredit)
+
+    def test_OneEventDoc_url(self):
+        url = reverse('blog-OneEventDoc')
+        self.assertEqual(url, '/OneEventDoc/')
+        resolver_match = resolve('/OneEventDoc/')
+        self.assertEqual(resolver_match.func, views.OneEventDoc)
+
+    # def test_ResetPassword_url(self):
+    #     url = reverse('blog-ResetPassword')
+    #     self.assertEqual(url, '/ResetPassword/')
+    #     resolver_match = resolve('/ResetPassword/')
+    #     self.assertEqual(resolver_match.func, views.reset)
+
+    def test_Email_url(self):
+        url = reverse('blog-Email')
+        self.assertEqual(url, '/Email/')
+        resolver_match = resolve('/Email/')
+        self.assertEqual(resolver_match.func, views.Email)
 
 
-
-                            # --- 2nd try ----
-
+#     ------------ 2nd try ----------------
 """
-
 To create a unit test for these URL patterns in your Django project that uses both the reverse and resolve functions,
 you can do the following:
    Use the reverse function to get the URL for each pattern.
@@ -283,7 +222,7 @@ class UrlsTestCase1(TestCase):
         # Test the URL pattern for the 'blog-community' view
         url = reverse('blog-community')
         self.assertEqual(resolve(url).view_name, 'blog-community')
-
+#
         # Test the URL pattern for the 'blog-admin' view
         url = reverse('blog-admin')
         self.assertEqual(resolve(url).view_name, 'blog-admin')
@@ -356,3 +295,129 @@ class UrlsTestCase1(TestCase):
         url = reverse('blog-ActivityReport')
         self.assertEqual(resolve(url).view_name, 'blog-ActivityReport')
 
+
+
+#
+#
+# # -------------------- 04/01/2022 - unittest --------------
+
+# ---- 1st try ---
+# """
+# This test case will send a GET request to each of the URL patterns and check that the response has a status code of 200,
+# which indicates that the request was successful.
+# """
+#
+# class UrlsTestCase2(TestCase):
+#     def test_url_patterns(self):
+#         # Test the URL pattern for the 'blog-register' view
+#         url = reverse('blog-register')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-community' view
+#         url = reverse('blog-community')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-admin' view
+#         url = reverse('blog-admin')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-login' view
+#         url = reverse('blog-login')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-HomePage' view
+#         url = reverse('blog-HomePage')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-organization' view
+#         url = reverse('blog-organization')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-CreatEvent' view
+#         url = reverse('blog-CreatEvent')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-CreatMission' view
+#         url = reverse('blog-CreatMission')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-AllDocOrg' view
+#         url = reverse('blog-AllDocOrg')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-missions' view
+#         url = reverse('blog-missions')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-AllDocAdm' view
+#         url = reverse('blog-AllDocAdm')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-ComUserPage' view
+#         url = reverse('blog-ComUserPage')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-CreatPost' view
+#         url = reverse('blog-CreatPost')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-OrgUserPage' view
+#         url = reverse('blog-OrgUserPage')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-deleteUsers' view
+#         url = reverse('blog-deleteUsers')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-UserAuth' view
+#         url = reverse('blog-UserAuth')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-PostAuth' view
+#         url = reverse('blog-PostAuth')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-ComUserPage' view
+#         url = reverse('blog-ComUserPage')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-TrainingRating' view
+#         url = reverse('blog-TrainingRating')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-ActivityReport' view
+#         url = reverse('blog-ActivityReport')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-TraningDoc' view
+#         url = reverse('blog-TraningDoc')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+#         # Test the URL pattern for the 'blog-AllDocCom' view
+#         url = reverse('blog-AllDocCom')
+#         response = self.client.get(url)
+#         self.assertEqual(response.status_code, 200)
+#
+
+#

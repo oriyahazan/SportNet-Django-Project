@@ -1,48 +1,59 @@
 from django.test import TestCase
-from blog import models
+from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
+from.models import user, Event, Mission, Post, Image, Rating, CreateGuide, Donate, DocEvent
 
-class ModelsTestCase(TestCase):
-    def setUpClass(self):
-        # Create a user
-        User.objects.create(full_name='John Smith', id_number='1234567890', identity_qu='Driver License',
-                            place='israel', role='admin', email='john@example.com', password='password123', age=25)
+class UserModelTest(TestCase):
+    def test_user_creation(self):
+        user = get_user_model()
+        user = user.objects.create(
+            full_name='Test User',
+            email='testuser@example.com',
+            id_number=1234567890,
+            identity_qu='Passport',
+            place='US',
+            role='Admin',
+            age=30,
+            flag='1',
+            credit=100,
+            password='testpassword'
+        )
+        self.assertEqual(user.full_name, 'Test User')
+        self.assertEqual(user.email, 'testuser@example.com')
+        self.assertEqual(user.id_number, 1234567890)
+        self.assertEqual(user.identity_qu, 'Passport')
+        self.assertEqual(user.place, 'US')
+        self.assertEqual(user.role, 'Admin')
+        self.assertEqual(user.age, 30)
+        self.assertEqual(user.flag, '1')
+        self.assertEqual(user.credit, 100)
 
-        # Create an event
-        Event.objects.create(title='Event 1', content='This is an event', credit=0, participants=10)
+    def test_user_email_validation(self): ''' this test show that we dont get attention if the user dont write @ in his email'''
+        user = get_user_model()
+        with self.assertRaises(ValidationError):
+            user = user.objects.create(
+                full_name='Test User',
+                email='invalid.email',
+                password='testpassword'
+            )
 
-        # Create a mission
-        Mission.objects.create(title='Mission 1', content='This is a mission')
 
-        # Create a post
-        Post.objects.create(title='Post 1', content='This is a post', credit=0,
-                            author=User.objects.get(full_name='John Smith'))
+    def test_event_creation(self):
+        event = Event.objects.create(
+            title='Test Event',
+            content='This is a test event.',
+            credit=100,
+            participants=5
+        )
+        self.assertEqual(event.title, 'Test Event')
+        self.assertEqual(event.content, 'This is a test event.')
+        self.assertEqual(event.credit, 100)
+        self.assertEqual(event.participants, 5)
 
-    def test_user_model(self):
-        # Test the user model
-        user = User.objects.get(full_name='John Smith')
-        self.assertEqual(user.id_number, '1234567890')
-        self.assertEqual(user.identity_qu, 'Driver License')
-        self.assertEqual(user.place, 'israel')
-        self.assertEqual(user.role, 'admin')
-        self.assertEqual(user.email, 'john@example.com')
-        self.assertEqual(user.password, 'password123')
-        self.assertEqual(user.age, 25)
-
-    def test_event_model(self):
-        # Test the event model
-        event = Event.objects.get(title='Event 1')
-        self.assertEqual(event.content, 'This is an event')
-        self.assertEqual(event.credit, 0)
-        self.assertEqual(event.participants, 10)
-
-    def test_mission_model(self):
-        # Test the mission model
-        mission = Mission.objects.get(title='Mission 1')
-        self.assertEqual(mission.content, 'This is a mission')
-
-    def test_post_model(self):
-        # Test the post model
-        post = Post.objects.get(title='Post 1')
-        self.assertEqual(post.content, 'This is a post')
-        self.assertEqual(post.credit, 0)
-        self.assertEqual(post.author.full_name, 'John Smith')
+    def test_mission_creation(self):
+        mission = Mission.objects.create(
+            title='Test Mission',
+            content='This is a test mission.'
+        )
+        self.assertEqual(mission.title, 'Test Mission')
+        self.assertEqual(mission.content, 'This is a test mission.')
